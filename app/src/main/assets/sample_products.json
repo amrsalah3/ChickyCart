@@ -1,0 +1,1215 @@
+{
+  "request_info": {
+    "success": true,
+    "credits_used": 60,
+    "credits_remaining": 40,
+    "credits_used_this_request": 1
+  },
+  "request_metadata": {
+    "created_at": "2021-07-29T01:45:41.457Z",
+    "processed_at": "2021-07-29T01:46:07.870Z",
+    "total_time_taken": 26.41,
+    "amazon_url": "https://www.amazon.com/s?node=3017941"
+  },
+  "request_parameters": {
+    "type": "category",
+    "amazon_domain": "amazon.com",
+    "category_id": "3017941"
+  },
+  "refinements": {
+    "department": [
+      {
+        "name": "Electronics",
+        "link": "https://www.amazon.com/Electronics/b?ie=UTF8&node=172282"
+      },
+      {
+        "name": "Camera & Photo",
+        "link": "https://www.amazon.com/Camera-Photo-Electronics/b?ie=UTF8&node=502394"
+      },
+      {
+        "name": "Digital Cameras",
+        "link": "https://www.amazon.com/Digital-Cameras-Camera-Photo/b?ie=UTF8&node=281052"
+      }
+    ],
+    "photography_skill_level": [
+      {
+        "name": "Amateur",
+        "link": "https://www.amazon.com/DSLR-Cameras-Amateur-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-three_browse-bin%3A23205760011"
+      },
+      {
+        "name": "Novice",
+        "link": "https://www.amazon.com/DSLR-Cameras-Novice-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-three_browse-bin%3A23205759011"
+      },
+      {
+        "name": "Professional",
+        "link": "https://www.amazon.com/DSLR-Cameras-Professional-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-three_browse-bin%3A23205761011"
+      }
+    ],
+    "zoom_type": [
+      {
+        "name": "Digital Zoom",
+        "link": "https://www.amazon.com/DSLR-Cameras-Digital-Zoom/s?rh=n%3A3017941%2Cp_n_feature_nine_browse-bin%3A23488166011"
+      },
+      {
+        "name": "Extended Optical Zoom",
+        "link": "https://www.amazon.com/DSLR-Cameras-Extended-Optical-Zoom-Digital/s?rh=n%3A3017941%2Cp_n_feature_nine_browse-bin%3A23488167011"
+      },
+      {
+        "name": "Optical Zoom",
+        "link": "https://www.amazon.com/DSLR-Cameras-Optical-Zoom-Digital/s?rh=n%3A3017941%2Cp_n_feature_nine_browse-bin%3A23488168011"
+      }
+    ],
+    "brand": [
+      {
+        "name": "Canon",
+        "link": "https://www.amazon.com/DSLR-Cameras-Canon-Digital/s?rh=n%3A3017941%2Cp_89%3ACanon"
+      },
+      {
+        "name": "SSE",
+        "link": "https://www.amazon.com/DSLR-Cameras-SSE-Digital/s?rh=n%3A3017941%2Cp_89%3ASSE"
+      },
+      {
+        "name": "Nikon",
+        "link": "https://www.amazon.com/DSLR-Cameras-Nikon-Digital/s?rh=n%3A3017941%2Cp_89%3ANikon"
+      },
+      {
+        "name": "Panasonic",
+        "link": "https://www.amazon.com/DSLR-Cameras-Panasonic-Digital/s?rh=n%3A3017941%2Cp_89%3APanasonic"
+      },
+      {
+        "name": "Loupedeck",
+        "link": "https://www.amazon.com/DSLR-Cameras-Loupedeck-Digital/s?rh=n%3A3017941%2Cp_89%3ALoupedeck"
+      },
+      {
+        "name": "SanDisk",
+        "link": "https://www.amazon.com/DSLR-Cameras-SanDisk-Digital/s?rh=n%3A3017941%2Cp_89%3ASanDisk"
+      },
+      {
+        "name": "Deal-Expo",
+        "link": "https://www.amazon.com/DSLR-Cameras-Deal-Expo-Digital/s?rh=n%3A3017941%2Cp_89%3ADeal-Expo"
+      }
+    ],
+    "effective_megapixels": [
+      {
+        "name": "Up to 9.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-Up-9-MP-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696557011"
+      },
+      {
+        "name": "10 to 14.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-10-14-9-MP/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696558011"
+      },
+      {
+        "name": "15 to 19.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-15-19-9-MP/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696559011"
+      },
+      {
+        "name": "20 to 24.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-20-24-9-MP/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696560011"
+      },
+      {
+        "name": "25 to 29.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-25-29-9-MP/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696561011"
+      },
+      {
+        "name": "30 to 39.9 MP",
+        "link": "https://www.amazon.com/DSLR-Cameras-30-39-9-MP/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696562011"
+      },
+      {
+        "name": "40 MP & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-40-MP-Above-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-five_browse-bin%3A17696563011"
+      }
+    ],
+    "photo_sensor_size": [
+      {
+        "name": "Full Frame",
+        "link": "https://www.amazon.com/DSLR-Cameras-Full-Frame-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099178011"
+      },
+      {
+        "name": "APS-H",
+        "link": "https://www.amazon.com/DSLR-Cameras-APS-H-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099179011"
+      },
+      {
+        "name": "APS-C",
+        "link": "https://www.amazon.com/DSLR-Cameras-APS-C-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099180011"
+      },
+      {
+        "name": "1.5\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-5-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099185011"
+      },
+      {
+        "name": "Micro Four Thirds",
+        "link": "https://www.amazon.com/DSLR-Cameras-Micro-Four-Thirds-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099182011"
+      },
+      {
+        "name": "1\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099183011"
+      },
+      {
+        "name": "2/3\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-2-3-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099187011"
+      },
+      {
+        "name": "1/1.7\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-7-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099189011"
+      },
+      {
+        "name": "1/1.8\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-8-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A17696567011"
+      },
+      {
+        "name": "1/2.3\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-2-3-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099190011"
+      },
+      {
+        "name": "1/2.5\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-2-5-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A17696569011"
+      },
+      {
+        "name": "1/2.7\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-2-7-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A17696570011"
+      },
+      {
+        "name": "1/3.2\"",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-3-2-Digital/s?rh=n%3A3017941%2Cp_n_feature_nineteen_browse-bin%3A10099191011"
+      }
+    ],
+    "sensor_type": [
+      {
+        "name": "CCD",
+        "link": "https://www.amazon.com/DSLR-Cameras-CCD-Digital/s?rh=n%3A3017941%2Cp_n_feature_five_browse-bin%3A3136286011"
+      },
+      {
+        "name": "CMOS",
+        "link": "https://www.amazon.com/DSLR-Cameras-CMOS-Digital/s?rh=n%3A3017941%2Cp_n_feature_five_browse-bin%3A3136287011"
+      }
+    ],
+    "optical_zoom": [
+      {
+        "name": "50x & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-50x-Above-Digital/s?rh=n%3A3017941%2Cp_n_feature_three_browse-bin%3A10705322011"
+      },
+      {
+        "name": "20x to 49.9x",
+        "link": "https://www.amazon.com/DSLR-Cameras-20x-49-9x-Digital/s?rh=n%3A3017941%2Cp_n_feature_three_browse-bin%3A10705321011"
+      },
+      {
+        "name": "10x to 19.9x",
+        "link": "https://www.amazon.com/DSLR-Cameras-10x-19-9x-Digital/s?rh=n%3A3017941%2Cp_n_feature_three_browse-bin%3A10705320011"
+      },
+      {
+        "name": "4x to 9.9x",
+        "link": "https://www.amazon.com/DSLR-Cameras-4x-9-9x-Digital/s?rh=n%3A3017941%2Cp_n_feature_three_browse-bin%3A10705319011"
+      },
+      {
+        "name": "3.9x & Under",
+        "link": "https://www.amazon.com/DSLR-Cameras-3-9x-Under-Digital/s?rh=n%3A3017941%2Cp_n_feature_three_browse-bin%3A10705318011"
+      }
+    ],
+    "video_capture_resolution": [
+      {
+        "name": "4K 2160p",
+        "link": "https://www.amazon.com/DSLR-Cameras-4K-2160p-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A21608131011"
+      },
+      {
+        "name": "FHD 1080p",
+        "link": "https://www.amazon.com/DSLR-Cameras-FHD-1080p-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A10705427011"
+      },
+      {
+        "name": "FHD 1080i",
+        "link": "https://www.amazon.com/DSLR-Cameras-FHD-1080i-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A21608133011"
+      },
+      {
+        "name": "HD 720p",
+        "link": "https://www.amazon.com/DSLR-Cameras-HD-720p-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A10705425011"
+      },
+      {
+        "name": "SD 480p",
+        "link": "https://www.amazon.com/DSLR-Cameras-SD-480p-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A10705424011"
+      },
+      {
+        "name": "240p",
+        "link": "https://www.amazon.com/DSLR-Cameras-240p-Digital/s?rh=n%3A3017941%2Cp_n_feature_eleven_browse-bin%3A21608134011"
+      }
+    ],
+    "video_capture_format": [
+      {
+        "name": "ASF",
+        "link": "https://www.amazon.com/DSLR-Cameras-ASF-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508975011"
+      },
+      {
+        "name": "AVCHD",
+        "link": "https://www.amazon.com/DSLR-Cameras-AVCHD-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508974011"
+      },
+      {
+        "name": "AVI",
+        "link": "https://www.amazon.com/DSLR-Cameras-AVI-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508973011"
+      },
+      {
+        "name": "FLV",
+        "link": "https://www.amazon.com/DSLR-Cameras-FLV-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508970011"
+      },
+      {
+        "name": "MJPEG",
+        "link": "https://www.amazon.com/DSLR-Cameras-MJPEG-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508972011"
+      },
+      {
+        "name": "MOV",
+        "link": "https://www.amazon.com/DSLR-Cameras-MOV-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508976011"
+      },
+      {
+        "name": "XAVC",
+        "link": "https://www.amazon.com/DSLR-Cameras-XAVC-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty_browse-bin%3A23508964011"
+      }
+    ],
+    "viewscreen_display_size": [
+      {
+        "name": "Under 2 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-Under-2-Inches-Digital/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792434011"
+      },
+      {
+        "name": "2 to 2.9 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-2-9-Inches-Digital/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792435011"
+      },
+      {
+        "name": "3 to 3.9 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-3-9-Inches-Digital/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792436011"
+      },
+      {
+        "name": "4 to 4.9 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-4-9-Inches-Digital/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792437011"
+      },
+      {
+        "name": "5 to 6.9 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-5-6-9-Inches/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792438011"
+      },
+      {
+        "name": "Over 7 Inches",
+        "link": "https://www.amazon.com/DSLR-Cameras-Over-7-Inches-Digital/s?rh=n%3A3017941%2Cp_n_feature_seven_browse-bin%3A6792439011"
+      }
+    ],
+    "viewfinder_type": [
+      {
+        "name": "Optical",
+        "link": "https://www.amazon.com/DSLR-Cameras-Optical-Digital/s?rh=n%3A3017941%2Cp_n_feature_six_browse-bin%3A2055878011"
+      },
+      {
+        "name": "LCD",
+        "link": "https://www.amazon.com/DSLR-Cameras-LCD-Digital/s?rh=n%3A3017941%2Cp_n_feature_six_browse-bin%3A2055879011"
+      },
+      {
+        "name": "Both",
+        "link": "https://www.amazon.com/DSLR-Cameras-Both-Digital/s?rh=n%3A3017941%2Cp_n_feature_six_browse-bin%3A2055877011"
+      }
+    ],
+    "viewfinder_magnification": [
+      {
+        "name": "0.62x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-62x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534158011"
+      },
+      {
+        "name": "0.70x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-70x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534157011"
+      },
+      {
+        "name": "0.71x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-71x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534143011"
+      },
+      {
+        "name": "0.72x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-72x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534142011"
+      },
+      {
+        "name": "0.74x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-74x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534139011"
+      },
+      {
+        "name": "0.75x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-75x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534141011"
+      },
+      {
+        "name": "0.76x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-76x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534138011"
+      },
+      {
+        "name": "0.78x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-78x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534137011"
+      },
+      {
+        "name": "0.82x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-82x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534140011"
+      },
+      {
+        "name": "0.85x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-85x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534150011"
+      },
+      {
+        "name": "0.86x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-86x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534147011"
+      },
+      {
+        "name": "0.87x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-87x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534145011"
+      },
+      {
+        "name": "0.8x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-8x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534144011"
+      },
+      {
+        "name": "0.94x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-94x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534146011"
+      },
+      {
+        "name": "0.95x",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-95x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534148011"
+      },
+      {
+        "name": "1.02x",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-02x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534149011"
+      },
+      {
+        "name": "1.09x",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-09x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534151011"
+      },
+      {
+        "name": "1.48x",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-48x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534153011"
+      },
+      {
+        "name": "1.4x",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-4x-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-four_browse-bin%3A23534152011"
+      }
+    ],
+    "audio_output_type": [
+      {
+        "name": "Headphones",
+        "link": "https://www.amazon.com/DSLR-Cameras-Headphones-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-one_browse-bin%3A23534132011"
+      },
+      {
+        "name": "Speakers",
+        "link": "https://www.amazon.com/DSLR-Cameras-Speakers-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-one_browse-bin%3A23534133011"
+      }
+    ],
+    "feature": [
+      {
+        "name": "GPS",
+        "link": "https://www.amazon.com/DSLR-Cameras-GPS-Digital/s?rh=n%3A3017941%2Cp_n_feature_four_browse-bin%3A21608085011"
+      },
+      {
+        "name": "Live View",
+        "link": "https://www.amazon.com/DSLR-Cameras-Live-View-Digital/s?rh=n%3A3017941%2Cp_n_feature_four_browse-bin%3A21608086011"
+      }
+    ],
+    "metering_mode": [
+      {
+        "name": "Center-Weighted",
+        "link": "https://www.amazon.com/DSLR-Cameras-Center-Weighted-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-two_browse-bin%3A23534135011"
+      },
+      {
+        "name": "Evaluative",
+        "link": "https://www.amazon.com/DSLR-Cameras-Evaluative-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-two_browse-bin%3A23534134011"
+      },
+      {
+        "name": "Spot",
+        "link": "https://www.amazon.com/DSLR-Cameras-Spot-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-two_browse-bin%3A23534136011"
+      }
+    ],
+    "autofocus_technology": [
+      {
+        "name": "Contrast Detection",
+        "link": "https://www.amazon.com/DSLR-Cameras-Contrast-Detection-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-six_browse-bin%3A23534165011"
+      },
+      {
+        "name": "Hybrid",
+        "link": "https://www.amazon.com/DSLR-Cameras-Hybrid-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-six_browse-bin%3A23534164011"
+      },
+      {
+        "name": "Phase Detection",
+        "link": "https://www.amazon.com/DSLR-Cameras-Phase-Detection-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-six_browse-bin%3A23534163011"
+      }
+    ],
+    "focus_description": [
+      {
+        "name": "Active",
+        "link": "https://www.amazon.com/DSLR-Cameras-Active-Digital/s?rh=n%3A3017941%2Cp_n_feature_sixteen_browse-bin%3A23501428011"
+      },
+      {
+        "name": "Hybrid",
+        "link": "https://www.amazon.com/DSLR-Cameras-Hybrid-Digital/s?rh=n%3A3017941%2Cp_n_feature_sixteen_browse-bin%3A23501426011"
+      },
+      {
+        "name": "Passive",
+        "link": "https://www.amazon.com/DSLR-Cameras-Passive-Digital/s?rh=n%3A3017941%2Cp_n_feature_sixteen_browse-bin%3A23501427011"
+      }
+    ],
+    "minimum_iso": [
+      {
+        "name": "32 & Under",
+        "link": "https://www.amazon.com/DSLR-Cameras-32-Under-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705395011"
+      },
+      {
+        "name": "50",
+        "link": "https://www.amazon.com/DSLR-Cameras-50-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705396011"
+      },
+      {
+        "name": "80",
+        "link": "https://www.amazon.com/DSLR-Cameras-80-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705397011"
+      },
+      {
+        "name": "100",
+        "link": "https://www.amazon.com/DSLR-Cameras-100-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705398011"
+      },
+      {
+        "name": "125",
+        "link": "https://www.amazon.com/DSLR-Cameras-125-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705399011"
+      },
+      {
+        "name": "160",
+        "link": "https://www.amazon.com/DSLR-Cameras-160-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705400011"
+      },
+      {
+        "name": "200",
+        "link": "https://www.amazon.com/DSLR-Cameras-200-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705401011"
+      },
+      {
+        "name": "400",
+        "link": "https://www.amazon.com/DSLR-Cameras-400-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705402011"
+      },
+      {
+        "name": "3200",
+        "link": "https://www.amazon.com/DSLR-Cameras-3200-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty-one_browse-bin%3A10705406011"
+      }
+    ],
+    "maximum_iso": [
+      {
+        "name": "800 & Under",
+        "link": "https://www.amazon.com/DSLR-Cameras-800-Under-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705410011"
+      },
+      {
+        "name": "1600",
+        "link": "https://www.amazon.com/DSLR-Cameras-1600-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705412011"
+      },
+      {
+        "name": "3200",
+        "link": "https://www.amazon.com/DSLR-Cameras-3200-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705413011"
+      },
+      {
+        "name": "6400",
+        "link": "https://www.amazon.com/DSLR-Cameras-6400-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705416011"
+      },
+      {
+        "name": "12800",
+        "link": "https://www.amazon.com/DSLR-Cameras-12800-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705418011"
+      },
+      {
+        "name": "25600",
+        "link": "https://www.amazon.com/DSLR-Cameras-25600-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705419011"
+      },
+      {
+        "name": "51200",
+        "link": "https://www.amazon.com/DSLR-Cameras-51200-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705420011"
+      },
+      {
+        "name": "102400",
+        "link": "https://www.amazon.com/DSLR-Cameras-102400-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705421011"
+      },
+      {
+        "name": "204800 & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-204800-Above-Digital/s?rh=n%3A3017941%2Cp_n_feature_fourteen_browse-bin%3A10705422011"
+      }
+    ],
+    "flash_synch_speed": [
+      {
+        "name": "1/60 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-60-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705385011"
+      },
+      {
+        "name": "1/160 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-160-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705386011"
+      },
+      {
+        "name": "1/180 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-180-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705387011"
+      },
+      {
+        "name": "1/200 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-200-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705388011"
+      },
+      {
+        "name": "1/250 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-250-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705389011"
+      },
+      {
+        "name": "1/320 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-320-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705390011"
+      },
+      {
+        "name": "1/500 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-500-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705391011"
+      },
+      {
+        "name": "1/4000 sec",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-4000-sec-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirteen_browse-bin%3A10705393011"
+      }
+    ],
+    "focus_type": [
+      {
+        "name": "Automatic",
+        "link": "https://www.amazon.com/DSLR-Cameras-Automatic-Digital/s?rh=n%3A3017941%2Cp_n_feature_fifteen_browse-bin%3A10099207011"
+      },
+      {
+        "name": "Manual",
+        "link": "https://www.amazon.com/DSLR-Cameras-Manual-Digital/s?rh=n%3A3017941%2Cp_n_feature_fifteen_browse-bin%3A10099208011"
+      },
+      {
+        "name": "Automatic with Manual",
+        "link": "https://www.amazon.com/DSLR-Cameras-Automatic-Manual-Digital/s?rh=n%3A3017941%2Cp_n_feature_fifteen_browse-bin%3A10099209011"
+      }
+    ],
+    "continuous_shooting_speed": [
+      {
+        "name": "4.9 fps & Under",
+        "link": "https://www.amazon.com/DSLR-Cameras-4-9-fps-Under/s?rh=n%3A3017941%2Cp_n_feature_ten_browse-bin%3A10705375011"
+      },
+      {
+        "name": "5 to 9.9 fps",
+        "link": "https://www.amazon.com/DSLR-Cameras-5-9-fps-Digital/s?rh=n%3A3017941%2Cp_n_feature_ten_browse-bin%3A10705376011"
+      },
+      {
+        "name": "10 to 19.9 fps",
+        "link": "https://www.amazon.com/DSLR-Cameras-10-19-9-fps/s?rh=n%3A3017941%2Cp_n_feature_ten_browse-bin%3A10705377011"
+      },
+      {
+        "name": "20 fps & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-20-fps-Above-Digital/s?rh=n%3A3017941%2Cp_n_feature_ten_browse-bin%3A10705379011"
+      }
+    ],
+    "autofocus_points": [
+      {
+        "name": "0 to 9",
+        "link": "https://www.amazon.com/DSLR-Cameras-0-9-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705366011"
+      },
+      {
+        "name": "10 to 19",
+        "link": "https://www.amazon.com/DSLR-Cameras-10-19-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705367011"
+      },
+      {
+        "name": "20 to 29",
+        "link": "https://www.amazon.com/DSLR-Cameras-20-29-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705368011"
+      },
+      {
+        "name": "30 to 39",
+        "link": "https://www.amazon.com/DSLR-Cameras-30-39-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705369011"
+      },
+      {
+        "name": "40 to 49",
+        "link": "https://www.amazon.com/DSLR-Cameras-40-49-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705370011"
+      },
+      {
+        "name": "50 to 59",
+        "link": "https://www.amazon.com/DSLR-Cameras-50-59-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705371011"
+      },
+      {
+        "name": "60 & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-60-Above-Digital/s?rh=n%3A3017941%2Cp_n_feature_eight_browse-bin%3A10705372011"
+      }
+    ],
+    "jpeg_quality_level": [
+      {
+        "name": "Basic",
+        "link": "https://www.amazon.com/DSLR-Cameras-Basic-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-eight_browse-bin%3A23539926011"
+      },
+      {
+        "name": "Fine",
+        "link": "https://www.amazon.com/DSLR-Cameras-Fine-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-eight_browse-bin%3A23539924011"
+      },
+      {
+        "name": "Normal",
+        "link": "https://www.amazon.com/DSLR-Cameras-Normal-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-eight_browse-bin%3A23539925011"
+      }
+    ],
+    "intended_user": [
+      {
+        "name": "Adult",
+        "link": "https://www.amazon.com/DSLR-Cameras-Adult-Digital/s?rh=n%3A3017941%2Cp_n_feature_two_browse-bin%3A23473534011"
+      },
+      {
+        "name": "Kid",
+        "link": "https://www.amazon.com/DSLR-Cameras-Kid-Digital/s?rh=n%3A3017941%2Cp_n_feature_two_browse-bin%3A23473533011"
+      }
+    ],
+    "connection_type": [
+      {
+        "name": "Ethernet",
+        "link": "https://www.amazon.com/DSLR-Cameras-Ethernet-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23501409011"
+      },
+      {
+        "name": "Firewire",
+        "link": "https://www.amazon.com/DSLR-Cameras-Firewire-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23501411011"
+      },
+      {
+        "name": "HDMI",
+        "link": "https://www.amazon.com/DSLR-Cameras-HDMI-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23501406011"
+      },
+      {
+        "name": "Micro HDMI",
+        "link": "https://www.amazon.com/DSLR-Cameras-Micro-HDMI-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23555008011"
+      },
+      {
+        "name": "Micro USB",
+        "link": "https://www.amazon.com/DSLR-Cameras-Micro-USB-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23555007011"
+      },
+      {
+        "name": "USB",
+        "link": "https://www.amazon.com/DSLR-Cameras-USB-Digital/s?rh=n%3A3017941%2Cp_n_feature_browse-bin%3A23501407011"
+      }
+    ],
+    "wireless_connectivity_technology": [
+      {
+        "name": "Bluetooth",
+        "link": "https://www.amazon.com/DSLR-Cameras-Bluetooth-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-nine_browse-bin%3A23447648011"
+      },
+      {
+        "name": "Infrared",
+        "link": "https://www.amazon.com/DSLR-Cameras-Infrared-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-nine_browse-bin%3A23555287011"
+      },
+      {
+        "name": "NFC",
+        "link": "https://www.amazon.com/DSLR-Cameras-NFC-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-nine_browse-bin%3A23490147011"
+      },
+      {
+        "name": "Wi-Fi",
+        "link": "https://www.amazon.com/DSLR-Cameras-Wi-Fi-Digital/s?rh=n%3A3017941%2Cp_n_feature_twenty-nine_browse-bin%3A23447647011"
+      }
+    ],
+    "expert_reviews": [
+      {
+        "name": "DPReview Tested",
+        "link": "https://www.amazon.com/DSLR-Cameras-DPReview-Tested-Digital/s?rh=n%3A3017941%2Cp_n_feature_twelve_browse-bin%3A9680308011"
+      }
+    ],
+    "eligible_for_free_shipping": [
+      {
+        "name": "Free Shipping by Amazon\n\n    \n    \n        \n            \n                \n\nAll customers get FREE Shipping on orders over $25 shipped by Amazon",
+        "link": "https://www.amazon.com/DSLR-Cameras-Free-Shipping-Amazon-Digital/s?rh=n%3A3017941%2Cp_76%3A1249137011"
+      }
+    ],
+    "exposure_control_type": [
+      {
+        "name": "Automatic",
+        "link": "https://www.amazon.com/DSLR-Cameras-Automatic-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty_browse-bin%3A23539928011"
+      },
+      {
+        "name": "Manual",
+        "link": "https://www.amazon.com/DSLR-Cameras-Manual-Digital/s?rh=n%3A3017941%2Cp_n_feature_thirty_browse-bin%3A23539927011"
+      }
+    ],
+    "packaging_option": [
+      {
+        "name": "Frustration-Free Packaging",
+        "link": "https://www.amazon.com/DSLR-Cameras-Frustration-Free-Packaging-Digital/s?rh=n%3A3017941%2Cp_n_is_ffp%3A7252855011"
+      }
+    ],
+    "price": [
+      {
+        "name": "Under $25",
+        "link": "https://www.amazon.com/DSLR-Cameras-Under-25-Digital/s?rh=n%3A3017941%2Cp_36%3A1253503011"
+      },
+      {
+        "name": "$25 to $50",
+        "link": "https://www.amazon.com/DSLR-Cameras-25-50-Digital/s?rh=n%3A3017941%2Cp_36%3A1253504011"
+      },
+      {
+        "name": "$50 to $100",
+        "link": "https://www.amazon.com/DSLR-Cameras-50-100-Digital/s?rh=n%3A3017941%2Cp_36%3A1253505011"
+      },
+      {
+        "name": "$100 to $200",
+        "link": "https://www.amazon.com/DSLR-Cameras-100-200-Digital/s?rh=n%3A3017941%2Cp_36%3A1253506011"
+      },
+      {
+        "name": "$200 & Above",
+        "link": "https://www.amazon.com/DSLR-Cameras-200-Above-Digital/s?rh=n%3A3017941%2Cp_36%3A1253507011"
+      }
+    ],
+    "condition": [
+      {
+        "name": "New",
+        "link": "https://www.amazon.com/DSLR-Cameras-New-Digital/s?rh=n%3A3017941%2Cp_n_condition-type%3A2224371011"
+      },
+      {
+        "name": "Used",
+        "link": "https://www.amazon.com/DSLR-Cameras-Used-Digital/s?rh=n%3A3017941%2Cp_n_condition-type%3A2224373011"
+      },
+      {
+        "name": "Renewed",
+        "link": "https://www.amazon.com/DSLR-Cameras-Renewed-Digital/s?rh=n%3A3017941%2Cp_n_condition-type%3A16907720011"
+      }
+    ],
+    "avg_customer_review": [
+      {
+        "name": "4 Stars & Up\n    \n\n\n        \n            \n\n& Up",
+        "link": "https://www.amazon.com/DSLR-Cameras-4-Stars-Up-Digital/s?rh=n%3A3017941%2Cp_72%3A1248879011"
+      },
+      {
+        "name": "3 Stars & Up\n    \n\n\n        \n            \n\n& Up",
+        "link": "https://www.amazon.com/DSLR-Cameras-3-Stars-Up-Digital/s?rh=n%3A3017941%2Cp_72%3A1248880011"
+      },
+      {
+        "name": "2 Stars & Up\n    \n\n\n        \n            \n\n& Up",
+        "link": "https://www.amazon.com/DSLR-Cameras-2-Stars-Up-Digital/s?rh=n%3A3017941%2Cp_72%3A1248881011"
+      },
+      {
+        "name": "1 Star & Up\n    \n\n\n        \n            \n\n& Up",
+        "link": "https://www.amazon.com/DSLR-Cameras-1-Star-Up-Digital/s?rh=n%3A3017941%2Cp_72%3A1248882011"
+      }
+    ],
+    "seller": [
+      {
+        "name": "6ave",
+        "link": "https://www.amazon.com/DSLR-Cameras-6ave-Digital/s?rh=n%3A3017941%2Cp_6%3AALAQLAKJ574UN"
+      },
+      {
+        "name": "Fast Ship Direct",
+        "link": "https://www.amazon.com/DSLR-Cameras-Fast-Ship-Direct-Digital/s?rh=n%3A3017941%2Cp_6%3AA1ONXNZCOVO2I6"
+      },
+      {
+        "name": "MOBILE DISTRIBUTORS",
+        "link": "https://www.amazon.com/DSLR-Cameras-MOBILE-DISTRIBUTORS-Digital/s?rh=n%3A3017941%2Cp_6%3AA1HS6B63BA407T"
+      },
+      {
+        "name": "Electronics Basket",
+        "link": "https://www.amazon.com/DSLR-Cameras-Electronics-Basket-Digital/s?rh=n%3A3017941%2Cp_6%3AA3DIJJ471X08L1"
+      },
+      {
+        "name": "PAGING ZONE",
+        "link": "https://www.amazon.com/DSLR-Cameras-PAGING-ZONE-Digital/s?rh=n%3A3017941%2Cp_6%3AA3KTZ4MX8F6OME"
+      },
+      {
+        "name": "Premier Camera  =Japan= Our Japanese staff will send you with care.",
+        "link": "https://www.amazon.com/DSLR-Cameras-Digital/s?rh=n%3A3017941%2Cp_6%3AA3PVM18MAOWC2S"
+      },
+      {
+        "name": "SELLOUTDEALS",
+        "link": "https://www.amazon.com/DSLR-Cameras-SELLOUTDEALS-Digital/s?rh=n%3A3017941%2Cp_6%3AA2N01J8SZ7W4B3"
+      },
+      {
+        "name": "BuyDirect & Save!!!",
+        "link": "https://www.amazon.com/DSLR-Cameras-BuyDirect-Save-Digital/s?rh=n%3A3017941%2Cp_6%3AACS77HWTQ0G3Q"
+      },
+      {
+        "name": "lichaodedian",
+        "link": "https://www.amazon.com/DSLR-Cameras-lichaodedian-Digital/s?rh=n%3A3017941%2Cp_6%3AA3HJ9N3JNBVIOI"
+      },
+      {
+        "name": "world_wide_treasures_inc",
+        "link": "https://www.amazon.com/DSLR-Cameras-world_wide_treasures_inc-Digital/s?rh=n%3A3017941%2Cp_6%3AA1565F979EWYG2"
+      }
+    ],
+    "new_and_upcoming": [
+      {
+        "name": "New Arrivals",
+        "link": "https://www.amazon.com/DSLR-Cameras-New-Arrivals-Digital/s?rh=n%3A3017941%2Cp_n_date%3A1249033011"
+      },
+      {
+        "name": "Coming Soon",
+        "link": "https://www.amazon.com/DSLR-Cameras-Coming-Soon-Digital/s?rh=n%3A3017941%2Cp_n_date%3A1249034011"
+      }
+    ],
+    "amazon_global_store": [
+      {
+        "name": "Amazon Global Store",
+        "link": "https://www.amazon.com/DSLR-Cameras-Amazon-Global-Store-Digital/s?rh=n%3A3017941%2Cp_n_global_store_origin_marketplace%3A16354393011"
+      }
+    ],
+    "international_shipping": [
+      {
+        "name": "International Shipping Eligible",
+        "link": "https://www.amazon.com/DSLR-Cameras-International-Shipping-Eligible-Digital/s?rh=n%3A3017941%2Cp_n_shipping_option-bin%3A3242350011"
+      }
+    ],
+    "deals": [
+      {
+        "name": "Today's Deals",
+        "link": "https://www.amazon.com/DSLR-Cameras-Todays-Deals-Digital/s?rh=n%3A3017941%2Cp_n_specials_match%3A21213697011"
+      }
+    ],
+    "availability": [
+      {
+        "name": "Include Out of Stock",
+        "link": "https://www.amazon.com/DSLR-Cameras-Include-Out-Stock-Digital/s?rh=n%3A3017941%2Cp_n_availability%3A2661601011"
+      }
+    ]
+  },
+  "category_results": [
+    {
+      "position": 1,
+      "title": "Canon EOS Rebel T7 DSLR Camera Bundle with Canon EF-S 18-55mm f/3.5-5.6 is II Lens + 2pc SanDisk 32GB Memory Cards + Accessory Kit",
+      "asin": "B07P15K8Q7",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51C1ZLCf7tL.jpg",
+      "rating": 5,
+      "ratings_total": 2089,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 599,
+          "currency": "USD",
+          "raw": "$599.00",
+          "name": "primary"
+        },
+        {
+          "symbol": "$",
+          "value": 749,
+          "currency": "USD",
+          "raw": "$749.00",
+          "name": "original"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 599,
+        "currency": "USD",
+        "raw": "$599.00",
+        "name": "primary"
+      }
+    },
+    {
+      "position": 2,
+      "title": "Canon EOS REBEL T7 DSLR Camera|2 Lens Kit with EF18-55mm + EF 75-300mm Lens, Black",
+      "asin": "B0101RW3QK",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41LLTMKuflL.jpg",
+      "rating": 5,
+      "ratings_total": 921
+    },
+    {
+      "position": 3,
+      "title": "Paging Zone-Canon intl Canon EOS 4000D DSLR Camera with 18-55mm f/3.5-5.6 Zoom Lens, 64GB Memory,Case, Tripod and More (28pc Bundle)",
+      "asin": "B08KSMKHF3",
+      "brand": "Paging Zone-Canon intl",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/516EYPWE4zL.jpg",
+      "rating": 4.5,
+      "ratings_total": 823,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 489,
+          "currency": "USD",
+          "raw": "$489.00",
+          "name": "primary"
+        },
+        {
+          "symbol": "$",
+          "value": 799,
+          "currency": "USD",
+          "raw": "$799.00",
+          "name": "original"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 489,
+        "currency": "USD",
+        "raw": "$489.00",
+        "name": "primary"
+      }
+    },
+    {
+      "position": 4,
+      "title": "Jerry's Photo | Canon Intl Canon EOS 2000D (Rebel T7) DSLR Camera w/Canon EF-S 18-55mm F/3.5-5.6 Zoom Lens + Case + 128GB Memory (28pc Bundle)",
+      "asin": "B08K7CKKB1",
+      "brand": "Jerry's Photo | Canon Intl",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51tPe9BdLtL.jpg",
+      "rating": 5,
+      "ratings_total": 334,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 539,
+          "currency": "USD",
+          "raw": "$539.00"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 539,
+        "currency": "USD",
+        "raw": "$539.00"
+      }
+    },
+    {
+      "position": 5,
+      "title": "Canon EOS M50 Mark II + EF-M 15-45mm is STM Kit Black",
+      "asin": "B08KSKV35C",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41jvbdzyqBL.jpg",
+      "rating": 5,
+      "ratings_total": 319,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 699.99,
+          "currency": "USD",
+          "raw": "$699.99"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 699.99,
+        "currency": "USD",
+        "raw": "$699.99"
+      }
+    },
+    {
+      "position": 6,
+      "title": "Canon EOS 5D Mark IV Full Frame Digital SLR Camera Body",
+      "asin": "B01KURGS9E",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41oKX3NFrCL.jpg",
+      "rating": 4.5,
+      "ratings_total": 707,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 2499,
+          "currency": "USD",
+          "raw": "$2,499.00"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 2499,
+        "currency": "USD",
+        "raw": "$2,499.00"
+      }
+    },
+    {
+      "position": 7,
+      "title": "Canon EOS Rebel T8i EF-S 18-55mm is STM Lens Kit, Black",
+      "asin": "B084BKKX8T",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/41WNsUhC53L.jpg",
+      "rating": 4.5,
+      "ratings_total": 333,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 899.99,
+          "currency": "USD",
+          "raw": "$899.99"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 899.99,
+        "currency": "USD",
+        "raw": "$899.99"
+      }
+    },
+    {
+      "position": 8,
+      "title": "Canon Cameras Inc. Canon EOS 2000D / Rebel T7 Digital SLR Camera Body w/Canon EF-S 18-55mm f/3.5-5.6 Lens Multi 3 Lens DSLR Kit with Complete Accessory Bundle + Tripod + 64GB + Flash + Case & More - International Model",
+      "asin": "B08S5FD42N",
+      "brand": "Canon Cameras Inc.",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51qfcrg0IRL.jpg",
+      "rating": 4.5,
+      "ratings_total": 160,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 499.95,
+          "currency": "USD",
+          "raw": "$499.95",
+          "name": "primary"
+        },
+        {
+          "symbol": "$",
+          "value": 539.95,
+          "currency": "USD",
+          "raw": "$539.95",
+          "name": "original"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 499.95,
+        "currency": "USD",
+        "raw": "$499.95",
+        "name": "primary"
+      }
+    },
+    {
+      "position": 9,
+      "title": "Canon EOS 6D Mark II Digital SLR Camera Body, Wi-Fi Enabled",
+      "asin": "B072MZCJKN",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51Okly2zXgL.jpg",
+      "rating": 5,
+      "ratings_total": 840,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 1399,
+          "currency": "USD",
+          "raw": "$1,399.00",
+          "name": "primary"
+        },
+        {
+          "symbol": "$",
+          "value": 1799,
+          "currency": "USD",
+          "raw": "$1,799.00",
+          "name": "original"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 1399,
+        "currency": "USD",
+        "raw": "$1,399.00",
+        "name": "primary"
+      }
+    },
+    {
+      "position": 10,
+      "title": "Canon DSLR Camera [EOS 90D] with 18-135 is USM Lens | Built-in Wi-Fi, Bluetooth, DIGIC 8 Image Processor, 4K Video, Dual Pixel CMOS AF, and 3.0 Inch Vari-Angle Touch LCD Screen, Black",
+      "asin": "B07WHV3HXL",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/51M8G-1P-hL.jpg",
+      "rating": 4.5,
+      "ratings_total": 321,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 1599,
+          "currency": "USD",
+          "raw": "$1,599.00"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 1599,
+        "currency": "USD",
+        "raw": "$1,599.00"
+      }
+    },
+    {
+      "position": 11,
+      "title": "Nikon D5600 DSLR with 18-55mm f/3.5-5.6G VR and 70-300mm f/4.5-6.3G ED",
+      "asin": "B01MR2D0OG",
+      "brand": "Nikon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/31d4NORyyEL.jpg",
+      "rating": 5,
+      "ratings_total": 539,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 896.95,
+          "currency": "USD",
+          "raw": "$896.95"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 896.95,
+        "currency": "USD",
+        "raw": "$896.95"
+      }
+    },
+    {
+      "position": 12,
+      "title": "Canon PowerShot Digital Camera [G7 X Mark II] with Wi-Fi & NFC, LCD Screen, and 1-Inch Sensor - Black, 100 - 1066C001",
+      "asin": "B01BV14OXA",
+      "brand": "Canon",
+      "categories": [
+        {
+          "name": "DSLR Cameras",
+          "id": "3017941"
+        }
+      ],
+      "image": "https://images-na.ssl-images-amazon.com/images/I/416b8xNfDJL.jpg",
+      "rating": 4.5,
+      "ratings_total": 1347,
+      "prices": [
+        {
+          "symbol": "$",
+          "value": 629,
+          "currency": "USD",
+          "raw": "$629.00"
+        }
+      ],
+      "price": {
+        "symbol": "$",
+        "value": 629,
+        "currency": "USD",
+        "raw": "$629.00"
+      }
+    }
+  ]
+}

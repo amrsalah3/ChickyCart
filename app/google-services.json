@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506977853059",
+    "project_id": "ecommerce-16feb",
+    "storage_bucket": "ecommerce-16feb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506977853059:android:3eb3a6fed0bb2e0df605b6",
+        "android_client_info": {
+          "package_name": "com.narify.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506977853059-lur0usm39pl6ni1umacovagkggrrrsk3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.narify.ecommerce",
+            "certificate_hash": "45f13f646e61cc1ededa243ba833fc8e1a82c975"
+          }
+        },
+        {
+          "client_id": "506977853059-k29erdufuarq7kh9utb2liuuirqqam47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa3ZEeKk9xvJrqB-zLO1ji2E4sujZqGJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506977853059-k29erdufuarq7kh9utb2liuuirqqam47.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

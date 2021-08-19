@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.narify.ecommerce.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.narify.ecommerce.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_filteredProductsFragment"
+            app:destination="@id/filteredProductsFragment" />
+        <action
+            android:id="@+id/action_showProductDetails"
+            app:destination="@id/productDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.narify.ecommerce.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.narify.ecommerce.ui.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_filteredProductsFragment"
+            app:destination="@id/filteredProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filteredProductsFragment"
+        android:name="com.narify.ecommerce.DisplayProductsFragment"
+        android:label="fragment_filtered_products"
+        tools:layout="@layout/fragment_display_products" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.narify.ecommerce.ui.productdetails.ProductDetailsFragment"
+        android:label="product_details_fragment"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="clickedProduct"
+            android:defaultValue="@null"
+            app:argType="com.narify.ecommerce.model.Product"
+            app:nullable="true" />
+    </fragment>
+</navigation>
