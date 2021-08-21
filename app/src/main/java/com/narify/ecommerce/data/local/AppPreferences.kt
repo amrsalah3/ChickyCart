@@ -27,7 +27,6 @@ class AppPreferences @Inject constructor(application: Application) {
         val encodedCart = pref.getString(PREF_KEY_CART, "") ?: ""
         return try {
             gson.fromJson(encodedCart, Cart::class.java)
-            //Json.decodeFromString(encodedCart)
         } catch (e: Exception) {
             Cart()
         }
