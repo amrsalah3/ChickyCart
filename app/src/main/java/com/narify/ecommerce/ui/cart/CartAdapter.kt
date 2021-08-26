@@ -8,39 +8,43 @@ import com.bumptech.glide.Glide
 import com.narify.ecommerce.R
 import com.narify.ecommerce.databinding.ItemCartBinding
 import com.narify.ecommerce.model.CartItem
+import com.narify.ecommerce.model.Product
 
-class CartAdapter(var data: List<CartItem>) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(
+    var items: List<CartItem>,
+    var addItem: ((product: Product) -> Unit)? = null,
+    var removeItem: ((product: Product) -> Unit)? = null
+) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_cart, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
         )
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(data[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position])
 
-    fun swapData(data: List<CartItem>) {
-        this.data = data
+    fun swapData(items: List<CartItem>) {
+        this.items = items
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: CartItem) = with(itemView) {
-            val binding = ItemCartBinding.bind(this)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val binding = ItemCartBinding.bind(itemView)
 
+        fun bind(item: CartItem) = with(itemView) {
             with(binding) {
                 Glide.with(context).load(item.product.getThumbnail()).into(ivProductImage)
                 tvProductTitle.text = item.product.title
                 tvProductCount.text = item.count.toString()
 
-                btnProductAdd.setOnClickListener {
-
-                }
+                btnProductAdd.setOnClickListener { addItem?.invoke(item.product) }
+                btnProductSubtract.setOnClickListener { removeItem?.invoke(item.product) }
             }
 
         }
     }
+
 }
