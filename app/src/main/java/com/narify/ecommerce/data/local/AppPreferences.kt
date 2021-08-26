@@ -19,7 +19,7 @@ class AppPreferences @Inject constructor(application: Application) {
     fun getProductSortOption(): String =
         pref.getString(PREF_KEY_SORT_OPTION, FIREBASE_PRODUCT_TITLE) ?: FIREBASE_PRODUCT_TITLE
 
-    fun setProductSortOption(sortOption: String) =
+    fun saveProductSortOption(sortOption: String) =
         pref.edit(commit = true) { putString(PREF_KEY_SORT_OPTION, sortOption) }
 
 
@@ -32,7 +32,7 @@ class AppPreferences @Inject constructor(application: Application) {
         }
     }
 
-    fun setCart(cart: Cart) {
+    fun saveCart(cart: Cart) {
         val encodedCart = gson.toJson(cart)
         pref.edit { putString(PREF_KEY_CART, encodedCart) }
     }

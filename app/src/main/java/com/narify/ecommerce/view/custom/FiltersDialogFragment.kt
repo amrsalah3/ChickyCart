@@ -37,7 +37,7 @@ class FiltersDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun onSortOptionClicked(sortOption: String) {
-        pref.setProductSortOption(sortOption)
+        pref.saveProductSortOption(sortOption)
 
         requireActivity().supportFragmentManager.setFragmentResult(
             REQUEST_CODE_SEARCH_FILTERS, bundleOf()
