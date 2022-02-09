@@ -5,13 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.narify.ecommerce.R
 import com.narify.ecommerce.data.remote.amazon.PutProductsActivity
 import com.narify.ecommerce.databinding.ActivityMainBinding
-import com.narify.ecommerce.model.User
+import com.narify.ecommerce.databinding.NavDrawerHeaderBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -25,14 +26,39 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         val navHost =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHost.navController
 
+
+        binding.navDrawer.setupWithNavController(navController)
         binding.bottomNavigation.setupWithNavController(navController)
 
+        updateNavDrawerHeaderUserDetails()
+    }
+
+    private fun updateNavDrawerHeaderUserDetails() {
+        val headerView = binding.navDrawer.getHeaderView(0)
+        val headerBinding: NavDrawerHeaderBinding = NavDrawerHeaderBinding.bind(headerView)
+
+        val userInfo = user?.providerData?.get(0)
+
+        val avatarUrl = userInfo?.photoUrl
+        var username = userInfo?.displayName
+
+        if (avatarUrl == null) {
+            Glide.with(this).load(R.drawable.ic_default_avatar).into(headerBinding.ivUserIcon)
+        } else {
+            Glide.with(this).load(avatarUrl).into(headerBinding.ivUserIcon)
+        }
+
+        if (username == null) {
+            username = "User"
+        }
+        headerBinding.tvUserName.text = username
     }
 
     /* override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -92,18 +118,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNewUser() {
-        val currentUser = Firebase.auth.currentUser
-        currentUser?.let {
-            val user = User(
-                name = it.displayName,
-                email = it.email,
-                photoUrl = it.photoUrl.toString(),
-                age = 21,
-                gender = User.Gender.MALE,
-                phoneNumber = "013514534"
-            )
-            Timber.d("GeneralLogKey addNewUser: $user")
-            db.collection("users").add(user)
-        }
+        /*  val currentUser = Firebase.auth.currentUser
+          currentUser?.let {
+              val user = User(
+                  name = it.displayName,
+                  email = it.email,
+                  photoUrl = it.photoUrl.toString(),
+                  age = 21,
+                  gender = User.Gender.MALE,
+                  phoneNumber = "013514534"
+              )
+              Timber.d("GeneralLogKey addNewUser: $user")
+              db.collection("users").add(user)
+          }*/
     }
 }

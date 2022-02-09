@@ -1,3 +1,8 @@
 package com.narify.ecommerce.data.remote.api
 
-interface ProductApi
+import androidx.lifecycle.LiveData
+import com.narify.ecommerce.model.Product
+
+interface ProductApi {
+    fun getProducts(sortOption: String): LiveData<List<Product>>
+}

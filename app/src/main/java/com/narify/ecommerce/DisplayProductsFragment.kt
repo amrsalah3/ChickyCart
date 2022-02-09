@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import com.narify.ecommerce.data.remote.api.RealtimeDbProductService
 import com.narify.ecommerce.data.repository.ProductRepository
 import com.narify.ecommerce.databinding.FragmentDisplayProductsBinding
 import com.narify.ecommerce.ui.home.ProductAdapter
@@ -41,7 +42,7 @@ class DisplayProductsFragment :
     private fun initSearchFilterListener() = with(binding) {
         searchBar.etSearch.setOnEditorActionListener { tv, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                ProductRepository().getProductsByName(tv.text.toString())
+                ProductRepository(RealtimeDbProductService()).getProductsByName(tv.text.toString())
                     .observe(viewLifecycleOwner, {
                         rvFilteredProducts.adapter = ProductAdapter(it)
                         searchBar.ibFilter.visibility = View.VISIBLE

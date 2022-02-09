@@ -8,8 +8,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.narify.ecommerce.R
 import com.narify.ecommerce.data.local.AppPreferences
-import com.narify.ecommerce.util.AppConstants
-import com.narify.ecommerce.util.AppConstants.Companion.REQUEST_CODE_SEARCH_FILTERS
+import com.narify.ecommerce.util.Constants
+import com.narify.ecommerce.util.Constants.Companion.REQUEST_CODE_SEARCH_FILTERS
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,13 +24,13 @@ class FiltersDialogFragment : BottomSheetDialogFragment() {
         dialog.setContentView(R.layout.dialog_filters)
 
         dialog.findViewById<Button>(R.id.tv_sort_alphabetical)?.setOnClickListener {
-            onSortOptionClicked(AppConstants.FIREBASE_PRODUCT_TITLE)
+            onSortOptionClicked(Constants.FIREBASE_PRODUCT_TITLE)
         }
         dialog.findViewById<Button>(R.id.tv_sort_price)?.setOnClickListener {
-            onSortOptionClicked(AppConstants.FIREBASE_PRODUCT_PRICE)
+            onSortOptionClicked(Constants.FIREBASE_PRODUCT_PRICE)
         }
         dialog.findViewById<Button>(R.id.tv_sort_rating)?.setOnClickListener {
-            onSortOptionClicked(AppConstants.FIREBASE_PRODUCT_RATING)
+            onSortOptionClicked(Constants.FIREBASE_PRODUCT_RATING)
         }
 
         return dialog

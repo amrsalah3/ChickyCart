@@ -3,7 +3,7 @@ package com.narify.ecommerce.util
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class AppConstants {
+class Constants {
     companion object {
         const val REQUEST_CODE_SEARCH_FILTERS = "sort_filters_request_code"
         const val KEY_SORT_OPTION = "sort_option"

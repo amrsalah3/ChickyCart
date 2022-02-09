@@ -1,19 +1,18 @@
 package com.narify.ecommerce.ui.home
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.narify.ecommerce.R
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.narify.ecommerce.data.local.AppPreferences
+import com.narify.ecommerce.data.remote.api.RealtimeDbProductService
 import com.narify.ecommerce.data.repository.ProductRepository
 import com.narify.ecommerce.databinding.FragmentHomeBinding
-import com.narify.ecommerce.util.AppConstants.Companion.FIREBASE_PRODUCT_TITLE
-import com.narify.ecommerce.util.AppConstants.Companion.REQUEST_CODE_SEARCH_FILTERS
+import com.narify.ecommerce.model.User
+import com.narify.ecommerce.util.Constants.Companion.REQUEST_CODE_SEARCH_FILTERS
 import com.narify.ecommerce.view.BaseFragment
-import com.narify.ecommerce.view.custom.FiltersDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -51,10 +50,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
         }
 
         searchBar.ibFilter.setOnClickListener {
-            FiltersDialogFragment().show(
+            putDummyUserToFirebase() // remove it later
+            // Uncomment to enable the feature
+            /*FiltersDialogFragment().show(
                 requireActivity().supportFragmentManager,
                 FiltersDialogFragment.TAG
-            )
+            )*/
+        }
+    }
+
+    // A temporary function for developing purposes (remove it later)
+    private fun putDummyUserToFirebase() {
+        User(
+            name = User.Name("Amr", "Salah", "Abdelhady"),
+            email = "amrhady3@gmail.com",
+            photoUrl = "https://firebasestorage.googleapis.com/v0/b/ecommerce-16feb.appspot.com/o/1610443607773.jpeg?alt=media&token=e9ad7247-5014-4375-b704-caff194607bd",
+            age = 22,
+            gender = User.Gender.MALE,
+            phoneNumber = "011534864",
+            address = User.Address("15 Texas St, US"),
+            card = User.Card("Amr Salah", "123456789"),
+            transaction = User.Transaction("ABCDEF")
+        ).apply {
+            Firebase.database.reference
+                .child("users").child("t57HGtfbWiQFrbQvZ4ighMn2tgo1")
+                .setValue(this)
         }
     }
 
@@ -71,11 +91,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>({ FragmentHomeBinding.inf
     private fun displayProducts() {
         toggleSearchFilterIconColor()
         val sortOption = pref.getProductSortOption()
-        ProductRepository().getAllProducts(sortOption).observe(viewLifecycleOwner) {
-            Timber.d("GeneralLogKey onViewCreated: Observed!")
-            productAdapter.swapData(it)
-            offerAdapter.swapData(it)
-        }
+        ProductRepository(RealtimeDbProductService()).getProducts(sortOption)
+            .observe(viewLifecycleOwner) {
+                Timber.d("GeneralLogKey onViewCreated: Observed!")
+                productAdapter.swapData(it)
+                offerAdapter.swapData(it)
+            }
     }
 
     private fun toggleSearchFilterIconColor() = with(binding.searchBar.ibFilter) {

@@ -39,8 +39,8 @@ class ProductDetailsFragment :
             val cart = pref.getCart()
             btnAddToCart.setOnClickListener {
                 cart.addProduct(product)
-                pref.setCart(cart)
-                Snackbar.make(it, "Added to cart.", Snackbar.LENGTH_SHORT).show()
+                pref.saveCart(cart)
+                Snackbar.make(it, "Added.", Snackbar.LENGTH_SHORT).show()
             }
         }
 

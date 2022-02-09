@@ -15,18 +15,23 @@ class CartFragment : BaseFragment<FragmentCartBinding>({ FragmentCartBinding.inf
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
+
         initAdapter()
     }
 
     private fun initAdapter() {
-        binding.rvCart.adapter = CartAdapter(viewModel.getItems()).apply {
-            addItem = {
-                viewModel.addItem(it)
-                swapData(viewModel.getItems())
-            }
-            removeItem = {
-                viewModel.removeItem(it)
-                swapData(viewModel.getItems())
+        viewModel.cartItems.observe(viewLifecycleOwner) { items ->
+            binding.rvCart.adapter = CartAdapter(items).apply {
+                addItem = {
+                    viewModel.addProduct(it)
+                    swapData(items)
+                }
+                removeItem = {
+                    viewModel.removeProduct(it)
+                    swapData(items)
+                }
             }
         }
     }

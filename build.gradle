@@ -3,6 +3,7 @@ buildscript {
     ext {
         kotlin_version = '1.4.32'
         ext.hilt_version = '2.38.1'
+        coroutine_version = '1.4.1'
     }
     repositories {
         google()
