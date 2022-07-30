@@ -1,2 +1,2 @@
 # Ecommerce
-## This project is in progress
+## This project is still in progress..
