@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ecommercy</string>
+
+    <string name="sort_alphabetical">A-Z</string>
+    <string name="sort_price">Price</string>
+    <string name="sort_rating">Rating</string>
+    <string name="sort_none">None</string>
+
+</resources>
