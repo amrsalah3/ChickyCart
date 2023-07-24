@@ -51,8 +51,9 @@ fun EcommercyNavGraph(
         ) {
             homeRoute()
             categoriesRoute()
-            cartRoute()
+            cartRoute(onCheckoutClicked = { navController.navigateToCheckout() })
             productDetailsRoute()
+            checkoutRoute()
         }
     }
 }

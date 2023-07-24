@@ -1,7 +1,7 @@
 package com.narify.ecommercy.ui.categories
 
 data class CategoriesUiState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean,
     val categoryItems: List<CategoryItemUiState> = emptyList(),
     val userMessage: String? = null
 )

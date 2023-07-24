@@ -2,7 +2,6 @@ package com.narify.ecommercy.ui.cart
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,35 +29,54 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.FakeProductsDataSource
+import com.narify.ecommercy.data.FakeCartDataSource
+import com.narify.ecommercy.model.CartItem
+import com.narify.ecommercy.model.totalPriceText
+import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
-fun CartRoute() {
-    val cartItems = List(10) {
-        CartProductItemUiState(
-            FakeProductsDataSource().product1.name,
-            FakeProductsDataSource().product1.getThumbnail(),
-            5,
-            "500 EGP"
-        )
-    }
-    CartScreen(cartItems)
+fun CartRoute(
+    onCheckoutClicked: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: CartViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    if (uiState.isLoading) LoadingContent()
+    else CartScreen(
+        cartItems = uiState.cartItems,
+        onIncrementItem = { viewModel.increaseItemCount(it.product) },
+        onDecrementItem = { viewModel.decreaseItemCount(it.product.id) },
+        onCheckoutClicked = onCheckoutClicked
+    )
 }
 
 @Composable
-fun CartScreen(cartItems: List<CartProductItemUiState>) {
-    Column(Modifier.fillMaxSize()) {
-        CartItemsList(cartItems, Modifier.weight(1f))
+fun CartScreen(
+    cartItems: List<CartItem>,
+    onIncrementItem: (CartItem) -> Unit,
+    onDecrementItem: (CartItem) -> Unit,
+    onCheckoutClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier.fillMaxSize()) {
+        CartItemsList(
+            cartItems = cartItems,
+            onIncrementItem = onIncrementItem,
+            onDecrementItem = onDecrementItem,
+            modifier = Modifier.weight(1f)
+        )
         Row(
             Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.secondaryContainer)
         ) {
             Button(
-                onClick = { },
+                onClick = onCheckoutClicked,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)
@@ -70,7 +89,9 @@ fun CartScreen(cartItems: List<CartProductItemUiState>) {
 
 @Composable
 fun CartItemsList(
-    cartItems: List<CartProductItemUiState>,
+    cartItems: List<CartItem>,
+    onIncrementItem: (CartItem) -> Unit,
+    onDecrementItem: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
@@ -79,15 +100,22 @@ fun CartItemsList(
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
         modifier = modifier
     ) {
-        items(cartItems) { cartItems ->
-            CartItem(cartItemState = cartItems, cardColor = cardColor)
+        items(cartItems) { item ->
+            CartItem(
+                cartItemState = item,
+                onIncrementItem = onIncrementItem,
+                onDecrementItem = onDecrementItem,
+                cardColor = cardColor
+            )
         }
     }
 }
 
 @Composable
 fun CartItem(
-    cartItemState: CartProductItemUiState,
+    cartItemState: CartItem,
+    onIncrementItem: (CartItem) -> Unit,
+    onDecrementItem: (CartItem) -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
@@ -100,9 +128,9 @@ fun CartItem(
             modifier
                 .height(150.dp)
                 .fillMaxWidth()
-                .clickable(true) { }) {
+        ) {
             AsyncImage(
-                model = cartItemState.imageUrl,
+                model = cartItemState.product.getThumbnail(),
                 placeholder = painterResource(R.drawable.sample_product_item),
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,
@@ -114,7 +142,7 @@ fun CartItem(
                     .weight(2f)
             ) {
                 Text(
-                    text = cartItemState.name,
+                    text = cartItemState.product.name,
                     fontWeight = FontWeight.Bold,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
@@ -128,20 +156,20 @@ fun CartItem(
                         .padding(4.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = { onDecrementItem(cartItemState) }) {
                         Text(
                             text = "-",
                             fontSize = 20.sp,
                         )
                     }
                     Text(
-                        text = "0",
+                        text = "${cartItemState.count}",
                         fontSize = 20.sp,
                         modifier = modifier
                             .padding(horizontal = 20.dp)
                             .align(Alignment.CenterVertically)
                     )
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = { onIncrementItem(cartItemState) }) {
                         Text(
                             text = "+",
                             fontSize = 20.sp
@@ -158,6 +186,7 @@ fun CartItem(
 @Composable
 fun CartScreenPreview() {
     EcommercyTheme {
-        CartRoute()
+        val cartItems = FakeCartDataSource().getPreviewCartItems()
+        CartScreen(cartItems, {}, {}, {})
     }
 }

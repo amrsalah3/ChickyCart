@@ -5,8 +5,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.narify.ecommercy.EcommercyDestinations.CART_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.CATEGORIES_ROUTE
+import com.narify.ecommercy.EcommercyDestinations.CHECKOUT_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.HOME_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.PRODUCT_DETAILS_ROUTE
+import com.narify.ecommercy.ui.CheckoutRoute
 import com.narify.ecommercy.ui.cart.CartRoute
 import com.narify.ecommercy.ui.categories.CategoryRoute
 import com.narify.ecommercy.ui.home.HomeRoute
@@ -62,6 +64,16 @@ fun NavController.navigateToProductDetails() {
     }
 }
 
+fun NavController.navigateToCheckout() {
+    navigate(CHECKOUT_ROUTE) {
+        popUpTo(CART_ROUTE) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
 // Type-safe navigation route builders
 fun NavGraphBuilder.homeRoute() {
     composable(HOME_ROUTE) {
@@ -75,14 +87,20 @@ fun NavGraphBuilder.categoriesRoute() {
     }
 }
 
-fun NavGraphBuilder.cartRoute() {
+fun NavGraphBuilder.cartRoute(onCheckoutClicked: () -> Unit) {
     composable(CART_ROUTE) {
-        CartRoute()
+        CartRoute(onCheckoutClicked)
     }
 }
 
 fun NavGraphBuilder.productDetailsRoute() {
     composable(PRODUCT_DETAILS_ROUTE) {
         ProductDetailsRoute()
+    }
+}
+
+fun NavGraphBuilder.checkoutRoute() {
+    composable(CHECKOUT_ROUTE) {
+        CheckoutRoute()
     }
 }
