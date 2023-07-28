@@ -36,9 +36,9 @@ fun EcommercyNavGraph(
             val backStackEntry by navController.currentBackStackEntryAsState()
             val activeDestination = backStackEntry?.destination?.route ?: HOME_ROUTE
             BottomBar(
-                onHomeTabClicked = { navController.navigateToHome() },
-                onCategoriesTabClicked = { navController.navigateToCategories() },
-                onCartTabClicked = { navController.navigateToCart() },
+                onHomeTabClicked = navController::navigateToHome,
+                onCategoriesTabClicked = navController::navigateToCategories,
+                onCartTabClicked = navController::navigateToCart,
                 selectedItem = activeDestination,
                 modifier = Modifier.height(60.dp)
             )
@@ -49,10 +49,10 @@ fun EcommercyNavGraph(
             startDestination = startDestination,
             modifier = modifier.padding(innerPadding)
         ) {
-            homeRoute()
+            homeRoute(onProductClicked = navController::navigateToProductDetails)
             categoriesRoute()
-            cartRoute(onCheckoutClicked = { navController.navigateToCheckout() })
-            productDetailsRoute()
+            cartRoute(onCheckoutClicked = navController::navigateToCheckout)
+            productDetailsRoute(onCartClicked = navController::navigateToCart)
             checkoutRoute()
         }
     }

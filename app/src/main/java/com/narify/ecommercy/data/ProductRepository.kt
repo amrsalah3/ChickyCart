@@ -19,6 +19,12 @@ class ProductRepository @Inject constructor(
         return@withContext products
     }
 
+    fun getProductStream(productId: String): Flow<Product?> {
+        val product = productsDataSource.getProductStream(productId)
+        // TODO: Handle errors
+        return product
+    }
+
     fun getProductsStream(): Flow<List<Product>> {
         val products = productsDataSource.getProductsStream()
         // TODO: Handle errors

@@ -91,6 +91,7 @@ class HomeViewModel @Inject constructor(
 
 
 fun Product.toProductUiState() = ProductItemUiState(
+    id = id,
     name = name,
     ratingStars = rating.stars,
     priceText = price.raw,
@@ -98,7 +99,9 @@ fun Product.toProductUiState() = ProductItemUiState(
 )
 
 fun Product.toFeaturedProductUiState() = FeaturedProductItemUiState(
-    imageUrl = getThumbnail(), priceText = price.raw
+    id = id,
+    imageUrl = getThumbnail(),
+    priceText = price.raw
 )
 
 fun List<Product>.toProductsUiState() = map(Product::toProductUiState)

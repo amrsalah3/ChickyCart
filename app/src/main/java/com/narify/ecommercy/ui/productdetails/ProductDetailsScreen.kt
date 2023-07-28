@@ -1,6 +1,7 @@
 package com.narify.ecommercy.ui.productdetails
 
 import android.content.res.Configuration
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,30 +20,53 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.FakeProductsDataSource
+import com.narify.ecommercy.model.Product
+import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
-fun ProductDetailsRoute() {
-    ProductDetailsScreen()
+fun ProductDetailsRoute(
+    onCartClicked: () -> Unit,
+    viewModel: ProductDetailsViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    if (uiState.isLoading) LoadingContent()
+    else ProductDetailsScreen(
+        uiState.product!!,
+        onAddToCartClicked = {
+            viewModel.addProductToCart(it)
+            Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
+        },
+        onCartClicked = onCartClicked
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProductDetailsScreen() {
-    Column(Modifier.verticalScroll(rememberScrollState())) {
-        val product = FakeProductsDataSource().product1
-        val pageCount = 3
+fun ProductDetailsScreen(
+    product: Product,
+    onAddToCartClicked: (Product) -> Unit,
+    onCartClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier.verticalScroll(rememberScrollState())) {
+        val pageCount = product.images.size
         val pagerState = rememberPagerState(initialPage = 0) { pageCount }
         HorizontalPager(
             state = pagerState,
@@ -76,7 +100,7 @@ fun ProductDetailsScreen() {
                 style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier.weight(1f)
             )
-            Button(onClick = { }) {
+            Button(onClick = { onAddToCartClicked(product) }) {
                 Text("Add to cart")
             }
         }
@@ -90,12 +114,11 @@ fun ProductDetailsScreen() {
         )
 
         Button(
-            onClick = { },
-            modifier = Modifier
+            onClick = onCartClicked, modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
-            Text(text = "Checkout Cart")
+            Text("Proceed to cart")
         }
     }
 }
@@ -127,6 +150,6 @@ fun DotIndicators(
 @Composable
 fun ProductDetailsScreenPreview() {
     EcommercyTheme {
-        ProductDetailsRoute()
+        ProductDetailsRoute({})
     }
 }

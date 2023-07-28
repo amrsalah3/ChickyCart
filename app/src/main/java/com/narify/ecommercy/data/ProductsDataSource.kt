@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 interface ProductsDataSource {
     suspend fun getProducts(): List<Product>
+    fun getProductStream(productId: String): Flow<Product?>
     fun getProductsStream(): Flow<List<Product>>
 }
 
@@ -19,6 +20,11 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
     override suspend fun getProducts(): List<Product> {
         delay(2000)
         return listOf(product1, product2, product3, product4, product5, product6)
+    }
+
+    override fun getProductStream(productId: String): Flow<Product?> = flow {
+        val product = getProducts().find { it.id == productId }
+        emit(product)
     }
 
     override fun getProductsStream(): Flow<List<Product>> = flow {

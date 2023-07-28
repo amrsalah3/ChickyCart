@@ -11,11 +11,15 @@ data class SearchUiState(
 )
 
 data class FeaturedProductItemUiState(
-    val imageUrl: String, val priceText: String
+    val id: String, val imageUrl: String, val priceText: String
 )
 
 data class ProductItemUiState(
-    val name: String, val ratingStars: Float, val priceText: String, val imageUrl: String
+    val id: String,
+    val name: String,
+    val ratingStars: Float,
+    val priceText: String,
+    val imageUrl: String
 )
 
 data class HomeUiState(

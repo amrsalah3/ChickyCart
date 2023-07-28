@@ -70,6 +70,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeRoute(
+    onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -83,6 +84,7 @@ fun HomeRoute(
         searchUiState = searchState,
         onSearchRequested = { query -> viewModel.searchProducts(query) },
         onSortApplied = { typeResId -> viewModel.setSortType(typeResId) },
+        onProductClicked = onProductClicked,
         sortIconBackgroundColor = if (uiState.sortUiState.isSortActive) {
             MaterialTheme.colorScheme.primary
         } else {
@@ -100,6 +102,7 @@ fun HomeScreen(
     searchUiState: SearchUiState,
     onSearchRequested: (String) -> Unit,
     onSortApplied: (Int) -> Unit,
+    onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     sortIconBackgroundColor: Color = Color.Transparent,
 ) {
@@ -119,13 +122,14 @@ fun HomeScreen(
                     sheetState.show()
                 }
             },
-            sortIconBackgroundColor = sortIconBackgroundColor
+            sortIconBackgroundColor = sortIconBackgroundColor,
+            onProductClicked = onProductClicked
         )
         HomeSection(title = "Featured products") {
-            FeaturedProductsRow(featuredProducts)
+            FeaturedProductsRow(products = featuredProducts, onProductClicked = onProductClicked)
         }
         HomeSection(title = "All products") {
-            AllProductsColumn(allProducts)
+            AllProductsColumn(products = allProducts, onProductClicked = onProductClicked)
         }
         SortOptionsBottomSheet(
             sheetState = sheetState, onSortApplied = onSortApplied
@@ -196,14 +200,16 @@ fun SortOptionsRadioGroup(
 
 @Composable
 fun FeaturedProductItem(
-    productState: FeaturedProductItemUiState, modifier: Modifier = Modifier
+    productState: FeaturedProductItemUiState,
+    onProductClicked: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         shadowElevation = 6.dp,
         modifier = modifier.size(120.dp)
     ) {
-        Box(Modifier.clickable(true) { }) {
+        Box(Modifier.clickable(true) { onProductClicked(productState.id) }) {
             AsyncImage(
                 model = productState.imageUrl,
                 placeholder = painterResource(R.drawable.sample_product_item),
@@ -226,6 +232,7 @@ fun FeaturedProductItem(
 
 @Composable
 fun ProductItem(
+    onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer,
     productState: ProductItemUiState
@@ -239,7 +246,7 @@ fun ProductItem(
             modifier
                 .height(140.dp)
                 .fillMaxWidth()
-                .clickable(true) { }
+                .clickable(true) { onProductClicked(productState.id) }
         ) {
             AsyncImage(
                 model = productState.imageUrl,
@@ -268,14 +275,17 @@ fun ProductItem(
 }
 
 @Composable
-fun FeaturedProductsRow(products: List<FeaturedProductItemUiState>) {
+fun FeaturedProductsRow(
+    products: List<FeaturedProductItemUiState>,
+    onProductClicked: (String) -> Unit,
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(8.dp),
         modifier = Modifier.padding(vertical = 8.dp)
     ) {
         items(products) { productItem ->
-            FeaturedProductItem(productItem)
+            FeaturedProductItem(productItem, onProductClicked)
         }
     }
 }
@@ -283,6 +293,7 @@ fun FeaturedProductsRow(products: List<FeaturedProductItemUiState>) {
 @Composable
 fun AllProductsColumn(
     products: List<ProductItemUiState>,
+    onProductClicked: (String) -> Unit,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
     LazyColumn(
@@ -293,6 +304,7 @@ fun AllProductsColumn(
             ProductItem(
                 productState = productItem,
                 cardColor = cardColor,
+                onProductClicked = onProductClicked
             )
         }
     }
@@ -304,6 +316,7 @@ fun HomeSearchBar(
     searchUiState: SearchUiState,
     onSearchRequested: (String) -> Unit,
     onSortIconClicked: () -> Unit,
+    onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     sortIconBackgroundColor: Color = Color.Transparent,
 ) {
@@ -357,7 +370,10 @@ fun HomeSearchBar(
             .padding(8.dp)
     ) {
         if (searchUiState.isLoading) LoadingContent()
-        else AllProductsColumn(searchUiState.results)
+        else AllProductsColumn(
+            products = searchUiState.results,
+            onProductClicked = onProductClicked
+        )
     }
 }
 
@@ -386,6 +402,7 @@ fun HomeScreenPreview() {
                 searchUiState = SearchUiState(),
                 onSearchRequested = {},
                 onSortApplied = {},
+                onProductClicked = {}
             )
         }
     }
@@ -397,9 +414,11 @@ fun FeaturedProductItemPreview() {
     EcommercyTheme {
         FeaturedProductItem(
             FeaturedProductItemUiState(
+                id = "p0",
                 imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
                 priceText = "100 EGP"
-            )
+            ),
+            onProductClicked = {}
         )
     }
 }
@@ -410,11 +429,13 @@ fun ProductItemPreview() {
     EcommercyTheme {
         ProductItem(
             productState = ProductItemUiState(
+                id = "p0",
                 name = "Camera",
                 ratingStars = 4.5f,
                 priceText = "500 EGP",
                 imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
-            )
+            ),
+            onProductClicked = {}
         )
     }
 }

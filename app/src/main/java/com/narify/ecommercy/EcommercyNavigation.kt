@@ -8,19 +8,39 @@ import com.narify.ecommercy.EcommercyDestinations.CATEGORIES_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.CHECKOUT_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.HOME_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.PRODUCT_DETAILS_ROUTE
+import com.narify.ecommercy.EcommercyDestintationsArgs.PRODUCT_ID_ARG
+import com.narify.ecommercy.EcommercyScreens.CART_SCREEN
+import com.narify.ecommercy.EcommercyScreens.CATEGORIES_SCREEN
+import com.narify.ecommercy.EcommercyScreens.CHECKOUT_SCREEN
+import com.narify.ecommercy.EcommercyScreens.HOME_SCREEN
+import com.narify.ecommercy.EcommercyScreens.PRODUCT_DETAILS_SCREEN
+import com.narify.ecommercy.EcommercyScreens.SETTINGS_SCREEN
 import com.narify.ecommercy.ui.CheckoutRoute
 import com.narify.ecommercy.ui.cart.CartRoute
 import com.narify.ecommercy.ui.categories.CategoryRoute
 import com.narify.ecommercy.ui.home.HomeRoute
 import com.narify.ecommercy.ui.productdetails.ProductDetailsRoute
 
+private object EcommercyScreens {
+    const val HOME_SCREEN = "home"
+    const val CATEGORIES_SCREEN = "category"
+    const val CART_SCREEN = "cart"
+    const val SETTINGS_SCREEN = "settings"
+    const val PRODUCT_DETAILS_SCREEN = "productDetails"
+    const val CHECKOUT_SCREEN = "checkout"
+}
+
+object EcommercyDestintationsArgs {
+    const val PRODUCT_ID_ARG = "productId"
+}
+
 object EcommercyDestinations {
-    const val HOME_ROUTE = "home"
-    const val CATEGORIES_ROUTE = "category"
-    const val CART_ROUTE = "cart"
-    const val SETTINGS_ROUTE = "settings"
-    const val PRODUCT_DETAILS_ROUTE = "productDetails"
-    const val CHECKOUT_ROUTE = "checkout"
+    const val HOME_ROUTE = HOME_SCREEN
+    const val CATEGORIES_ROUTE = CATEGORIES_SCREEN
+    const val CART_ROUTE = CART_SCREEN
+    const val SETTINGS_ROUTE = SETTINGS_SCREEN
+    const val PRODUCT_DETAILS_ROUTE = "$PRODUCT_DETAILS_SCREEN/{$PRODUCT_ID_ARG}"
+    const val CHECKOUT_ROUTE = CHECKOUT_SCREEN
 }
 
 //  Type-safe navigation actions
@@ -54,8 +74,8 @@ fun NavController.navigateToCart() {
     }
 }
 
-fun NavController.navigateToProductDetails() {
-    navigate(PRODUCT_DETAILS_ROUTE) {
+fun NavController.navigateToProductDetails(productId: String) {
+    navigate("$PRODUCT_DETAILS_SCREEN/$productId") {
         popUpTo(HOME_ROUTE) {
             saveState = true
         }
@@ -75,9 +95,9 @@ fun NavController.navigateToCheckout() {
 }
 
 // Type-safe navigation route builders
-fun NavGraphBuilder.homeRoute() {
+fun NavGraphBuilder.homeRoute(onProductClicked: (String) -> Unit) {
     composable(HOME_ROUTE) {
-        HomeRoute()
+        HomeRoute(onProductClicked)
     }
 }
 
@@ -93,9 +113,9 @@ fun NavGraphBuilder.cartRoute(onCheckoutClicked: () -> Unit) {
     }
 }
 
-fun NavGraphBuilder.productDetailsRoute() {
+fun NavGraphBuilder.productDetailsRoute(onCartClicked: () -> Unit) {
     composable(PRODUCT_DETAILS_ROUTE) {
-        ProductDetailsRoute()
+        ProductDetailsRoute(onCartClicked)
     }
 }
 
