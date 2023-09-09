@@ -15,9 +15,9 @@ import com.narify.ecommercy.EcommercyScreens.CHECKOUT_SCREEN
 import com.narify.ecommercy.EcommercyScreens.HOME_SCREEN
 import com.narify.ecommercy.EcommercyScreens.PRODUCT_DETAILS_SCREEN
 import com.narify.ecommercy.EcommercyScreens.SETTINGS_SCREEN
-import com.narify.ecommercy.ui.CheckoutRoute
 import com.narify.ecommercy.ui.cart.CartRoute
 import com.narify.ecommercy.ui.categories.CategoryRoute
+import com.narify.ecommercy.ui.checkout.CheckoutRoute
 import com.narify.ecommercy.ui.home.HomeRoute
 import com.narify.ecommercy.ui.productdetails.ProductDetailsRoute
 
