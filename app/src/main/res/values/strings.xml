@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Ecommercy</string>
 
+    <!-- Common -->
+    <string name="empty_string">""</string>
+    <string name="empty_content">Empty content</string>
+
+    <!-- Home Screen -->
+    <string name="error_loading_products">Error while loading products</string>
+    <string name="error_finding_product">Error while searching for the product</string>
+    <string name="empty_products">No products available</string>
     <string name="sort_alphabetical">A-Z</string>
     <string name="sort_price">Price</string>
     <string name="sort_rating">Rating</string>
     <string name="sort_none">None</string>
-    <string name="empty_string">""</string>
 
 </resources>

@@ -7,5 +7,5 @@ import androidx.annotation.StringRes
  */
 data class ErrorState(
     val hasError: Boolean = false,
-    @StringRes val errorMsgStringRes: Int = R.string.empty_string
+    @StringRes val errorMsgResId: Int = R.string.empty_string
 )

@@ -3,6 +3,8 @@ package com.narify.ecommercy.ui.home
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.R
 import com.narify.ecommercy.data.ProductRepository
 import com.narify.ecommercy.data.Result
 import com.narify.ecommercy.model.Product
@@ -28,7 +30,7 @@ class HomeViewModel @Inject constructor(
     private val _sortState = MutableStateFlow(SortUiState())
     private val _productsResult = productRepository.getProductsStream()
         .map { products -> Result.Success(products) }
-        .catch<Result<List<Product>>> { emit(Result.Error("Error while loading products")) }
+        .catch<Result<List<Product>>> { emit(Result.Error(R.string.error_loading_products)) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -51,7 +53,10 @@ class HomeViewModel @Inject constructor(
                 }
 
                 is Result.Error -> {
-                    HomeUiState(userMessage = result.message, sortUiState = sortState)
+                    HomeUiState(
+                        errorState = ErrorState(true, result.messageResId),
+                        sortUiState = sortState
+                    )
                 }
             }
         }.stateIn(
@@ -68,18 +73,27 @@ class HomeViewModel @Inject constructor(
     )
 
     fun searchProducts(query: String) {
+        if (query.isEmpty()) return
+        
         viewModelScope.launch(Dispatchers.IO) {
             _searchState.update { it.copy(isLoading = true, query = query) }
+            try {
+                val filteredProducts =
+                    productRepository.getProducts().filter { it.name.contains(query, true) }
 
-            val filteredProducts =
-                productRepository.getProducts().filter { it.name.contains(query, true) }
-
-            _searchState.update {
-                it.copy(
-                    isLoading = false,
-                    query = query,
-                    results = filteredProducts.toProductsUiState()
-                )
+                _searchState.update {
+                    it.copy(
+                        isLoading = false,
+                        results = filteredProducts.toProductsUiState()
+                    )
+                }
+            } catch (e: Exception) {
+                _searchState.update {
+                    it.copy(
+                        isLoading = false,
+                        errorState = ErrorState(true, R.string.error_finding_product)
+                    )
+                }
             }
         }
     }

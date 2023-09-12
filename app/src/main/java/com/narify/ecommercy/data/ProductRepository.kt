@@ -14,20 +14,14 @@ class ProductRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend fun getProducts(): List<Product> = withContext(ioDispatcher) {
-        val products = productsDataSource.getProducts()
-        // TODO: Handle errors
-        return@withContext products
+        return@withContext productsDataSource.getProducts()
     }
 
     fun getProductStream(productId: String): Flow<Product?> {
-        val product = productsDataSource.getProductStream(productId)
-        // TODO: Handle errors
-        return product
+        return productsDataSource.getProductStream(productId)
     }
 
     fun getProductsStream(): Flow<List<Product>> {
-        val products = productsDataSource.getProductsStream()
-        // TODO: Handle errors
-        return products
+        return productsDataSource.getProductsStream()
     }
 }

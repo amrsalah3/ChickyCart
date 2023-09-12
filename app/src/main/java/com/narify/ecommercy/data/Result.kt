@@ -1,16 +1,12 @@
 package com.narify.ecommercy.data
 
-sealed class Result<out R> {
+import androidx.annotation.StringRes
 
-    data class Success<out T>(val data: T) : Result<T>()
-    data class Error(val message: String, val exception: Exception? = null) : Result<Nothing>()
-    object Loading : Result<Nothing>()
+sealed interface Result<out R> {
 
-    override fun toString(): String {
-        return when (this) {
-            is Success<*> -> "Success[data=$data]"
-            is Error -> "Error[message=$message, exception=$exception]"
-            Loading -> "Loading"
-        }
-    }
+    data class Success<out T>(val data: T) : Result<T>
+    data class Error(@StringRes val messageResId: Int, val exception: Exception? = null) :
+        Result<Nothing>
+
+    object Loading : Result<Nothing>
 }
