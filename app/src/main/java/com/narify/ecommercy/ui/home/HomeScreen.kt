@@ -72,7 +72,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeRoute(
     onProductClicked: (String) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -112,8 +111,7 @@ fun HomeRoute(
             MaterialTheme.colorScheme.primary
         } else {
             Color.Transparent
-        },
-        modifier = modifier,
+        }
     )
 }
 
