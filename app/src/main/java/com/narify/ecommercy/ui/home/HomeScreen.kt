@@ -144,7 +144,7 @@ fun HomeScreen(
         )
 
         if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty()) {
-            HomeSection("Featured products") {
+            HomeSection(stringResource(R.string.section_featured_products)) {
                 FeaturedProductsRow(
                     products = featuredProducts,
                     onProductClicked = onProductClicked
@@ -153,7 +153,7 @@ fun HomeScreen(
         }
 
         if (allProducts.isNotEmpty()) {
-            HomeSection("All products") {
+            HomeSection(stringResource(R.string.section_all_products)) {
                 AllProductsColumn(products = allProducts, onProductClicked = onProductClicked)
             }
         } else {
@@ -213,7 +213,7 @@ fun SortOptionsBottomSheet(
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp)
             ) {
-                Text("Apply")
+                Text(stringResource(R.string.apply))
             }
 
             Spacer(Modifier.height(58.dp))
@@ -229,7 +229,11 @@ fun SortOptionsRadioGroup(
     onOptionSelected: (Int) -> Unit
 ) {
     Column(modifier.padding(horizontal = 16.dp)) {
-        Text("Sort by", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
+        Text(
+            stringResource(R.string.sort_by),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
 
         sortOptions.forEach { option ->
             Row(
@@ -399,7 +403,7 @@ fun HomeSearchBar(
         trailingIcon = {
             if (active) {
                 Icon(imageVector = Icons.Default.Close,
-                    contentDescription = "Close icon",
+                    contentDescription = stringResource(R.string.content_description_close_icon),
                     modifier = Modifier.clickable(true) { query = "" })
             } else {
                 IconButton(
@@ -409,13 +413,13 @@ fun HomeSearchBar(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_filter),
-                        contentDescription = "Sort or filter icon"
+                        contentDescription = stringResource(R.string.content_description_sort_icon)
                     )
                 }
             }
         },
         placeholder = {
-            Text(text = "Search")
+            Text(text = stringResource(R.string.searchbar_placeholder))
         },
         modifier = modifier
             .fillMaxWidth()

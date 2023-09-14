@@ -10,10 +10,17 @@
     <string name="error_loading_products">Error while loading products</string>
     <string name="error_finding_product">Error while searching for the product</string>
     <string name="empty_products">No products available</string>
+    <string name="section_featured_products">Featured products</string>
+    <string name="section_all_products">All products</string>
+    <string name="apply">Apply</string>
+    <string name="sort_by">Sort by</string>
     <string name="sort_alphabetical">A-Z</string>
     <string name="sort_price">Price</string>
     <string name="sort_rating">Rating</string>
     <string name="sort_none">None</string>
+    <string name="searchbar_placeholder">Search</string>
+    <string name="content_description_close_icon">Close search</string>
+    <string name="content_description_sort_icon">Sort or filter icon</string>
 
     <!-- Categories Screen -->
     <string name="error_loading_categories">Error while loading categories</string>
