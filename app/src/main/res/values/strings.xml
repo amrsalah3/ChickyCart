@@ -4,6 +4,7 @@
     <!-- Common -->
     <string name="empty_string">""</string>
     <string name="empty_content">Empty content</string>
+    <string name="action_dismiss">Dismiss</string>
 
     <!-- Home Screen -->
     <string name="error_loading_products">Error while loading products</string>
@@ -20,5 +21,11 @@
     <!-- Cart Screen -->
     <string name="error_loading_cart">Error while loading cart</string>
     <string name="proceed_to_checkout">PROCEED TO CHECKOUT</string>
+
+    <!-- Product Details Screen -->
+    <string name="error_loading_product_details">Error while loading the product</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="added_product_to_cart">Added</string>
+    <string name="proceed_to_cart">Proceed to cart</string>
 
 </resources>

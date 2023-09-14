@@ -1,7 +1,6 @@
 package com.narify.ecommercy.ui.productdetails
 
 import android.content.res.Configuration
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,16 +17,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,6 +39,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.narify.ecommercy.R
 import com.narify.ecommercy.model.Product
+import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
@@ -44,17 +49,31 @@ fun ProductDetailsRoute(
     viewModel: ProductDetailsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
+    val snackbarHostState = SnackbarHostState()
 
-    if (uiState.isLoading) LoadingContent()
-    else ProductDetailsScreen(
-        uiState.product!!,
-        onAddToCartClicked = {
-            viewModel.addProductToCart(it)
-            Toast.makeText(context, "Added", Toast.LENGTH_SHORT).show()
-        },
-        onCartClicked = onCartClicked
-    )
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { paddingValues ->
+        if (uiState.isLoading) LoadingContent()
+        else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
+        else ProductDetailsScreen(
+            product = uiState.product!!,
+            onAddToCartClicked = viewModel::addProductToCart,
+            onCartClicked = onCartClicked,
+            modifier = Modifier.padding(paddingValues)
+        )
+
+        uiState.userMessage?.let {
+            val message = stringResource(it)
+            val action = stringResource(R.string.action_dismiss)
+            LaunchedEffect(snackbarHostState) {
+                snackbarHostState.showSnackbar(
+                    message = message,
+                    actionLabel = action,
+                    duration = SnackbarDuration.Short
+                )
+                viewModel.setUserMessageShown()
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -101,7 +120,7 @@ fun ProductDetailsScreen(
                 modifier = Modifier.weight(1f)
             )
             Button(onClick = { onAddToCartClicked(product) }) {
-                Text("Add to cart")
+                Text(stringResource(R.string.add_to_cart))
             }
         }
 
@@ -118,7 +137,7 @@ fun ProductDetailsScreen(
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
-            Text("Proceed to cart")
+            Text(stringResource(R.string.proceed_to_cart))
         }
     }
 }
