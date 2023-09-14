@@ -18,7 +18,6 @@ interface ProductsDataSource {
 class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
 
     override suspend fun getProducts(): List<Product> {
-        delay(2000)
         return listOf(product1, product2, product3, product4, product5, product6)
     }
 

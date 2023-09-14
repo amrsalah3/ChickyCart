@@ -1,7 +1,10 @@
 package com.narify.ecommercy.ui.cart
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.R
 import com.narify.ecommercy.data.CartRepository
 import com.narify.ecommercy.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +32,7 @@ class CartViewModel @Inject constructor(
             emit(
                 CartUiState(
                     isLoading = false,
-                    userMessage = "Error while loading the cart"
+                    errorState = ErrorState(true, R.string.error_loading_cart)
                 )
             )
         }
@@ -40,10 +43,22 @@ class CartViewModel @Inject constructor(
         )
 
     fun increaseItemCount(product: Product) {
-        viewModelScope.launch { cartRepository.addProductToCart(product) }
+        viewModelScope.launch {
+            try {
+                cartRepository.addProductToCart(product)
+            } catch (e: Exception) {
+                Log.e("CartViewModel", "increaseItemCount: ${e.message}")
+            }
+        }
     }
 
     fun decreaseItemCount(productId: String) {
-        viewModelScope.launch { cartRepository.removeProductFromCart(productId) }
+        viewModelScope.launch {
+            try {
+                cartRepository.removeProductFromCart(productId)
+            } catch (e: Exception) {
+                Log.e("CartViewModel", "increaseItemCount: ${e.message}")
+            }
+        }
     }
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,6 +37,7 @@ import com.narify.ecommercy.R
 import com.narify.ecommercy.data.FakeCartDataSource
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.totalPriceText
+import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
@@ -46,12 +48,15 @@ fun CartRoute(
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     if (uiState.isLoading) LoadingContent()
+    else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
     else CartScreen(
         cartItems = uiState.cartItems,
         onIncrementItem = { viewModel.increaseItemCount(it.product) },
         onDecrementItem = { viewModel.decreaseItemCount(it.product.id) },
-        onCheckoutClicked = onCheckoutClicked
+        onCheckoutClicked = onCheckoutClicked,
+        modifier = modifier
     )
 }
 
@@ -81,7 +86,7 @@ fun CartScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 8.dp)
             ) {
-                Text("PROCEED TO CHECKOUT")
+                Text(stringResource(R.string.proceed_to_checkout))
             }
         }
     }

@@ -16,12 +16,10 @@ class CartRepository @Inject constructor(
 ) {
 
     suspend fun getCartItems(): List<CartItem> = withContext(ioDispatcher) {
-        // TODO: Handle errors
         return@withContext cartDataSource.getCartItems()
     }
 
     fun getCartItemsStream(): Flow<List<CartItem>> {
-        // TODO: Handle errors
         return cartDataSource.getCartItemsStream()
     }
 

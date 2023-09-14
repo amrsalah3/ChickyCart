@@ -3,13 +3,12 @@ package com.narify.ecommercy.data
 import com.narify.ecommercy.model.Cart
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.Product
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,14 +26,12 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
     private val cartItems = MutableStateFlow(emptyList<CartItem>())
 
     init {
-        MainScope().launch {
-            withContext(Dispatchers.IO) {
-                val products = FakeProductsDataSource().getProducts()
-                val cart = Cart().apply {
-                    products.forEach { addProduct(it) }
-                }
-                cartItems.value = cart.items
+        CoroutineScope(Dispatchers.IO).launch {
+            val products = FakeProductsDataSource().getProducts()
+            val cart = Cart().apply {
+                products.forEach { addProduct(it) }
             }
+            cartItems.value = cart.items
         }
     }
 

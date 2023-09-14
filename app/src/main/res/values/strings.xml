@@ -17,4 +17,8 @@
     <!-- Categories Screen -->
     <string name="error_loading_categories">Error while loading categories</string>
 
+    <!-- Cart Screen -->
+    <string name="error_loading_cart">Error while loading cart</string>
+    <string name="proceed_to_checkout">PROCEED TO CHECKOUT</string>
+
 </resources>
