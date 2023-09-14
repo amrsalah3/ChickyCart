@@ -3,6 +3,7 @@ package com.narify.ecommercy.ui.checkout
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.R
 import com.narify.ecommercy.data.CartRepository
 import com.narify.ecommercy.data.OrderRepository
 import com.narify.ecommercy.model.Order
@@ -39,14 +40,22 @@ class CheckoutViewModel @Inject constructor(
 
     private fun updateReceiptItemsState() {
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(isLoading = true)
-            }
+            try {
+                _uiState.update { CheckoutUiState(isLoading = true) }
 
-            val receiptUiItems = orderRepository.getReceiptItems().toReceiptUiItems()
+                val receiptUiItems = orderRepository.getReceiptItems().toReceiptUiItems()
 
-            _uiState.update {
-                it.copy(isLoading = false, receiptItems = receiptUiItems)
+                _uiState.update {
+                    CheckoutUiState(isLoading = false, receiptItems = receiptUiItems)
+                }
+
+            } catch (e: Exception) {
+                _uiState.update {
+                    CheckoutUiState(
+                        isLoading = false,
+                        errorState = ErrorState(true, R.string.error_loading_receipt)
+                    )
+                }
             }
         }
     }
@@ -121,7 +130,10 @@ class CheckoutViewModel @Inject constructor(
     fun placeOrder() {
         viewModelScope.launch {
             // Ensure that all fields are valid before proceeding
-            if (!validateAllFields()) return@launch
+            if (!validateAllFields()) {
+                _uiState.update { it.copy(shouldScrollToShowError = true) }
+                return@launch
+            }
 
             // Proceed to place the order
             _uiState.update {
@@ -145,11 +157,18 @@ class CheckoutViewModel @Inject constructor(
                 )
 
                 val order = Order(orderItems, shippingDetails)
-                orderRepository.placeOrder(order)
-            }
 
-            _uiState.update {
-                it.copy(ordering = OrderingUiState.OrderPlaced)
+                try {
+                    orderRepository.placeOrder(order)
+                    _uiState.update {
+                        it.copy(ordering = OrderingUiState.OrderPlaced)
+                    }
+                } catch (e: Exception) {
+                    _uiState.update {
+                        it.copy(ordering = OrderingUiState.OrderFailed(R.string.empty_string))
+                    }
+                }
+                
             }
         }
     }
@@ -180,19 +199,15 @@ class CheckoutViewModel @Inject constructor(
             }
         }
 
-        // Check if any of the input fields have errors, show a ui message accordingly and return.
+        // Check if any of the input fields have errors and return.
         with(_uiState.value.shippingErrorState) {
-            if (name.hasError || email.hasError || mobileNumber.hasError || country.hasError ||
-                state.hasError || city.hasError || address.hasError
-            ) {
-                _uiState.update {
-                    it.copy(userMessage = "One or more fields are empty or have invalid input")
-                }
-                return false
-            } else {
-                return true
-            }
+            return !(name.hasError || email.hasError || mobileNumber.hasError || country.hasError ||
+                    state.hasError || city.hasError || address.hasError)
         }
+    }
+
+    fun setScrolled() {
+        _uiState.update { it.copy(shouldScrollToShowError = false) }
     }
 }
 

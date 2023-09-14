@@ -1,5 +1,6 @@
 package com.narify.ecommercy.ui.checkout
 
+import androidx.annotation.StringRes
 import com.narify.ecommercy.ErrorState
 
 data class CheckoutUiState(
@@ -8,7 +9,9 @@ data class CheckoutUiState(
     val shippingErrorState: ShippingErrorState = ShippingErrorState(),
     val receiptItems: List<ReceiptUiItem> = emptyList(),
     val ordering: OrderingUiState? = null,
+    val shouldScrollToShowError: Boolean = false,
     val userMessage: String? = null,
+    val errorState: ErrorState = ErrorState(),
 )
 
 data class ShippingInputState(
@@ -36,5 +39,5 @@ data class ReceiptUiItem(val name: String, val price: String)
 sealed interface OrderingUiState {
     object OrderLoading : OrderingUiState
     object OrderPlaced : OrderingUiState
-    data class OrderFailed(val errorMessage: String) : OrderingUiState
+    data class OrderFailed(@StringRes val messageResId: Int) : OrderingUiState
 }

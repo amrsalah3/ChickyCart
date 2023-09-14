@@ -28,4 +28,32 @@
     <string name="added_product_to_cart">Added</string>
     <string name="proceed_to_cart">Proceed to cart</string>
 
+    <!-- Checkout Screen -->
+    <string name="error_loading_receipt">Error while loading the receipt</string>
+    <string name="section_shipping_details">Shipping details</string>
+    <string name="section_receipt">Receipt</string>
+    <string name="tf_label_name">Name</string>
+    <string name="tf_label_email">Email</string>
+    <string name="tf_label_mobile_number">Mobile number</string>
+    <string name="tf_label_country">Country</string>
+    <string name="tf_label_state">State</string>
+    <string name="tf_label_city">City</string>
+    <string name="tf_label_address">Address</string>
+    <string name="tf_placeholder_name">Type your full name</string>
+    <string name="tf_placeholder_email">Type your email to receive updates about the shipment</string>
+    <string name="tf_placeholder_mobile_number">Type your mobile number for contact</string>
+    <string name="tf_placeholder_country">Type your country</string>
+    <string name="tf_placeholder_state">Type your state</string>
+    <string name="tf_placeholder_city">Type your city</string>
+    <string name="tf_placeholder_address">Type your detailed address to receive the shipment at it</string>
+    <string name="receipt_item_description">Description</string>
+    <string name="receipt_item_items">Items</string>
+    <string name="receipt_item_shipping_fees">Shipping fees</string>
+    <string name="receipt_item_total">Total</string>
+    <string name="receipt_item_cost">Cost</string>
+    <string name="place_the_order">PLACE THE ORDER</string>
+    <string name="order_result_loading">Placing the order</string>
+    <string name="order_result_success">Order placed</string>
+    <string name="order_result_error">An error occurred</string>
+
 </resources>

@@ -2,6 +2,9 @@ package com.narify.ecommercy.ui.checkout
 
 import android.content.res.Configuration
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -27,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -36,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.R
+import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 
 @Composable
@@ -43,36 +49,51 @@ fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     if (uiState.isLoading) LoadingContent()
+    else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
     else if (uiState.ordering != null) {
         when (uiState.ordering!!) {
             OrderingUiState.OrderLoading -> OrderResult(
-                resultMsg = "Placing the order",
+                resultMsg = stringResource(R.string.order_result_loading),
                 imageRes = R.drawable.ic_loading,
                 imageTint = Color(0xFF3C78FA)
             )
 
             OrderingUiState.OrderPlaced -> OrderResult(
-                resultMsg = "Order placed",
+                resultMsg = stringResource(R.string.order_result_success),
                 imageRes = R.drawable.ic_success,
                 imageTint = Color(0xFFA4FA3C)
             )
 
             is OrderingUiState.OrderFailed -> OrderResult(
-                resultMsg = "An error occurred",
+                resultMsg = stringResource(R.string.order_result_error),
                 imageRes = R.drawable.ic_error,
                 imageTint = Color(0xFFFA0000)
             )
         }
     } else {
+        val scrollState = rememberScrollState()
+
         CheckoutScreen(
             shippingInputState = uiState.shippingInputState,
             shippingErrorState = uiState.shippingErrorState,
             shippingOnValueChange = viewModel::onShippingUiEvent,
-            onPlaceOrderClicked = viewModel::placeOrder
+            onPlaceOrderClicked = viewModel::placeOrder,
+            scrollState = scrollState
         )
 
-        uiState.userMessage?.let {
-
+        LaunchedEffect(uiState.shouldScrollToShowError) {
+            if (uiState.shouldScrollToShowError) {
+                try {
+                    val scrollPosition = 100
+                    scrollState.animateScrollTo(
+                        scrollPosition,
+                        SpringSpec(Spring.DampingRatioLowBouncy, Spring.StiffnessLow)
+                    )
+                } finally {
+                    // Set scrolled even if the user cancels the animation (and its coroutine)
+                    viewModel.setScrolled()
+                }
+            }
         }
     }
 }
@@ -83,22 +104,23 @@ fun CheckoutScreen(
     shippingErrorState: ShippingErrorState,
     shippingOnValueChange: (ShippingUiEvent) -> Unit,
     onPlaceOrderClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scrollState: ScrollState = rememberScrollState()
 ) {
     Column(
         modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
-        SectionCard("Shipping address") {
+        SectionCard(stringResource(R.string.section_shipping_details)) {
             Column(Modifier.padding(16.dp)) {
                 ShippingTextField(
                     value = shippingInputState.name,
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.NameChanged(it))
                     },
-                    label = "Name",
-                    placeholder = "Type your full name",
+                    label = stringResource(R.string.tf_label_name),
+                    placeholder = stringResource(R.string.tf_placeholder_name),
                     isError = shippingErrorState.name.hasError,
                 )
 
@@ -107,8 +129,8 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.EmailChanged(it))
                     },
-                    label = "Email",
-                    placeholder = "Type your email to receive updates about the shipment",
+                    label = stringResource(R.string.tf_label_email),
+                    placeholder = stringResource(R.string.tf_placeholder_email),
                     isError = shippingErrorState.email.hasError,
                     keyboardType = KeyboardType.Email
                 )
@@ -118,8 +140,8 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.MobileNumberChanged(it))
                     },
-                    label = "Mobile number",
-                    placeholder = "Type your mobile number for contact",
+                    label = stringResource(R.string.tf_label_mobile_number),
+                    placeholder = stringResource(R.string.tf_placeholder_mobile_number),
                     isError = shippingErrorState.mobileNumber.hasError,
                     keyboardType = KeyboardType.Phone
                 )
@@ -129,8 +151,8 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.CountryChanged(it))
                     },
-                    label = "Country",
-                    placeholder = "Type your country",
+                    label = stringResource(R.string.tf_label_country),
+                    placeholder = stringResource(R.string.tf_placeholder_country),
                     isError = shippingErrorState.country.hasError
                 )
 
@@ -139,8 +161,8 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.StateChanged(it))
                     },
-                    label = "State",
-                    placeholder = "Type your State",
+                    label = stringResource(R.string.tf_label_state),
+                    placeholder = stringResource(R.string.tf_placeholder_state),
                     isError = shippingErrorState.state.hasError
                 )
 
@@ -149,8 +171,8 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.CityChanged(it))
                     },
-                    label = "City",
-                    placeholder = "Type your City",
+                    label = stringResource(R.string.tf_label_city),
+                    placeholder = stringResource(R.string.tf_placeholder_city),
                     isError = shippingErrorState.city.hasError
                 )
 
@@ -159,20 +181,28 @@ fun CheckoutScreen(
                     onValueChange = {
                         shippingOnValueChange(ShippingUiEvent.AddressChanged(it))
                     },
-                    label = "Address",
-                    placeholder = "Type your detailed address to receive the shipment at",
+                    label = stringResource(R.string.tf_label_address),
+                    placeholder = stringResource(R.string.tf_placeholder_address),
                     isError = shippingErrorState.address.hasError,
                     imeAction = ImeAction.Done
                 )
             }
         }
 
-        SectionCard("Receipt") {
+        SectionCard(stringResource(R.string.section_receipt)) {
             Column(Modifier.padding(16.dp)) {
-                ReceiptItem("Description", "Cost", fontWeight = FontWeight.Bold)
-                ReceiptItem("Items", "EGP 500")
-                ReceiptItem("Shipping fees", "EGP 30")
-                ReceiptItem("Total", "EGP 530", fontWeight = FontWeight.Bold)
+                ReceiptItem(
+                    stringResource(R.string.receipt_item_description),
+                    stringResource(R.string.receipt_item_cost),
+                    fontWeight = FontWeight.Bold
+                )
+                ReceiptItem(stringResource(R.string.receipt_item_items), "EGP 500")
+                ReceiptItem(stringResource(R.string.receipt_item_shipping_fees), "EGP 30")
+                ReceiptItem(
+                    stringResource(R.string.receipt_item_total),
+                    "EGP 530",
+                    fontWeight = FontWeight.Bold
+                )
             }
         }
 
@@ -185,7 +215,7 @@ fun CheckoutScreen(
                 .padding(16.dp)
                 .align(Alignment.CenterHorizontally)
         ) {
-            Text("PLACE THE ORDER")
+            Text(stringResource(R.string.place_the_order))
         }
     }
 }
@@ -306,7 +336,7 @@ fun CheckoutScreenPreview() {
 @Composable
 fun OrderResultLoadingPreview() {
     OrderResult(
-        resultMsg = "Placing the order",
+        resultMsg = stringResource(R.string.order_result_loading),
         imageRes = R.drawable.ic_loading,
         imageTint = Color(0xFF3C78FA)
     )
@@ -317,7 +347,7 @@ fun OrderResultLoadingPreview() {
 @Composable
 fun OrderResultSuccessPreview() {
     OrderResult(
-        resultMsg = "Order placed",
+        resultMsg = stringResource(R.string.order_result_success),
         imageRes = R.drawable.ic_success,
         imageTint = Color(0xFFA4FA3C)
     )
@@ -328,7 +358,7 @@ fun OrderResultSuccessPreview() {
 @Composable
 fun OrderResultFailPreview() {
     OrderResult(
-        resultMsg = "An error occurred",
+        resultMsg = stringResource(R.string.order_result_error),
         imageRes = R.drawable.ic_error,
         imageTint = Color(0xFFFA0000)
     )

@@ -17,17 +17,14 @@ class OrderRepository @Inject constructor(
 ) {
 
     suspend fun getReceiptItems(): List<ReceiptItem> = withContext(ioDispatcher) {
-        // TODO: Handle errors
         return@withContext receiptDataSource.getReceiptItems()
     }
 
     fun getReceiptItemsStream(): Flow<List<ReceiptItem>> {
-        // TODO: Handle errors
         return receiptDataSource.getReceiptItemsStream()
     }
 
     suspend fun placeOrder(order: Order) = withContext(ioDispatcher) {
         orderService.placeOrder(order)
-        // TODO: Handle errors
     }
 }
