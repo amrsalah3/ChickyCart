@@ -14,15 +14,11 @@ class CategoryRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     suspend fun getCategories(): List<Category> = withContext(ioDispatcher) {
-        val categories = categoriesDataSource.getCategories()
-        // TODO: Handle errors
-        return@withContext categories
+        return@withContext categoriesDataSource.getCategories()
     }
 
     fun getCategoriesStream(): Flow<List<Category>> {
-        val categories = categoriesDataSource.getCategoriesStream()
-        // TODO: Handle errors
-        return categories
+        return categoriesDataSource.getCategoriesStream()
     }
 }
 

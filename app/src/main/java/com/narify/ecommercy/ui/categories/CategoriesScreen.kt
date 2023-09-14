@@ -23,23 +23,30 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.data.FakeCategoriesDataSource
+import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
 fun CategoryRoute(viewModel: CategoriesViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     if (uiState.isLoading) LoadingContent()
+    else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
     else CategoryScreen(uiState.categoryItems)
 }
 
 @Composable
-fun CategoryScreen(categoryItems: List<CategoryItemUiState>) {
+fun CategoryScreen(
+    categoryItems: List<CategoryItemUiState>,
+    modifier: Modifier = Modifier
+) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp)
+        contentPadding = PaddingValues(16.dp),
+        modifier = modifier
     ) {
         items(categoryItems) { category ->
             CategoryCard(category)
@@ -51,7 +58,7 @@ fun CategoryScreen(categoryItems: List<CategoryItemUiState>) {
 fun CategoryCard(
     categoryState: CategoryItemUiState,
     modifier: Modifier = Modifier,
-    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
     Surface(
         shape = MaterialTheme.shapes.extraLarge,

@@ -2,6 +2,8 @@ package com.narify.ecommercy.ui.categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.R
 import com.narify.ecommercy.data.CategoryRepository
 import com.narify.ecommercy.model.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +30,7 @@ class CategoriesViewModel @Inject constructor(
             emit(
                 CategoriesUiState(
                     isLoading = false,
-                    userMessage = "Error while loading categories"
+                    errorState = ErrorState(true, R.string.error_loading_categories)
                 )
             )
         }

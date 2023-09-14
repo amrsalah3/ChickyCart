@@ -14,4 +14,7 @@
     <string name="sort_rating">Rating</string>
     <string name="sort_none">None</string>
 
+    <!-- Categories Screen -->
+    <string name="error_loading_categories">Error while loading categories</string>
+
 </resources>
