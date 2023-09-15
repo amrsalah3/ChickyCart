@@ -5,12 +5,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.narify.ecommercy.EcommercyDestintationsArgs.PRODUCT_ID_ARG
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.CartRepository
-import com.narify.ecommercy.data.ProductRepository
 import com.narify.ecommercy.data.Result
+import com.narify.ecommercy.data.cart.CartRepository
+import com.narify.ecommercy.data.products.ProductRepository
 import com.narify.ecommercy.model.Product
+import com.narify.ecommercy.ui.common.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

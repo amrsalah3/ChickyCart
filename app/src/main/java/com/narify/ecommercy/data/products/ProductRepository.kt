@@ -1,4 +1,4 @@
-package com.narify.ecommercy.data
+package com.narify.ecommercy.data.products
 
 import com.narify.ecommercy.model.Product
 import kotlinx.coroutines.CoroutineDispatcher

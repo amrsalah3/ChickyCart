@@ -1,6 +1,6 @@
 package com.narify.ecommercy.ui.categories
 
-import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.ui.common.ErrorState
 
 data class CategoriesUiState(
     val isLoading: Boolean,

@@ -62,7 +62,7 @@ import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.FakeProductsDataSource
+import com.narify.ecommercy.data.products.FakeProductsDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme

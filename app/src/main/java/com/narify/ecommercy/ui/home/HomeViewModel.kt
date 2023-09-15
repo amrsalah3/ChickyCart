@@ -3,11 +3,11 @@ package com.narify.ecommercy.ui.home
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.ProductRepository
 import com.narify.ecommercy.data.Result
+import com.narify.ecommercy.data.products.ProductRepository
 import com.narify.ecommercy.model.Product
+import com.narify.ecommercy.ui.common.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,8 +1,8 @@
 package com.narify.ecommercy.ui.home
 
 import androidx.annotation.StringRes
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.R
+import com.narify.ecommercy.ui.common.ErrorState
 
 data class HomeUiState(
     val isLoading: Boolean = false,

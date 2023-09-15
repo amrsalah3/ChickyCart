@@ -3,10 +3,10 @@ package com.narify.ecommercy.ui.cart
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.CartRepository
+import com.narify.ecommercy.data.cart.CartRepository
 import com.narify.ecommercy.model.Product
+import com.narify.ecommercy.ui.common.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

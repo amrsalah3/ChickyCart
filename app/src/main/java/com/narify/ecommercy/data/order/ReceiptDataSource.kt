@@ -1,5 +1,6 @@
-package com.narify.ecommercy.data
+package com.narify.ecommercy.data.order
 
+import com.narify.ecommercy.data.cart.FakeCartDataSource
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.ReceiptItem
 import com.narify.ecommercy.model.totalPrice

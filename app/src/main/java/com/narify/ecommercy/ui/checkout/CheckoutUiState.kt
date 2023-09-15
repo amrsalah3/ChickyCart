@@ -1,7 +1,7 @@
 package com.narify.ecommercy.ui.checkout
 
 import androidx.annotation.StringRes
-import com.narify.ecommercy.ErrorState
+import com.narify.ecommercy.ui.common.ErrorState
 
 data class CheckoutUiState(
     val isLoading: Boolean = false,

@@ -2,14 +2,14 @@ package com.narify.ecommercy.ui.checkout
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.CartRepository
-import com.narify.ecommercy.data.OrderRepository
+import com.narify.ecommercy.data.cart.CartRepository
+import com.narify.ecommercy.data.order.OrderRepository
 import com.narify.ecommercy.model.Order
 import com.narify.ecommercy.model.OrderItem
 import com.narify.ecommercy.model.ReceiptItem
 import com.narify.ecommercy.model.ShippingDetails
+import com.narify.ecommercy.ui.common.ErrorState
 import com.narify.ecommercy.util.ShippingFieldsValidator.isValidAddress
 import com.narify.ecommercy.util.ShippingFieldsValidator.isValidCity
 import com.narify.ecommercy.util.ShippingFieldsValidator.isValidCountry

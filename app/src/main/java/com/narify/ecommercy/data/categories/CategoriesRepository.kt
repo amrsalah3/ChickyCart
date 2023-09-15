@@ -1,4 +1,4 @@
-package com.narify.ecommercy.data
+package com.narify.ecommercy.data.categories
 
 import com.narify.ecommercy.model.Category
 import kotlinx.coroutines.CoroutineDispatcher
@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CategoryRepository @Inject constructor(
+class CategoriesRepository @Inject constructor(
     private val categoriesDataSource: CategoriesDataSource,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {

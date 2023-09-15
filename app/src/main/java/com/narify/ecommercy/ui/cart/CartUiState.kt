@@ -1,7 +1,7 @@
 package com.narify.ecommercy.ui.cart
 
-import com.narify.ecommercy.ErrorState
 import com.narify.ecommercy.model.CartItem
+import com.narify.ecommercy.ui.common.ErrorState
 
 data class CartUiState(
     val isLoading: Boolean,

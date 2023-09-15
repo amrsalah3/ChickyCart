@@ -1,6 +1,7 @@
-package com.narify.ecommercy
+package com.narify.ecommercy.ui.common
 
 import androidx.annotation.StringRes
+import com.narify.ecommercy.R
 
 /**
  * Error state holding values for error ui

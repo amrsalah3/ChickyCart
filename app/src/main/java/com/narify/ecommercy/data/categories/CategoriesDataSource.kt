@@ -1,4 +1,4 @@
-package com.narify.ecommercy.data
+package com.narify.ecommercy.data.categories
 
 import com.narify.ecommercy.model.Category
 import kotlinx.coroutines.delay

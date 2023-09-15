@@ -34,7 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.FakeCartDataSource
+import com.narify.ecommercy.data.cart.FakeCartDataSource
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.totalPriceText
 import com.narify.ecommercy.ui.EmptyContent

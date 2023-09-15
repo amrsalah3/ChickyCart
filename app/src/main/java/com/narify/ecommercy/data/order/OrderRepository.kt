@@ -1,4 +1,4 @@
-package com.narify.ecommercy.data
+package com.narify.ecommercy.data.order
 
 import com.narify.ecommercy.model.Order
 import com.narify.ecommercy.model.ReceiptItem
