@@ -15,7 +15,7 @@ class FakeCategoriesDataSource @Inject constructor() : CategoriesDataSource {
     override suspend fun getCategories(): List<Category> {
         delay(1000)
         val categories = List(10) { i ->
-            Category("$i", "Category #$i")
+            Category("$i", "Category $i")
         }
         return categories
     }
@@ -23,14 +23,14 @@ class FakeCategoriesDataSource @Inject constructor() : CategoriesDataSource {
     override fun getCategoriesStream(): Flow<List<Category>> = flow {
         delay(1000)
         val categories = List(10) { i ->
-            Category("$i", "Category #$i")
+            Category("$i", "Category $i")
         }
         emit(categories)
     }
 
     fun getPreviewCategories(): List<Category> {
         return List(10) { i ->
-            Category("$i", "Category #$i")
+            Category("$i", "Category $i")
         }
     }
 }

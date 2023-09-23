@@ -19,6 +19,7 @@
     <string name="sort_rating">Rating</string>
     <string name="sort_none">None</string>
     <string name="searchbar_placeholder">Search</string>
+    <string name="content_description_clear_filter">Clear filtering</string>
     <string name="content_description_close_icon">Close search</string>
     <string name="content_description_sort_icon">Sort or filter icon</string>
 

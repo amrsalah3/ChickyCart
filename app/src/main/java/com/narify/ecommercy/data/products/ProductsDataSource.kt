@@ -1,5 +1,8 @@
 package com.narify.ecommercy.data.products
 
+import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.ALPHABETICAL
+import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.PRICE
+import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.RATING
 import com.narify.ecommercy.model.Category
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.Product
@@ -11,24 +14,52 @@ import javax.inject.Inject
 
 interface ProductsDataSource {
     suspend fun getProducts(): List<Product>
+    fun getProductsStream(category: String? = null, sortType: String? = null): Flow<List<Product>>
     fun getProductStream(productId: String): Flow<Product?>
-    fun getProductsStream(): Flow<List<Product>>
 }
 
 class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
+
+    /**
+     * Sort type string values for this specific implementation (FakeProductsDataSource)
+     */
+    object SortType {
+        const val ALPHABETICAL = "alphabetical"
+        const val PRICE = "price"
+        const val RATING = "rating"
+        const val NONE = ""
+    }
 
     override suspend fun getProducts(): List<Product> {
         return listOf(product1, product2, product3, product4, product5, product6)
     }
 
+    override fun getProductsStream(category: String?, sortType: String?): Flow<List<Product>> =
+        flow {
+            delay(2000)
+            val products = listOf(product1, product2, product3, product4, product5, product6)
+
+            var filteredProducts = products
+            if (!category.isNullOrBlank()) {
+                filteredProducts = products.filter { it.category.name == category }
+            }
+
+            var sortedProducts = filteredProducts
+            if (!sortType.isNullOrBlank()) {
+                sortedProducts = when (sortType) {
+                    ALPHABETICAL -> filteredProducts.sortedBy { it.name }
+                    PRICE -> filteredProducts.sortedBy { it.price.value }
+                    RATING -> filteredProducts.sortedByDescending { it.rating.stars }
+                    else -> filteredProducts
+                }
+            }
+
+            emit(sortedProducts)
+        }
+
     override fun getProductStream(productId: String): Flow<Product?> = flow {
         val product = getProducts().find { it.id == productId }
         emit(product)
-    }
-
-    override fun getProductsStream(): Flow<List<Product>> = flow {
-        delay(2000)
-        emit(listOf(product1, product2, product3, product4, product5, product6))
     }
 
     fun getPreviewProducts(): List<Product> {
@@ -48,7 +79,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
             "https://m.media-amazon.com/images/I/819Ek+5EWLL._AC_SL1500_.jpg",
             "https://m.media-amazon.com/images/I/716X+b47UML._AC_SL1500_.jpg"
         ),
-        category = Category("C1", "Headsets"),
+        category = Category("C1", "Category 1"),
         price = Price(
             value = 465.0,
             original = 465.0,
@@ -71,7 +102,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
             "https://m.media-amazon.com/images/I/61zjyRJ2okL._AC_SL1500_.jpg",
             "https://m.media-amazon.com/images/I/41fQiybi-HL._AC_.jpg",
         ),
-        category = Category("C2", "Playstation"),
+        category = Category("C2", "Category 2"),
         price = Price(
             value = 699.0,
             original = 699.0,
@@ -90,7 +121,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         images = listOf(
             "https://m.media-amazon.com/images/I/619CWyUmtoL._AC_SL1500_.jpg",
         ),
-        category = Category("C3", "Playstation"),
+        category = Category("C3", "Category 3"),
         price = Price(
             value = 699.0,
             original = 699.0,
@@ -109,7 +140,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         images = listOf(
             "https://m.media-amazon.com/images/I/51rJEls8i1L._AC_SL1309_.jpg",
         ),
-        category = Category("C3", "Playstation"),
+        category = Category("C3", "Category 3"),
         price = Price(
             value = 699.0,
             original = 699.0,
@@ -128,7 +159,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         images = listOf(
             "https://m.media-amazon.com/images/I/71DTeZjOn3L._AC_SL1500_.jpg",
         ),
-        category = Category("C3", "Playstation"),
+        category = Category("C3", "Category 3"),
         price = Price(
             value = 699.0,
             original = 699.0,
@@ -147,7 +178,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         images = listOf(
             "https://m.media-amazon.com/images/I/71RqyKk2eBL._AC_SL1500_.jpg",
         ),
-        category = Category("C3", "Playstation"),
+        category = Category("C3", "Category 3"),
         price = Price(
             value = 11666.0,
             original = 11666.0,

@@ -28,17 +28,21 @@ import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
-fun CategoryRoute(viewModel: CategoriesViewModel = hiltViewModel()) {
+fun CategoryRoute(
+    onCategoryClicked: (String) -> Unit,
+    viewModel: CategoriesViewModel = hiltViewModel()
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     if (uiState.isLoading) LoadingContent()
     else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
-    else CategoryScreen(uiState.categoryItems)
+    else CategoryScreen(uiState.categoryItems, onCategoryClicked)
 }
 
 @Composable
 fun CategoryScreen(
     categoryItems: List<CategoryItemUiState>,
+    onCategoryClicked: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
@@ -49,7 +53,7 @@ fun CategoryScreen(
         modifier = modifier
     ) {
         items(categoryItems) { category ->
-            CategoryCard(category)
+            CategoryCard(category, onCategoryClicked)
         }
     }
 }
@@ -57,6 +61,7 @@ fun CategoryScreen(
 @Composable
 fun CategoryCard(
     categoryState: CategoryItemUiState,
+    onCategoryClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
@@ -66,7 +71,7 @@ fun CategoryCard(
         shadowElevation = 6.dp,
         modifier = modifier.size(120.dp)
     ) {
-        Box(Modifier.clickable { }) {
+        Box(Modifier.clickable { onCategoryClicked(categoryState.name) }) {
             Text(
                 text = categoryState.name,
                 fontWeight = FontWeight.Bold,
@@ -83,7 +88,7 @@ fun CategoryScreenPreview() {
     EcommercyTheme {
         FakeCategoriesDataSource().getPreviewCategories().let {
             val categories = it.toCategoriesUiState()
-            CategoryScreen(categories)
+            CategoryScreen(categories, {})
         }
     }
 }

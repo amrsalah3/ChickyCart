@@ -23,6 +23,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedFilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,7 +41,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -66,6 +66,7 @@ import com.narify.ecommercy.data.products.FakeProductsDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.util.ProductsSortType
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,12 +102,14 @@ fun HomeRoute(
         bottomSheetState = bottomSheetState,
         onSearchRequested = viewModel::searchProducts,
         onSortIconClicked = { showBottomSheet() },
-        onSortApplied = { typeResId ->
-            viewModel.setSortType(typeResId)
+        onSortApplied = { sortType ->
+            viewModel.setSorting(sortType)
             collapseBottomSheet()
         },
+        appliedSortType = uiState.sortUiState.sortType,
         onDismissBottomSheet = { collapseBottomSheet() },
         onProductClicked = onProductClicked,
+        categoryFilter = uiState.categoryFilterState,
         sortIconBackgroundColor = if (uiState.sortUiState.isSortActive) {
             MaterialTheme.colorScheme.primary
         } else {
@@ -124,10 +127,12 @@ fun HomeScreen(
     bottomSheetState: SheetState,
     onSearchRequested: (String) -> Unit,
     onSortIconClicked: () -> Unit,
-    onSortApplied: (Int) -> Unit,
+    onSortApplied: (ProductsSortType) -> Unit,
+    appliedSortType: ProductsSortType,
     onDismissBottomSheet: () -> Unit,
     onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
+    categoryFilter: CategoryFilterState? = null,
     sortIconBackgroundColor: Color = Color.Transparent,
 ) {
     Column(
@@ -135,6 +140,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
     ) {
+        // Top search bar
         HomeSearchBar(
             searchUiState = searchUiState,
             onSearchRequested = onSearchRequested,
@@ -143,72 +149,94 @@ fun HomeScreen(
             onProductClicked = onProductClicked
         )
 
-        if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty()) {
-            HomeSection(stringResource(R.string.section_featured_products)) {
-                FeaturedProductsRow(
-                    products = featuredProducts,
-                    onProductClicked = onProductClicked
-                )
-            }
+        // Featured products section
+        if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty() && categoryFilter == null) {
+            SectionLabel(R.string.section_featured_products)
+            FeaturedProductsRow(products = featuredProducts, onProductClicked = onProductClicked)
         }
 
+        // All (or filtered) products section
         if (allProducts.isNotEmpty()) {
-            HomeSection(stringResource(R.string.section_all_products)) {
-                AllProductsColumn(products = allProducts, onProductClicked = onProductClicked)
+            Row(Modifier.fillMaxWidth()) {
+                if (categoryFilter == null) SectionLabel(R.string.section_all_products)
+                else CategoryFilterChip(categoryFilter)
             }
+            AllProductsColumn(products = allProducts, onProductClicked = onProductClicked)
         } else {
+            if (categoryFilter != null) CategoryFilterChip(categoryFilter)
             EmptyContent(R.string.empty_products)
         }
 
+        // Bottom sheet for showing sort options
         SortOptionsBottomSheet(
             sheetState = bottomSheetState,
             onSortApplied = onSortApplied,
+            appliedSortType = appliedSortType,
             onDismiss = onDismissBottomSheet
         )
     }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun CategoryFilterChip(
+    categoryFilter: CategoryFilterState,
+    modifier: Modifier = Modifier
+) {
+    ElevatedFilterChip(
+        selected = true,
+        onClick = { /* Do nothing */ },
+        label = { Text(categoryFilter.categoryName) },
+        trailingIcon = {
+            val iconSize = 20.dp
+            IconButton(
+                onClick = categoryFilter.onFilterCleared,
+                modifier = modifier.size(iconSize)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = stringResource(R.string.content_description_clear_filter),
+                    modifier = modifier.size(iconSize)
+                )
+            }
+        },
+        modifier = modifier.padding(horizontal = 8.dp)
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SortOptionsBottomSheet(
     sheetState: SheetState,
-    onSortApplied: (Int) -> Unit,
+    onSortApplied: (ProductsSortType) -> Unit,
+    appliedSortType: ProductsSortType,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     /*
-    * appliedOption is the radio button selected for the sort option and already applied
-    * and should be set to the temporarily (selectedOption) when applying the sort.
-    *
     * selectedOption is the radio button selected as the sheet is appearing on the screen
-    * and should be set to the already (appliedOption) when dismissing the sheet (not applying).
+    * This variable is reset to the already (appliedSortType) when dismissing the sheet (not applying).
     */
-    val sortOptions = intArrayOf(
-        R.string.sort_alphabetical, R.string.sort_price, R.string.sort_rating, R.string.sort_none
-    )
-    var appliedOption by rememberSaveable { mutableIntStateOf(sortOptions[3]) }
-    var selectedOption by rememberSaveable { mutableIntStateOf(appliedOption) }
+
+    var selectedOption by rememberSaveable { mutableStateOf(appliedSortType) }
 
     if (sheetState.isVisible) {
         ModalBottomSheet(
             sheetState = sheetState,
             onDismissRequest = {
-                selectedOption = appliedOption
+                selectedOption = appliedSortType
                 onDismiss()
             },
             modifier = modifier
         ) {
             SortOptionsRadioGroup(
-                sortOptions = sortOptions,
+                sortOptions = ProductsSortType.values(),
                 selectedOption = selectedOption,
                 onOptionSelected = { selectedOption = it }
             )
 
             Button(
-                onClick = {
-                    appliedOption = selectedOption
-                    onSortApplied(selectedOption)
-                },
+                onClick = { onSortApplied(selectedOption) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 32.dp, vertical = 16.dp)
@@ -224,9 +252,9 @@ fun SortOptionsBottomSheet(
 @Composable
 fun SortOptionsRadioGroup(
     modifier: Modifier = Modifier,
-    @StringRes sortOptions: IntArray,
-    @StringRes selectedOption: Int,
-    onOptionSelected: (Int) -> Unit
+    sortOptions: Array<ProductsSortType>,
+    selectedOption: ProductsSortType,
+    onOptionSelected: (ProductsSortType) -> Unit
 ) {
     Column(modifier.padding(horizontal = 16.dp)) {
         Text(
@@ -236,18 +264,19 @@ fun SortOptionsRadioGroup(
         )
 
         sortOptions.forEach { option ->
+            val labelResId = option.labelResId
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier.selectable(
-                    selected = (option == selectedOption),
+                    selected = (labelResId == selectedOption.labelResId),
                     onClick = { onOptionSelected(option) }
                 )
             ) {
                 RadioButton(
-                    selected = (option == selectedOption),
+                    selected = (labelResId == selectedOption.labelResId),
                     onClick = { onOptionSelected(option) }
                 )
-                Text(stringResource(option), modifier.padding(end = 12.dp))
+                Text(stringResource(labelResId), modifier.padding(end = 12.dp))
             }
         }
     }
@@ -393,8 +422,10 @@ fun HomeSearchBar(
             active = it
         },
         colors = SearchBarDefaults.colors(
-            containerColor = backgroundColor, inputFieldColors = TextFieldDefaults.colors(
-                focusedContainerColor = backgroundColor, unfocusedContainerColor = backgroundColor
+            containerColor = backgroundColor,
+            inputFieldColors = TextFieldDefaults.colors(
+                focusedContainerColor = backgroundColor,
+                unfocusedContainerColor = backgroundColor
             )
         ),
         leadingIcon = {
@@ -402,14 +433,17 @@ fun HomeSearchBar(
         },
         trailingIcon = {
             if (active) {
-                Icon(imageVector = Icons.Default.Close,
+                Icon(
+                    imageVector = Icons.Default.Close,
                     contentDescription = stringResource(R.string.content_description_close_icon),
-                    modifier = Modifier.clickable(true) { query = "" })
+                    modifier = Modifier.clickable(true) { query = "" }
+                )
             } else {
                 IconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(
                         containerColor = sortIconBackgroundColor
-                    ), onClick = onSortIconClicked
+                    ),
+                    onClick = onSortIconClicked
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_filter),
@@ -439,14 +473,13 @@ fun HomeSearchBar(
 }
 
 @Composable
-fun HomeSection(title: String, content: @Composable () -> Unit) {
+fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
     Text(
-        text = title.uppercase(),
+        text = stringResource(labelResId).uppercase(),
         fontFamily = FontFamily.Default,
         style = MaterialTheme.typography.headlineSmall,
-        modifier = Modifier.padding(8.dp)
+        modifier = modifier.padding(8.dp)
     )
-    content()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -465,7 +498,35 @@ fun HomeScreenPreview() {
                 onSearchRequested = {},
                 onSortIconClicked = {},
                 onSortApplied = {},
+                appliedSortType = ProductsSortType.NONE,
                 onProductClicked = {},
+                categoryFilter = null,
+                bottomSheetState = rememberModalBottomSheetState(),
+                onDismissBottomSheet = {}
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(device = "id:pixel_2", showSystemUi = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun HomeScreenWithCategoryFilteringPreview() {
+    EcommercyTheme {
+        FakeProductsDataSource().getPreviewProducts().let {
+            val featuredProducts = it.toFeaturedProductsUiState()
+            val allProducts = it.toProductsUiState()
+            HomeScreen(
+                featuredProducts = featuredProducts,
+                allProducts = allProducts,
+                searchUiState = SearchUiState(),
+                onSearchRequested = {},
+                onSortIconClicked = {},
+                onSortApplied = {},
+                appliedSortType = ProductsSortType.NONE,
+                onProductClicked = {},
+                categoryFilter = CategoryFilterState("Laptops", {}),
                 bottomSheetState = rememberModalBottomSheetState(),
                 onDismissBottomSheet = {}
             )
@@ -516,6 +577,7 @@ fun SortOptionsBottomSheetPreview() {
                 initialValue = SheetValue.Expanded,
                 skipPartiallyExpanded = true
             ),
+            appliedSortType = ProductsSortType.NONE,
             onDismiss = {}
         )
     }

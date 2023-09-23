@@ -50,7 +50,7 @@ fun EcommercyNavGraph(
             modifier = modifier.padding(innerPadding)
         ) {
             homeRoute(onProductClicked = navController::navigateToProductDetails)
-            categoriesRoute()
+            categoriesRoute(onCategoryClicked = { navController.navigateToHome(it, false) })
             cartRoute(onCheckoutClicked = navController::navigateToCheckout)
             productDetailsRoute(onCartClicked = navController::navigateToCart)
             checkoutRoute()

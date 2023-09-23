@@ -1,13 +1,13 @@
 package com.narify.ecommercy.ui.home
 
-import androidx.annotation.StringRes
-import com.narify.ecommercy.R
 import com.narify.ecommercy.ui.common.ErrorState
+import com.narify.ecommercy.util.ProductsSortType
 
 data class HomeUiState(
     val isLoading: Boolean = false,
     val featuredProductsItems: List<FeaturedProductItemUiState> = emptyList(),
     val productItems: List<ProductItemUiState> = emptyList(),
+    val categoryFilterState: CategoryFilterState? = null,
     val sortUiState: SortUiState = SortUiState(),
     val errorState: ErrorState = ErrorState()
 )
@@ -32,11 +32,9 @@ data class ProductItemUiState(
     val imageUrl: String
 )
 
-data class SortUiState(@StringRes val sortTypeLabel: Int = R.string.sort_none)
+data class CategoryFilterState(val categoryName: String, val onFilterCleared: () -> Unit)
+
+data class SortUiState(val sortType: ProductsSortType = ProductsSortType.NONE)
 
 val SortUiState.isSortActive
-    get() = (sortTypeLabel != R.string.sort_none)
-
-enum class ProductsSortOption {
-    ALPHABETICAL, PRICE, RATING, NONE
-}
+    get() = (sortType !== ProductsSortType.NONE)

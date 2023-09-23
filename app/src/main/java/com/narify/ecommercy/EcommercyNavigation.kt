@@ -2,12 +2,15 @@ package com.narify.ecommercy
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.narify.ecommercy.EcommercyDestinations.CART_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.CATEGORIES_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.CHECKOUT_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.HOME_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.PRODUCT_DETAILS_ROUTE
+import com.narify.ecommercy.EcommercyDestintationsArgs.CATEGORY_NAME_ARG
 import com.narify.ecommercy.EcommercyDestintationsArgs.PRODUCT_ID_ARG
 import com.narify.ecommercy.EcommercyScreens.CART_SCREEN
 import com.narify.ecommercy.EcommercyScreens.CATEGORIES_SCREEN
@@ -32,10 +35,11 @@ private object EcommercyScreens {
 
 object EcommercyDestintationsArgs {
     const val PRODUCT_ID_ARG = "productId"
+    const val CATEGORY_NAME_ARG = "categoryName"
 }
 
 object EcommercyDestinations {
-    const val HOME_ROUTE = HOME_SCREEN
+    const val HOME_ROUTE = "$HOME_SCREEN?$CATEGORY_NAME_ARG={$CATEGORY_NAME_ARG}"
     const val CATEGORIES_ROUTE = CATEGORIES_SCREEN
     const val CART_ROUTE = CART_SCREEN
     const val SETTINGS_ROUTE = SETTINGS_SCREEN
@@ -44,13 +48,14 @@ object EcommercyDestinations {
 }
 
 //  Type-safe navigation actions
-fun NavController.navigateToHome() {
-    navigate(HOME_ROUTE) {
+fun NavController.navigateToHome(categoryName: String? = null, restoreHome: Boolean = true) {
+    navigate("$HOME_SCREEN?$CATEGORY_NAME_ARG=$categoryName") {
         popUpTo(HOME_ROUTE) {
+            inclusive = !restoreHome
             saveState = true
         }
         launchSingleTop = true
-        restoreState = true
+        restoreState = restoreHome
     }
 }
 
@@ -96,14 +101,18 @@ fun NavController.navigateToCheckout() {
 
 // Type-safe navigation route builders
 fun NavGraphBuilder.homeRoute(onProductClicked: (String) -> Unit) {
-    composable(HOME_ROUTE) {
+    val categoryArg = navArgument(CATEGORY_NAME_ARG) {
+        type = NavType.StringType
+        nullable = true
+    }
+    composable(HOME_ROUTE, listOf(categoryArg)) {
         HomeRoute(onProductClicked)
     }
 }
 
-fun NavGraphBuilder.categoriesRoute() {
+fun NavGraphBuilder.categoriesRoute(onCategoryClicked: (String) -> Unit) {
     composable(CATEGORIES_ROUTE) {
-        CategoryRoute()
+        CategoryRoute(onCategoryClicked)
     }
 }
 
