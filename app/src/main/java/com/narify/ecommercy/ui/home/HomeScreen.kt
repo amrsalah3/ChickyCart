@@ -149,20 +149,45 @@ fun HomeScreen(
             onProductClicked = onProductClicked
         )
 
-        // Featured products section
-        if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty() && categoryFilter == null) {
-            SectionLabel(R.string.section_featured_products)
-            FeaturedProductsRow(products = featuredProducts, onProductClicked = onProductClicked)
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(vertical = 8.dp),
+        ) {
+            // Featured products section
+            if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty() && categoryFilter == null) {
+                item {
+                    SectionLabel(R.string.section_featured_products)
+                    FeaturedProductsRow(
+                        products = featuredProducts,
+                        onProductClicked = onProductClicked
+                    )
+                }
+            }
+
+            // All (or filtered) products section
+            if (allProducts.isNotEmpty()) {
+                item {
+                    Row(Modifier.fillMaxWidth()) {
+                        if (categoryFilter == null) SectionLabel(R.string.section_all_products)
+                        else CategoryFilterChip(categoryFilter)
+                    }
+                }
+
+                items(allProducts) { productItem ->
+                    Box(Modifier.padding(horizontal = 8.dp)) {
+                        ProductItem(
+                            productState = productItem,
+                            cardColor = MaterialTheme.colorScheme.secondaryContainer,
+                            onProductClicked = onProductClicked
+                        )
+                    }
+                }
+            }
+
         }
 
-        // All (or filtered) products section
-        if (allProducts.isNotEmpty()) {
-            Row(Modifier.fillMaxWidth()) {
-                if (categoryFilter == null) SectionLabel(R.string.section_all_products)
-                else CategoryFilterChip(categoryFilter)
-            }
-            AllProductsColumn(products = allProducts, onProductClicked = onProductClicked)
-        } else {
+        // No products state
+        if (allProducts.isEmpty()) {
             if (categoryFilter != null) CategoryFilterChip(categoryFilter)
             EmptyContent(R.string.empty_products)
         }
@@ -347,11 +372,14 @@ fun ProductItem(
                 Text(
                     text = productState.name, maxLines = 2, overflow = TextOverflow.Ellipsis
                 )
-                RatingBar(value = productState.ratingStars,
-                    config = RatingBarConfig().activeColor(MaterialTheme.colorScheme.primary)
+                RatingBar(
+                    value = productState.ratingStars,
+                    config = RatingBarConfig()
+                        .activeColor(MaterialTheme.colorScheme.primary)
                         .size(20.dp),
                     onValueChange = {},
-                    onRatingChanged = {})
+                    onRatingChanged = {}
+                )
                 Text(productState.priceText)
             }
         }
@@ -374,25 +402,6 @@ fun FeaturedProductsRow(
     }
 }
 
-@Composable
-fun AllProductsColumn(
-    products: List<ProductItemUiState>,
-    onProductClicked: (String) -> Unit,
-    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
-) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(8.dp),
-    ) {
-        items(products) { productItem ->
-            ProductItem(
-                productState = productItem,
-                cardColor = cardColor,
-                onProductClicked = onProductClicked
-            )
-        }
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -464,8 +473,28 @@ fun HomeSearchBar(
         else if (searchUiState.query.isNotEmpty() && searchUiState.results.isEmpty()) {
             EmptyContent(R.string.empty_products)
         } else {
-            AllProductsColumn(
+            SearchProductsContent(
                 products = searchUiState.results,
+                onProductClicked = onProductClicked
+            )
+        }
+    }
+}
+
+@Composable
+fun SearchProductsContent(
+    products: List<ProductItemUiState>,
+    onProductClicked: (String) -> Unit,
+    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
+) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(8.dp),
+    ) {
+        items(products) { productItem ->
+            ProductItem(
+                productState = productItem,
+                cardColor = cardColor,
                 onProductClicked = onProductClicked
             )
         }
