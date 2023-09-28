@@ -1,17 +1,16 @@
 package com.narify.ecommercy.ui.cart
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -38,7 +37,7 @@ import com.narify.ecommercy.data.cart.FakeCartDataSource
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.totalPriceText
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.LoadingContent
+import com.narify.ecommercy.ui.common.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
@@ -51,6 +50,7 @@ fun CartRoute(
 
     if (uiState.isLoading) LoadingContent()
     else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
+    else if (uiState.cartItems.isEmpty()) EmptyContent(R.string.empty_cart)
     else CartScreen(
         cartItems = uiState.cartItems,
         onIncrementItem = { viewModel.increaseItemCount(it.product) },
@@ -68,38 +68,6 @@ fun CartScreen(
     onCheckoutClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier.fillMaxSize()) {
-        CartItemsList(
-            cartItems = cartItems,
-            onIncrementItem = onIncrementItem,
-            onDecrementItem = onDecrementItem,
-            modifier = Modifier.weight(1f)
-        )
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.secondaryContainer)
-        ) {
-            Button(
-                onClick = onCheckoutClicked,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
-            ) {
-                Text(stringResource(R.string.proceed_to_checkout))
-            }
-        }
-    }
-}
-
-@Composable
-fun CartItemsList(
-    cartItems: List<CartItem>,
-    onIncrementItem: (CartItem) -> Unit,
-    onDecrementItem: (CartItem) -> Unit,
-    modifier: Modifier = Modifier,
-    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
-) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
@@ -110,8 +78,20 @@ fun CartItemsList(
                 cartItemState = item,
                 onIncrementItem = onIncrementItem,
                 onDecrementItem = onDecrementItem,
-                cardColor = cardColor
             )
+        }
+
+        item {
+            Button(
+                onClick = onCheckoutClicked,
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier
+                    .padding(vertical = 8.dp)
+                    .height(40.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(stringResource(R.string.proceed_to_checkout))
+            }
         }
     }
 }

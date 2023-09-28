@@ -58,6 +58,7 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         }
 
     override fun getProductStream(productId: String): Flow<Product?> = flow {
+        delay(2000)
         val product = getProducts().find { it.id == productId }
         emit(product)
     }

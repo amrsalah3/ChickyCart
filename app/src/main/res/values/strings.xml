@@ -28,13 +28,14 @@
 
     <!-- Cart Screen -->
     <string name="error_loading_cart">Error while loading cart</string>
+    <string name="empty_cart">Empty cart</string>
     <string name="proceed_to_checkout">PROCEED TO CHECKOUT</string>
 
     <!-- Product Details Screen -->
     <string name="error_loading_product_details">Error while loading the product</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_product_to_cart">Added</string>
-    <string name="proceed_to_cart">Proceed to cart</string>
+    <string name="proceed_to_cart">PROCEED TO CART</string>
 
     <!-- Checkout Screen -->
     <string name="error_loading_receipt">Error while loading the receipt</string>
@@ -60,7 +61,7 @@
     <string name="receipt_item_total">Total</string>
     <string name="receipt_item_cost">Cost</string>
     <string name="place_the_order">PLACE THE ORDER</string>
-    <string name="order_result_loading">Placing the order</string>
+    <string name="order_result_loading">Placing the order..</string>
     <string name="order_result_success">Order placed</string>
     <string name="order_result_error">An error occurred</string>
 

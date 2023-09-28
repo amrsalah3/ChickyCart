@@ -3,6 +3,7 @@ package com.narify.ecommercy.ui.productdetails
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,10 +38,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.gowtham.ratingbar.RatingBar
+import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
+import com.narify.ecommercy.data.products.FakeProductsDataSource
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 
 @Composable
@@ -52,7 +55,7 @@ fun ProductDetailsRoute(
     val snackbarHostState = SnackbarHostState()
 
     Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { paddingValues ->
-        if (uiState.isLoading) LoadingContent()
+        if (uiState.isLoading) LoadingProductDetails()
         else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
         else ProductDetailsScreen(
             product = uiState.product!!,
@@ -84,16 +87,20 @@ fun ProductDetailsScreen(
     onCartClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier.verticalScroll(rememberScrollState())) {
+    Column(
+        modifier
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp)
+    ) {
+        /* Images slider */
         val pageCount = product.images.size
         val pagerState = rememberPagerState(initialPage = 0) { pageCount }
         HorizontalPager(
             state = pagerState,
             pageSpacing = 16.dp,
             modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
                 .height(300.dp)
+                .fillMaxWidth()
         ) { pageIndex ->
             Box {
                 AsyncImage(
@@ -107,35 +114,72 @@ fun ProductDetailsScreen(
                     pageCount = pageCount,
                     selectedPage = pagerState.currentPage,
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(vertical = 16.dp)
                         .align(Alignment.BottomCenter)
                 )
             }
         }
 
-        Row(modifier = Modifier.padding(horizontal = 16.dp)) {
+        /* Product name */
+        Text(
+            text = product.name,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier
+                .padding(top = 16.dp, bottom = 8.dp)
+                .fillMaxWidth()
+        )
+
+        /* Product rating */
+        Row(Modifier.padding(vertical = 8.dp)) {
+            RatingBar(
+                value = product.rating.stars,
+                config = RatingBarConfig()
+                    .activeColor(MaterialTheme.colorScheme.primary)
+                    .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
+                    .size(20.dp),
+                onValueChange = {},
+                onRatingChanged = {},
+                modifier = modifier.align(Alignment.CenterVertically)
+            )
+            Text(
+                text = "(${product.rating.raters})",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = modifier
+                    .padding(horizontal = 4.dp)
+                    .align(Alignment.CenterVertically)
+            )
+        }
+
+        /* Price text & Add to cart button */
+        Row(modifier.padding(vertical = 8.dp)) {
             Text(
                 text = product.price.raw,
-                style = MaterialTheme.typography.displaySmall,
-                modifier = Modifier.weight(1f)
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically)
             )
             Button(onClick = { onAddToCartClicked(product) }) {
                 Text(stringResource(R.string.add_to_cart))
             }
         }
 
+        /* Product description */
         Text(
             text = product.description,
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(vertical = 16.dp)
                 .fillMaxWidth()
         )
 
+        /* Proceed to cart button */
         Button(
-            onClick = onCartClicked, modifier = Modifier
+            onClick = onCartClicked,
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp)
+                .padding(vertical = 8.dp)
         ) {
             Text(stringResource(R.string.proceed_to_cart))
         }
@@ -147,15 +191,18 @@ fun DotIndicators(
     pageCount: Int,
     selectedPage: Int,
     modifier: Modifier = Modifier,
-    selectedColor: Color = Color.DarkGray,
-    unselectedColor: Color = Color.LightGray,
+    selectedColor: Color = MaterialTheme.colorScheme.onSecondary,
+    unselectedColor: Color = MaterialTheme.colorScheme.secondary,
 ) {
-    Row(modifier = modifier) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxWidth()
+    ) {
         repeat(pageCount) { dotNum ->
             val color = if (selectedPage == dotNum) selectedColor else unselectedColor
             Box(
                 Modifier
-                    .padding(horizontal = 8.dp)
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
                     .size(20.dp)
                     .clip(CircleShape)
                     .background(color)
@@ -169,6 +216,7 @@ fun DotIndicators(
 @Composable
 fun ProductDetailsScreenPreview() {
     EcommercyTheme {
-        ProductDetailsRoute({})
+        val product = FakeProductsDataSource().product1
+        ProductDetailsScreen(product, {}, {})
     }
 }

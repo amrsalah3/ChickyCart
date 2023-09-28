@@ -42,7 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.R
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.LoadingContent
+import com.narify.ecommercy.ui.common.LoadingContent
 
 @Composable
 fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
@@ -52,12 +52,7 @@ fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
     else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
     else if (uiState.ordering != null) {
         when (uiState.ordering!!) {
-            OrderingUiState.OrderLoading -> OrderResult(
-                resultMsg = stringResource(R.string.order_result_loading),
-                imageRes = R.drawable.ic_loading,
-                imageTint = Color(0xFF3C78FA)
-            )
-
+            OrderingUiState.OrderLoading -> PlacingOrderLoading()
             OrderingUiState.OrderPlaced -> OrderResult(
                 resultMsg = stringResource(R.string.order_result_success),
                 imageRes = R.drawable.ic_success,
@@ -328,17 +323,6 @@ fun CheckoutScreenPreview() {
         shippingErrorState = ShippingErrorState(),
         shippingOnValueChange = { },
         onPlaceOrderClicked = { }
-    )
-}
-
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun OrderResultLoadingPreview() {
-    OrderResult(
-        resultMsg = stringResource(R.string.order_result_loading),
-        imageRes = R.drawable.ic_loading,
-        imageTint = Color(0xFF3C78FA)
     )
 }
 

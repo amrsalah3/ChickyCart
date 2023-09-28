@@ -32,12 +32,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,7 +49,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,7 +62,6 @@ import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
 import com.narify.ecommercy.data.products.FakeProductsDataSource
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 import com.narify.ecommercy.util.ProductsSortType
 import kotlinx.coroutines.launch
@@ -93,7 +90,7 @@ fun HomeRoute(
         }
     }
 
-    if (uiState.isLoading) LoadingContent()
+    if (uiState.isLoading) LoadingProductsList()
     else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
     else HomeScreen(
         featuredProducts = uiState.featuredProductsItems,
@@ -135,11 +132,7 @@ fun HomeScreen(
     categoryFilter: CategoryFilterState? = null,
     sortIconBackgroundColor: Color = Color.Transparent,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
-    ) {
+    Column(modifier = modifier.fillMaxSize()) {
         // Top search bar
         HomeSearchBar(
             searchUiState = searchUiState,
@@ -177,7 +170,6 @@ fun HomeScreen(
                     Box(Modifier.padding(horizontal = 8.dp)) {
                         ProductItem(
                             productState = productItem,
-                            cardColor = MaterialTheme.colorScheme.secondaryContainer,
                             onProductClicked = onProductClicked
                         )
                     }
@@ -341,15 +333,15 @@ fun FeaturedProductItem(
 
 @Composable
 fun ProductItem(
+    productState: ProductItemUiState,
     onProductClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer,
-    productState: ProductItemUiState
 ) {
     Surface(
         shape = MaterialTheme.shapes.large,
         color = cardColor,
-        shadowElevation = 6.dp,
+        shadowElevation = 6.dp
     ) {
         Row(
             modifier
@@ -376,6 +368,7 @@ fun ProductItem(
                     value = productState.ratingStars,
                     config = RatingBarConfig()
                         .activeColor(MaterialTheme.colorScheme.primary)
+                        .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
                         .size(20.dp),
                     onValueChange = {},
                     onRatingChanged = {}
@@ -393,7 +386,7 @@ fun FeaturedProductsRow(
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(8.dp),
+        contentPadding = PaddingValues(horizontal = 8.dp),
         modifier = Modifier.padding(vertical = 8.dp)
     ) {
         items(products) { productItem ->
@@ -415,11 +408,6 @@ fun HomeSearchBar(
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     var active by rememberSaveable { mutableStateOf(false) }
-    val backgroundColor = if (active) {
-        MaterialTheme.colorScheme.background
-    } else {
-        MaterialTheme.colorScheme.secondaryContainer
-    }
 
     SearchBar(
         query = query,
@@ -430,13 +418,6 @@ fun HomeSearchBar(
             query = ""
             active = it
         },
-        colors = SearchBarDefaults.colors(
-            containerColor = backgroundColor,
-            inputFieldColors = TextFieldDefaults.colors(
-                focusedContainerColor = backgroundColor,
-                unfocusedContainerColor = backgroundColor
-            )
-        ),
         leadingIcon = {
             Icon(imageVector = Icons.Default.Search, contentDescription = null)
         },
@@ -468,7 +449,7 @@ fun HomeSearchBar(
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        if (searchUiState.isLoading) LoadingContent()
+        if (searchUiState.isLoading) LoadingProductsList()
         else if (searchUiState.errorState.hasError) EmptyContent(searchUiState.errorState.errorMsgResId)
         else if (searchUiState.query.isNotEmpty() && searchUiState.results.isEmpty()) {
             EmptyContent(R.string.empty_products)
@@ -494,8 +475,8 @@ fun SearchProductsContent(
         items(products) { productItem ->
             ProductItem(
                 productState = productItem,
-                cardColor = cardColor,
-                onProductClicked = onProductClicked
+                onProductClicked = onProductClicked,
+                cardColor = cardColor
             )
         }
     }
@@ -505,8 +486,9 @@ fun SearchProductsContent(
 fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
     Text(
         text = stringResource(labelResId).uppercase(),
-        fontFamily = FontFamily.Default,
-        style = MaterialTheme.typography.headlineSmall,
+        style = MaterialTheme.typography.titleMedium,
+        color = Color.Gray,
+        fontWeight = FontWeight.Bold,
         modifier = modifier.padding(8.dp)
     )
 }
