@@ -1,8 +1,8 @@
-package com.narify.ecommercy.data.products
+package com.narify.ecommercy.data.products.fake
 
-import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.ALPHABETICAL
-import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.PRICE
-import com.narify.ecommercy.data.products.FakeProductsDataSource.SortType.RATING
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.ALPHABETICAL
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.PRICE
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.RATING
 import com.narify.ecommercy.model.Category
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.Product
@@ -11,17 +11,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
-interface ProductsDataSource {
-    suspend fun getProducts(): List<Product>
-    fun getProductsStream(category: String? = null, sortType: String? = null): Flow<List<Product>>
-    fun getProductStream(productId: String): Flow<Product?>
-}
-
-class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
+@Singleton
+class ProductFakeDataSource @Inject constructor() {
 
     /**
-     * Sort type string values for this specific implementation (FakeProductsDataSource)
+     * Sort type string values for this specific data source [ProductFakeDataSource]
      */
     object SortType {
         const val ALPHABETICAL = "alphabetical"
@@ -30,34 +26,36 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
         const val NONE = ""
     }
 
-    override suspend fun getProducts(): List<Product> {
+    suspend fun getProducts(): List<Product> {
         return listOf(product1, product2, product3, product4, product5, product6)
     }
 
-    override fun getProductsStream(category: String?, sortType: String?): Flow<List<Product>> =
-        flow {
-            delay(2000)
-            val products = listOf(product1, product2, product3, product4, product5, product6)
+    fun getProductsStream(
+        category: String? = null,
+        sortType: String? = null
+    ): Flow<List<Product>> = flow {
+        delay(2000)
+        val products = listOf(product1, product2, product3, product4, product5, product6)
 
-            var filteredProducts = products
-            if (!category.isNullOrBlank()) {
-                filteredProducts = products.filter { it.category.name == category }
-            }
-
-            var sortedProducts = filteredProducts
-            if (!sortType.isNullOrBlank()) {
-                sortedProducts = when (sortType) {
-                    ALPHABETICAL -> filteredProducts.sortedBy { it.name }
-                    PRICE -> filteredProducts.sortedBy { it.price.value }
-                    RATING -> filteredProducts.sortedByDescending { it.rating.stars }
-                    else -> filteredProducts
-                }
-            }
-
-            emit(sortedProducts)
+        var filteredProducts = products
+        if (!category.isNullOrBlank()) {
+            filteredProducts = products.filter { it.category.name == category }
         }
 
-    override fun getProductStream(productId: String): Flow<Product?> = flow {
+        var sortedProducts = filteredProducts
+        if (!sortType.isNullOrBlank()) {
+            sortedProducts = when (sortType) {
+                ALPHABETICAL -> filteredProducts.sortedBy { it.name }
+                PRICE -> filteredProducts.sortedBy { it.price.value }
+                RATING -> filteredProducts.sortedByDescending { it.rating.stars }
+                else -> filteredProducts
+            }
+        }
+
+        emit(sortedProducts)
+    }
+
+    fun getProductStream(productId: String): Flow<Product?> = flow {
         delay(2000)
         val product = getProducts().find { it.id == productId }
         emit(product)
@@ -192,4 +190,3 @@ class FakeProductsDataSource @Inject constructor() : ProductsDataSource {
     )
 
 }
-

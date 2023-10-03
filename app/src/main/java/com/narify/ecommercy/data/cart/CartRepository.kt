@@ -12,10 +12,10 @@ import javax.inject.Singleton
 @Singleton
 class CartRepository @Inject constructor(
     private val cartDataSource: CartDataSource,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getCartItems(): List<CartItem> = withContext(ioDispatcher) {
+    suspend fun getCartItems(): List<CartItem> = withContext(dispatcher) {
         return@withContext cartDataSource.getCartItems()
     }
 
@@ -23,11 +23,11 @@ class CartRepository @Inject constructor(
         return cartDataSource.getCartItemsStream()
     }
 
-    suspend fun addProductToCart(product: Product) = withContext(ioDispatcher) {
+    suspend fun addProductToCart(product: Product) = withContext(dispatcher) {
         cartDataSource.increaseItemCount(product)
     }
 
-    suspend fun removeProductFromCart(productId: String) = withContext(ioDispatcher) {
+    suspend fun removeProductFromCart(productId: String) = withContext(dispatcher) {
         cartDataSource.decreaseItemCount(productId)
     }
 }

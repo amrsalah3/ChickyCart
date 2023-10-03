@@ -13,10 +13,10 @@ import javax.inject.Singleton
 class OrderRepository @Inject constructor(
     private val receiptDataSource: ReceiptDataSource,
     private val orderService: OrderService,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getReceiptItems(): List<ReceiptItem> = withContext(ioDispatcher) {
+    suspend fun getReceiptItems(): List<ReceiptItem> = withContext(dispatcher) {
         return@withContext receiptDataSource.getReceiptItems()
     }
 
@@ -24,7 +24,7 @@ class OrderRepository @Inject constructor(
         return receiptDataSource.getReceiptItemsStream()
     }
 
-    suspend fun placeOrder(order: Order) = withContext(ioDispatcher) {
+    suspend fun placeOrder(order: Order) = withContext(dispatcher) {
         orderService.placeOrder(order)
     }
 }

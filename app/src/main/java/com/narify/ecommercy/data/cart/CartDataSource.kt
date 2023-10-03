@@ -1,6 +1,6 @@
 package com.narify.ecommercy.data.cart
 
-import com.narify.ecommercy.data.products.FakeProductsDataSource
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.model.Cart
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.Product
@@ -28,7 +28,7 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            val products = FakeProductsDataSource().getProducts()
+            val products = ProductFakeDataSource().getProducts()
             val cart = Cart().apply {
                 products.forEach { addProduct(it) }
             }
@@ -38,7 +38,7 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
 
     override suspend fun getCartItems(): List<CartItem> {
         delay(1000)
-        val products = FakeProductsDataSource().getProducts()
+        val products = ProductFakeDataSource().getProducts()
         val cart = Cart().apply {
             products.forEach { addProduct(it) }
         }
@@ -60,7 +60,7 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
     }
 
     fun getPreviewCartItems(): List<CartItem> {
-        val products = FakeProductsDataSource().getPreviewProducts()
+        val products = ProductFakeDataSource().getPreviewProducts()
         val cart = Cart().apply {
             products.forEach { addProduct(it) }
         }

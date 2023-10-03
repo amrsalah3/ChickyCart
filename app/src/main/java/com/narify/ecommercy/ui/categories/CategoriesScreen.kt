@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.narify.ecommercy.data.categories.FakeCategoriesDataSource
+import com.narify.ecommercy.data.categories.fake.CategoriesFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.common.LoadingContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
@@ -86,7 +86,7 @@ fun CategoryCard(
 @Composable
 fun CategoryScreenPreview() {
     EcommercyTheme {
-        FakeCategoriesDataSource().getPreviewCategories().let {
+        CategoriesFakeDataSource().getPreviewCategories().let {
             val categories = it.toCategoriesUiState()
             CategoryScreen(categories, {})
         }

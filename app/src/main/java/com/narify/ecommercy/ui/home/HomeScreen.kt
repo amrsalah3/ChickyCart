@@ -60,7 +60,7 @@ import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.products.FakeProductsDataSource
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
 import com.narify.ecommercy.util.ProductsSortType
@@ -314,8 +314,9 @@ fun FeaturedProductItem(
             AsyncImage(
                 model = productState.imageUrl,
                 placeholder = painterResource(R.drawable.sample_product_item),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentDescription = stringResource(R.string.content_description_product_image),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
             )
             Text(
                 text = productState.priceText,
@@ -352,8 +353,8 @@ fun ProductItem(
             AsyncImage(
                 model = productState.imageUrl,
                 placeholder = painterResource(R.drawable.sample_product_item),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentDescription = stringResource(R.string.content_description_product_image),
+                contentScale = ContentScale.Crop,
                 modifier = modifier.weight(1.2f)
             )
             Column(
@@ -499,7 +500,7 @@ fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
 @Composable
 fun HomeScreenPreview() {
     EcommercyTheme {
-        FakeProductsDataSource().getPreviewProducts().let {
+        ProductFakeDataSource().getPreviewProducts().let {
             val featuredProducts = it.toFeaturedProductsUiState()
             val allProducts = it.toProductsUiState()
             HomeScreen(
@@ -525,7 +526,7 @@ fun HomeScreenPreview() {
 @Composable
 fun HomeScreenWithCategoryFilteringPreview() {
     EcommercyTheme {
-        FakeProductsDataSource().getPreviewProducts().let {
+        ProductFakeDataSource().getPreviewProducts().let {
             val featuredProducts = it.toFeaturedProductsUiState()
             val allProducts = it.toProductsUiState()
             HomeScreen(

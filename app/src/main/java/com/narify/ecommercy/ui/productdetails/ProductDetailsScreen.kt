@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,7 +42,7 @@ import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.products.FakeProductsDataSource
+import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.theme.EcommercyTheme
@@ -106,9 +107,11 @@ fun ProductDetailsScreen(
                 AsyncImage(
                     model = product.images[pageIndex],
                     placeholder = painterResource(R.drawable.sample_product_item),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier.clip(MaterialTheme.shapes.large)
+                    contentDescription = stringResource(R.string.content_description_product_image),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(MaterialTheme.shapes.large)
                 )
                 DotIndicators(
                     pageCount = pageCount,
@@ -216,7 +219,7 @@ fun DotIndicators(
 @Composable
 fun ProductDetailsScreenPreview() {
     EcommercyTheme {
-        val product = FakeProductsDataSource().product1
+        val product = ProductFakeDataSource().product1
         ProductDetailsScreen(product, {}, {})
     }
 }
