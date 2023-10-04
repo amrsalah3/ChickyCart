@@ -1,6 +1,5 @@
 package com.narify.ecommercy.data.products
 
-import com.narify.ecommercy.data.ProductApi
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.model.toProduct
 import com.narify.ecommercy.util.ProductsSortType
@@ -15,12 +14,12 @@ import javax.inject.Singleton
 
 @Singleton
 class ProductDefaultRepository @Inject constructor(
-    private val productApi: ProductApi,
+    private val dataSource: ProductApiDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ProductRepository {
 
     override suspend fun getProducts(): List<Product> = withContext(dispatcher) {
-        val response = productApi.getProducts()
+        val response = dataSource.getProducts()
         val products = response.products.map { it.toProduct() }
         return@withContext products
     }
@@ -30,7 +29,7 @@ class ProductDefaultRepository @Inject constructor(
         sortType: ProductsSortType
     ): Flow<List<Product>> = flow {
         // Get products from the network.
-        val response = productApi.getProducts(category)
+        val response = dataSource.getProducts(category)
         val products = response.products.map { it.toProduct() }
 
         // Apply the sort if specified.
@@ -45,7 +44,7 @@ class ProductDefaultRepository @Inject constructor(
     }.flowOn(dispatcher)
 
     override fun getProductStream(productId: String): Flow<Product?> = flow {
-        val productEntity = productApi.getProduct(productId)
+        val productEntity = dataSource.getProduct(productId)
         emit(productEntity.toProduct())
     }.flowOn(dispatcher)
 }

@@ -1,6 +1,5 @@
 package com.narify.ecommercy.data.categories
 
-import com.narify.ecommercy.data.ProductApi
 import com.narify.ecommercy.model.Category
 import com.narify.ecommercy.model.createCategory
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,12 +13,12 @@ import javax.inject.Singleton
 
 @Singleton
 class CategoriesDefaultRepository @Inject constructor(
-    private val productApi: ProductApi,
+    private val dataSource: CategoriesApiDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CategoriesRepository {
 
     override suspend fun getCategories(): List<Category> = withContext(dispatcher) {
-        val categoryNames = productApi.getCategories()
+        val categoryNames = dataSource.getCategories()
         val categories = categoryNames.map { createCategory(it) }
         return@withContext categories
     }
