@@ -4,7 +4,7 @@ import com.narify.ecommercy.model.entities.ProductEntity
 import kotlin.random.Random
 
 data class Product(
-    var id: String,
+    val id: String,
     val name: String,
     val description: String,
     val images: List<String>,
@@ -13,8 +13,7 @@ data class Product(
     val stock: Int,
     val rating: Rating,
 ) {
-
-    fun getThumbnail(): String = images[0]
+    val thumbnail: String = images[0]
 }
 
 data class Price(

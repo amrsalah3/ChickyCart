@@ -136,12 +136,12 @@ fun Product.toProductUiState() = ProductItemUiState(
     name = name,
     ratingStars = rating.stars,
     priceText = price.raw,
-    imageUrl = getThumbnail()
+    imageUrl = thumbnail
 )
 
 fun Product.toFeaturedProductUiState() = FeaturedProductItemUiState(
     id = id,
-    imageUrl = getThumbnail(),
+    imageUrl = thumbnail,
     priceText = price.raw
 )
 

@@ -115,7 +115,7 @@ fun CartItem(
                 .fillMaxWidth()
         ) {
             AsyncImage(
-                model = cartItemState.product.getThumbnail(),
+                model = cartItemState.product.thumbnail,
                 placeholder = painterResource(R.drawable.sample_product_item),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
