@@ -1,7 +1,5 @@
 package com.narify.ecommercy.di
 
-import com.narify.ecommercy.data.cart.CartDataSource
-import com.narify.ecommercy.data.cart.FakeCartDataSource
 import com.narify.ecommercy.data.order.FakeOrderService
 import com.narify.ecommercy.data.order.FakeReceiptDataSource
 import com.narify.ecommercy.data.order.OrderService
@@ -14,11 +12,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface DataSourceModule {
-
-    @Binds
-    fun bindsCartDataSource(
-        cartDataSource: FakeCartDataSource
-    ): CartDataSource
 
     @Binds
     fun bindsReceiptDataSource(

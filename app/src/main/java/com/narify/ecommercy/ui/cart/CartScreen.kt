@@ -33,7 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.narify.ecommercy.R
-import com.narify.ecommercy.data.cart.FakeCartDataSource
+import com.narify.ecommercy.data.cart.fake.CartFakeDataSource
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.totalPriceText
 import com.narify.ecommercy.ui.EmptyContent
@@ -118,7 +118,7 @@ fun CartItem(
                 model = cartItemState.product.getThumbnail(),
                 placeholder = painterResource(R.drawable.sample_product_item),
                 contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 modifier = modifier.weight(1.2f)
             )
             Column(
@@ -171,7 +171,7 @@ fun CartItem(
 @Composable
 fun CartScreenPreview() {
     EcommercyTheme {
-        val cartItems = FakeCartDataSource().getPreviewCartItems()
+        val cartItems = CartFakeDataSource().getPreviewCartItems()
         CartScreen(cartItems, {}, {}, {})
     }
 }

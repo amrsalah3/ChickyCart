@@ -83,6 +83,10 @@ dependencies {
     implementation "io.ktor:ktor-client-json:1.6.6"
     implementation 'io.ktor:ktor-client-serialization:1.6.6'
     implementation 'io.ktor:ktor-client-logging:1.6.6'
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

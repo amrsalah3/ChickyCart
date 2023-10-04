@@ -1,6 +1,6 @@
 package com.narify.ecommercy.data.order
 
-import com.narify.ecommercy.data.cart.FakeCartDataSource
+import com.narify.ecommercy.data.cart.fake.CartFakeDataSource
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.ReceiptItem
 import com.narify.ecommercy.model.totalPrice
@@ -29,7 +29,7 @@ class FakeReceiptDataSource @Inject constructor() : ReceiptDataSource {
         MainScope().launch {
             withContext(Dispatchers.IO) {
                 var totalItemsPrice = 0.0
-                FakeCartDataSource().getCartItems().forEach { totalItemsPrice += it.totalPrice }
+                CartFakeDataSource().getCartItems().forEach { totalItemsPrice += it.totalPrice }
                 val totalCartPriceReceiptItem = ReceiptItem(
                     "Items",
                     Price(
@@ -56,7 +56,7 @@ class FakeReceiptDataSource @Inject constructor() : ReceiptDataSource {
         delay(1000)
 
         var totalCartItemsPrice = 0.0
-        FakeCartDataSource().getCartItems().forEach { totalCartItemsPrice += it.totalPrice }
+        CartFakeDataSource().getCartItems().forEach { totalCartItemsPrice += it.totalPrice }
         val totalCartPriceReceiptItem = ReceiptItem(
             "Items",
             Price(totalCartItemsPrice, totalCartItemsPrice, "EGP", "£", raw = "EGP 50")

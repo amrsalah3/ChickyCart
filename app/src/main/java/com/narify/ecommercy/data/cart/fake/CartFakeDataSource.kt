@@ -1,4 +1,4 @@
-package com.narify.ecommercy.data.cart
+package com.narify.ecommercy.data.cart.fake
 
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.model.Cart
@@ -14,15 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-interface CartDataSource {
-    suspend fun getCartItems(): List<CartItem>
-    suspend fun increaseItemCount(product: Product)
-    suspend fun decreaseItemCount(productId: String)
-    fun getCartItemsStream(): Flow<List<CartItem>>
-}
-
-@Singleton
-class FakeCartDataSource @Inject constructor() : CartDataSource {
+class CartFakeDataSource @Inject constructor() {
 
     private val cartItems = MutableStateFlow(emptyList<CartItem>())
 
@@ -36,7 +28,19 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
         }
     }
 
-    override suspend fun getCartItems(): List<CartItem> {
+    suspend fun increaseItemCount(product: Product) {
+        val cart = Cart(cartItems.value)
+        cart.addProduct(product)
+        cartItems.value = cart.items
+    }
+
+    suspend fun decreaseItemCount(productId: String) {
+        val cart = Cart(cartItems.value)
+        cart.removeProduct(productId)
+        cartItems.value = cart.items
+    }
+
+    suspend fun getCartItems(): List<CartItem> {
         delay(1000)
         val products = ProductFakeDataSource().getProducts()
         val cart = Cart().apply {
@@ -45,19 +49,7 @@ class FakeCartDataSource @Inject constructor() : CartDataSource {
         return cart.items
     }
 
-    override fun getCartItemsStream(): Flow<List<CartItem>> = cartItems
-
-    override suspend fun increaseItemCount(product: Product) {
-        val cart = Cart(cartItems.value)
-        cart.addProduct(product)
-        cartItems.value = cart.items
-    }
-
-    override suspend fun decreaseItemCount(productId: String) {
-        val cart = Cart(cartItems.value)
-        cart.removeProduct(productId)
-        cartItems.value = cart.items
-    }
+    fun getCartItemsStream(): Flow<List<CartItem>> = cartItems
 
     fun getPreviewCartItems(): List<CartItem> {
         val products = ProductFakeDataSource().getPreviewProducts()

@@ -1,5 +1,7 @@
 package com.narify.ecommercy.di
 
+import com.narify.ecommercy.data.cart.CartDefaultRepository
+import com.narify.ecommercy.data.cart.CartRepository
 import com.narify.ecommercy.data.categories.CategoriesDefaultRepository
 import com.narify.ecommercy.data.categories.CategoriesRepository
 import com.narify.ecommercy.data.products.ProductDefaultRepository
@@ -22,4 +24,9 @@ interface RepositoryModule {
     fun bindsCategoriesRespository(
         categoriesRepository: CategoriesDefaultRepository
     ): CategoriesRepository
+
+    @Binds
+    fun bindsCartRespository(
+        cartRepository: CartDefaultRepository
+    ): CartRepository
 }
