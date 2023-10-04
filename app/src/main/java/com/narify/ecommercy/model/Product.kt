@@ -1,11 +1,8 @@
 package com.narify.ecommercy.model
 
-import android.os.Parcelable
 import com.narify.ecommercy.model.entities.ProductEntity
-import kotlinx.parcelize.Parcelize
 import kotlin.random.Random
 
-@Parcelize
 data class Product(
     var id: String,
     val name: String,
@@ -15,12 +12,11 @@ data class Product(
     val price: Price,
     val stock: Int,
     val rating: Rating,
-) : Parcelable {
+) {
 
     fun getThumbnail(): String = images[0]
 }
 
-@Parcelize
 data class Price(
     val value: Double,
     val original: Double,
@@ -28,17 +24,15 @@ data class Price(
     val symbol: String,
     val discount: Discount? = null,
     val raw: String
-) : Parcelable
+)
 
-@Parcelize
 data class Discount(
     val percentage: Int,
     val active: Boolean,
     val raw: String
-) : Parcelable
+)
 
-@Parcelize
-data class Rating(val stars: Float = 0.0F, val raters: Int = 0) : Parcelable
+data class Rating(val stars: Float = 0.0F, val raters: Int = 0)
 
 fun ProductEntity.toProduct(): Product {
     val currency = "USD"
