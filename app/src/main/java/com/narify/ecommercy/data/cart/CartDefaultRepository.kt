@@ -15,6 +15,12 @@ class CartDefaultRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CartRepository {
 
+    override fun getCartItemsStream(): Flow<List<CartItem>> = dataSource.getCartItemsStream()
+
+    override suspend fun getCartItems(): List<CartItem> = withContext(dispatcher) {
+        return@withContext dataSource.getCartItems()
+    }
+
     override suspend fun addProductToCart(product: Product) = withContext(dispatcher) {
         dataSource.addItemToCart(product)
     }
@@ -22,10 +28,4 @@ class CartDefaultRepository @Inject constructor(
     override suspend fun removeProductFromCart(productId: String) = withContext(dispatcher) {
         dataSource.removeItemFromCart(productId)
     }
-
-    override suspend fun getCartItems(): List<CartItem> = withContext(dispatcher) {
-        return@withContext dataSource.getCartItems()
-    }
-
-    override fun getCartItemsStream(): Flow<List<CartItem>> = dataSource.getCartItemsStream()
 }

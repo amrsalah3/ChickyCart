@@ -16,12 +16,12 @@ class CartFakeRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CartRepository {
 
-    override suspend fun getCartItems(): List<CartItem> = withContext(dispatcher) {
-        return@withContext dataSource.getCartItems()
-    }
-
     override fun getCartItemsStream(): Flow<List<CartItem>> {
         return dataSource.getCartItemsStream()
+    }
+
+    override suspend fun getCartItems(): List<CartItem> = withContext(dispatcher) {
+        return@withContext dataSource.getCartItems()
     }
 
     override suspend fun addProductToCart(product: Product) = withContext(dispatcher) {

@@ -7,8 +7,8 @@ import javax.inject.Singleton
 
 @Singleton
 interface CartRepository {
+    fun getCartItemsStream(): Flow<List<CartItem>>
+    suspend fun getCartItems(): List<CartItem>
     suspend fun addProductToCart(product: Product)
     suspend fun removeProductFromCart(productId: String)
-    suspend fun getCartItems(): List<CartItem>
-    fun getCartItemsStream(): Flow<List<CartItem>>
 }
