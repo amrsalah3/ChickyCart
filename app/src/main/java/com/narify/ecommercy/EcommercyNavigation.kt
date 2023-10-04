@@ -85,7 +85,6 @@ fun NavController.navigateToProductDetails(productId: String) {
             saveState = true
         }
         launchSingleTop = true
-        restoreState = true
     }
 }
 
