@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.narify.ecommercy.R
 import com.narify.ecommercy.data.cart.CartRepository
-import com.narify.ecommercy.data.order.OrderRepository
+import com.narify.ecommercy.data.checkout.CheckoutRepository
 import com.narify.ecommercy.model.Order
 import com.narify.ecommercy.model.OrderItem
 import com.narify.ecommercy.model.ReceiptItem
@@ -28,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CheckoutViewModel @Inject constructor(
     private val cartRepository: CartRepository,
-    private val orderRepository: OrderRepository
+    private val checkoutRepository: CheckoutRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CheckoutUiState())
@@ -43,10 +43,11 @@ class CheckoutViewModel @Inject constructor(
             try {
                 _uiState.update { CheckoutUiState(isLoading = true) }
 
-                val receiptUiItems = orderRepository.getReceiptItems().toReceiptUiItems()
+                val receiptUiItemsState =
+                    checkoutRepository.getReceiptItems().toReceiptUiItemsState()
 
                 _uiState.update {
-                    CheckoutUiState(isLoading = false, receiptItems = receiptUiItems)
+                    CheckoutUiState(isLoading = false, receiptItemsState = receiptUiItemsState)
                 }
 
             } catch (e: Exception) {
@@ -159,7 +160,7 @@ class CheckoutViewModel @Inject constructor(
                 val order = Order(orderItems, shippingDetails)
 
                 try {
-                    orderRepository.placeOrder(order)
+                    checkoutRepository.placeOrder(order)
                     _uiState.update {
                         it.copy(ordering = OrderingUiState.OrderPlaced)
                     }
@@ -211,5 +212,5 @@ class CheckoutViewModel @Inject constructor(
     }
 }
 
-fun ReceiptItem.toReceiptUiItem() = ReceiptUiItem(name, price.raw)
-fun List<ReceiptItem>.toReceiptUiItems() = map(ReceiptItem::toReceiptUiItem)
+fun ReceiptItem.toReceiptUiItemState() = ReceiptUiItemState(name, price.raw)
+fun List<ReceiptItem>.toReceiptUiItemsState() = map(ReceiptItem::toReceiptUiItemState)

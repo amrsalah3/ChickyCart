@@ -4,6 +4,8 @@ import com.narify.ecommercy.data.cart.CartDefaultRepository
 import com.narify.ecommercy.data.cart.CartRepository
 import com.narify.ecommercy.data.categories.CategoriesDefaultRepository
 import com.narify.ecommercy.data.categories.CategoriesRepository
+import com.narify.ecommercy.data.checkout.CheckoutDefaultRepository
+import com.narify.ecommercy.data.checkout.CheckoutRepository
 import com.narify.ecommercy.data.products.ProductDefaultRepository
 import com.narify.ecommercy.data.products.ProductRepository
 import dagger.Binds
@@ -29,4 +31,9 @@ interface RepositoryModule {
     fun bindsCartRespository(
         cartRepository: CartDefaultRepository
     ): CartRepository
+
+    @Binds
+    fun bindsCheckoutRespository(
+        checkoutRepository: CheckoutDefaultRepository
+    ): CheckoutRepository
 }

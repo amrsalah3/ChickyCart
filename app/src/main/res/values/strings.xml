@@ -57,9 +57,6 @@
     <string name="tf_placeholder_city">Type your city</string>
     <string name="tf_placeholder_address">Type your detailed address to receive the shipment at it</string>
     <string name="receipt_item_description">Description</string>
-    <string name="receipt_item_items">Items</string>
-    <string name="receipt_item_shipping_fees">Shipping fees</string>
-    <string name="receipt_item_total">Total</string>
     <string name="receipt_item_cost">Cost</string>
     <string name="place_the_order">PLACE THE ORDER</string>
     <string name="order_result_loading">Placing the order..</string>

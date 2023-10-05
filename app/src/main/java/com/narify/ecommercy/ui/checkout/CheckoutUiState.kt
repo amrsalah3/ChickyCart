@@ -7,7 +7,7 @@ data class CheckoutUiState(
     val isLoading: Boolean = false,
     val shippingInputState: ShippingInputState = ShippingInputState(),
     val shippingErrorState: ShippingErrorState = ShippingErrorState(),
-    val receiptItems: List<ReceiptUiItem> = emptyList(),
+    val receiptItemsState: List<ReceiptUiItemState> = emptyList(),
     val ordering: OrderingUiState? = null,
     val shouldScrollToShowError: Boolean = false,
     val userMessage: String? = null,
@@ -34,7 +34,7 @@ data class ShippingErrorState(
     val address: ErrorState = ErrorState()
 )
 
-data class ReceiptUiItem(val name: String, val price: String)
+data class ReceiptUiItemState(val name: String, val price: String)
 
 sealed interface OrderingUiState {
     object OrderLoading : OrderingUiState

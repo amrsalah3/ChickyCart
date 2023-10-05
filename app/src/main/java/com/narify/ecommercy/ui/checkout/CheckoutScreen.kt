@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.R
+import com.narify.ecommercy.data.checkout.fake.ReceiptFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.common.LoadingContent
 
@@ -72,6 +73,7 @@ fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
             shippingInputState = uiState.shippingInputState,
             shippingErrorState = uiState.shippingErrorState,
             shippingOnValueChange = viewModel::onShippingUiEvent,
+            receiptItemsState = uiState.receiptItemsState,
             onPlaceOrderClicked = viewModel::placeOrder,
             scrollState = scrollState
         )
@@ -98,6 +100,7 @@ fun CheckoutScreen(
     shippingInputState: ShippingInputState,
     shippingErrorState: ShippingErrorState,
     shippingOnValueChange: (ShippingUiEvent) -> Unit,
+    receiptItemsState: List<ReceiptUiItemState>,
     onPlaceOrderClicked: () -> Unit,
     modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState()
@@ -186,18 +189,21 @@ fun CheckoutScreen(
 
         SectionCard(stringResource(R.string.section_receipt)) {
             Column(Modifier.padding(16.dp)) {
-                ReceiptItem(
+                // Header receipt description
+                ReceiptUiItem(
                     stringResource(R.string.receipt_item_description),
                     stringResource(R.string.receipt_item_cost),
                     fontWeight = FontWeight.Bold
                 )
-                ReceiptItem(stringResource(R.string.receipt_item_items), "EGP 500")
-                ReceiptItem(stringResource(R.string.receipt_item_shipping_fees), "EGP 30")
-                ReceiptItem(
-                    stringResource(R.string.receipt_item_total),
-                    "EGP 530",
-                    fontWeight = FontWeight.Bold
-                )
+                // Content of the receipt
+                receiptItemsState.forEach { item ->
+                    val fontWeight = if (item.name.equals("total", true)) {
+                        FontWeight.Bold
+                    } else {
+                        FontWeight.Normal
+                    }
+                    ReceiptUiItem(label = item.name, cost = item.price, fontWeight = fontWeight)
+                }
             }
         }
 
@@ -251,7 +257,7 @@ fun ShippingTextField(
 }
 
 @Composable
-fun ReceiptItem(
+fun ReceiptUiItem(
     label: String,
     cost: String,
     modifier: Modifier = Modifier,
@@ -322,6 +328,8 @@ fun CheckoutScreenPreview() {
         shippingInputState = ShippingInputState(),
         shippingErrorState = ShippingErrorState(),
         shippingOnValueChange = { },
+        receiptItemsState = ReceiptFakeDataSource().getPreviewReceiptItems()
+            .toReceiptUiItemsState(),
         onPlaceOrderClicked = { }
     )
 }
