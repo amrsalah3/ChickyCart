@@ -130,14 +130,16 @@ fun CartItem(
                     text = cartItemState.product.name,
                     fontWeight = FontWeight.Bold,
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
                 )
                 Text(
                     text = cartItemState.totalPriceText,
                     textAlign = TextAlign.Center,
+                    modifier = Modifier.weight(1f)
                 )
                 Row(
-                    modifier
+                    Modifier
                         .padding(4.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
@@ -150,7 +152,7 @@ fun CartItem(
                     Text(
                         text = "${cartItemState.count}",
                         fontSize = 20.sp,
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(horizontal = 20.dp)
                             .align(Alignment.CenterVertically)
                     )

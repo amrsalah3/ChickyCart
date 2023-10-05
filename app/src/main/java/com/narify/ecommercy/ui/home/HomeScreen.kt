@@ -358,12 +358,15 @@ fun ProductItem(
                 modifier = modifier.weight(1.2f)
             )
             Column(
-                modifier
+                Modifier
                     .padding(16.dp)
                     .weight(2f)
             ) {
                 Text(
-                    text = productState.name, maxLines = 2, overflow = TextOverflow.Ellipsis
+                    text = productState.name,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
                 )
                 RatingBar(
                     value = productState.ratingStars,
@@ -372,9 +375,10 @@ fun ProductItem(
                         .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
                         .size(20.dp),
                     onValueChange = {},
-                    onRatingChanged = {}
+                    onRatingChanged = {},
+                    modifier = Modifier.weight(0.5f)
                 )
-                Text(productState.priceText)
+                Text(text = productState.priceText, modifier = Modifier.weight(0.5f))
             }
         }
     }
