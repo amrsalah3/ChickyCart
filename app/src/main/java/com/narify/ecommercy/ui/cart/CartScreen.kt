@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -69,9 +70,9 @@ fun CartScreen(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 16.dp),
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
         items(cartItems) { item ->
             CartItem(
@@ -173,7 +174,7 @@ fun CartItem(
 @Composable
 fun CartScreenPreview() {
     EcommercyTheme {
-        val cartItems = CartFakeDataSource().getPreviewCartItems()
+        val cartItems = CartFakeDataSource().getPreviewCartItems().subList(0, 2)
         CartScreen(cartItems, {}, {}, {})
     }
 }
