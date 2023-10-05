@@ -83,8 +83,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 465.0,
             original = 465.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "465 £"
+            symbol = "£"
         ),
         stock = 10,
         rating = Rating(stars = 4.5F, raters = 9502),
@@ -106,8 +105,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "699 £"
+            symbol = "£"
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),
@@ -125,8 +123,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "699 £"
+            symbol = "£"
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),
@@ -144,8 +141,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "699 £"
+            symbol = "£"
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),
@@ -163,8 +159,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "699 £"
+            symbol = "£"
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),
@@ -182,8 +177,7 @@ class ProductFakeDataSource @Inject constructor() {
             value = 11666.0,
             original = 11666.0,
             currency = "EGP",
-            symbol = "£",
-            raw = "11666 £"
+            symbol = "£"
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),

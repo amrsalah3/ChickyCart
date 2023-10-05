@@ -4,8 +4,8 @@ import kotlin.math.min
 
 data class CartItem(val product: Product, var count: Int)
 
-val CartItem.totalPrice get() = product.price.value.times(count)
-val CartItem.totalPriceText get() = "$totalPrice ${product.price.symbol}"
+val CartItem.totalPrice get() = product.price.value.toInt().times(count)
+val CartItem.totalPriceText get() = "${product.price.symbol}$totalPrice"
 
 class Cart(initialItems: List<CartItem> = emptyList()) {
 

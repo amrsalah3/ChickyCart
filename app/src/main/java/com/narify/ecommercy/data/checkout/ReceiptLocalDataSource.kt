@@ -18,25 +18,19 @@ class ReceiptLocalDataSource @Inject constructor(private val cartDataSource: Car
         cartDataSource.getCartItems().forEach { totalCartItemsPrice += it.totalPrice }
         val totalCartPriceReceiptItem = ReceiptItem(
             "Items",
-            Price(
-                totalCartItemsPrice,
-                totalCartItemsPrice,
-                "USD",
-                "$",
-                raw = "$$totalCartItemsPrice"
-            )
+            Price(totalCartItemsPrice, totalCartItemsPrice, "USD", "$")
         )
 
         val totalShippingFees = 50.0
         val shippingReceiptItem = ReceiptItem(
             "Shipping fees",
-            Price(totalShippingFees, totalShippingFees, "USD", "$", raw = "$$totalShippingFees")
+            Price(totalShippingFees, totalShippingFees, "USD", "$")
         )
 
         val totalPrice = totalCartItemsPrice + totalShippingFees
         val totalPriceItem = ReceiptItem(
             "Total",
-            Price(totalPrice, totalPrice, "USD", "$", raw = "$$totalPrice")
+            Price(totalPrice, totalPrice, "USD", "$")
         )
 
         return listOf(totalCartPriceReceiptItem, shippingReceiptItem, totalPriceItem)

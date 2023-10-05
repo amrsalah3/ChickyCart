@@ -21,15 +21,17 @@ data class Price(
     val original: Double,
     val currency: String,
     val symbol: String,
-    val discount: Discount? = null,
-    val raw: String
-)
+    val discount: Discount? = null
+) {
+    val raw: String = "$symbol${value.toInt()}"
+}
 
 data class Discount(
     val percentage: Int,
-    val active: Boolean,
-    val raw: String
-)
+    val active: Boolean
+) {
+    val raw: String = percentage.toString()
+}
 
 data class Rating(val stars: Float = 0.0F, val raters: Int = 0)
 
@@ -50,10 +52,8 @@ fun ProductEntity.toProduct(): Product {
             symbol = symbol,
             discount = Discount(
                 percentage = discountPercentage.toInt(),
-                active = discountPercentage > 0,
-                raw = discountPercentage.toString()
-            ),
-            raw = "$price $currency"
+                active = discountPercentage > 0
+            )
         ),
         stock = stock,
         rating = Rating(stars = rating.toFloat(), raters = raters)

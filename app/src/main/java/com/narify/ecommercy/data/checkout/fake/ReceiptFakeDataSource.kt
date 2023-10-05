@@ -24,37 +24,25 @@ class ReceiptFakeDataSource @Inject constructor() {
             withContext(Dispatchers.IO) {
                 var totalCartItemsPrice = 0.0
                 CartFakeDataSource().getCartItems().forEach { totalCartItemsPrice += it.totalPrice }
-                val totalCartPriceReceiptItem = ReceiptItem(
+                val totalCartPriceItem = ReceiptItem(
                     "Items",
-                    Price(
-                        totalCartItemsPrice,
-                        totalCartItemsPrice,
-                        "USD",
-                        "$",
-                        raw = "$$totalCartItemsPrice"
-                    )
+                    Price(totalCartItemsPrice, totalCartItemsPrice, "USD", "$")
                 )
 
                 val totalShippingFees = 50.0
-                val shippingReceiptItem = ReceiptItem(
+                val totalShippingFeesItem = ReceiptItem(
                     "Shipping fees",
-                    Price(
-                        totalShippingFees,
-                        totalShippingFees,
-                        "USD",
-                        "$",
-                        raw = "$$totalShippingFees"
-                    )
+                    Price(totalShippingFees, totalShippingFees, "USD", "$")
                 )
 
                 val totalPrice = totalCartItemsPrice + totalShippingFees
                 val totalPriceItem = ReceiptItem(
                     "Total",
-                    Price(totalPrice, totalPrice, "USD", "$", raw = "$$totalPrice")
+                    Price(totalPrice, totalPrice, "USD", "$")
                 )
 
                 receiptItems.value =
-                    listOf(totalCartPriceReceiptItem, shippingReceiptItem, totalPriceItem)
+                    listOf(totalCartPriceItem, totalShippingFeesItem, totalPriceItem)
             }
         }
     }
@@ -64,59 +52,47 @@ class ReceiptFakeDataSource @Inject constructor() {
 
         var totalCartItemsPrice = 0.0
         CartFakeDataSource().getCartItems().forEach { totalCartItemsPrice += it.totalPrice }
-        val totalCartPriceReceiptItem = ReceiptItem(
+        val totalCartPriceItem = ReceiptItem(
             "Items",
-            Price(
-                totalCartItemsPrice,
-                totalCartItemsPrice,
-                "$",
-                "£",
-                raw = "$ $totalCartItemsPrice"
-            )
+            Price(totalCartItemsPrice, totalCartItemsPrice, "USD", "$")
         )
 
         val totalShippingFees = 50.0
-        val shippingReceiptItem = ReceiptItem(
+        val totalShippingFeesItem = ReceiptItem(
             "Shipping fees",
-            Price(totalShippingFees, totalShippingFees, "USD", "$", raw = "$$totalShippingFees")
+            Price(totalShippingFees, totalShippingFees, "USD", "$")
         )
 
         val totalPrice = totalCartItemsPrice + totalShippingFees
         val totalPriceItem = ReceiptItem(
             "Total",
-            Price(totalPrice, totalPrice, "USD", "$", raw = "$$totalPrice")
+            Price(totalPrice, totalPrice, "USD", "$")
         )
 
-        return listOf(totalCartPriceReceiptItem, shippingReceiptItem, totalPriceItem)
+        return listOf(totalCartPriceItem, totalShippingFeesItem, totalPriceItem)
     }
 
     fun getReceiptItemsStream(): Flow<List<ReceiptItem>> = receiptItems
 
     fun getPreviewReceiptItems(): List<ReceiptItem> {
         val totalCartItemsPrice = 1000.0
-        val totalCartPriceReceiptItem = ReceiptItem(
+        val totalCartPriceItem = ReceiptItem(
             "Items",
-            Price(
-                totalCartItemsPrice,
-                totalCartItemsPrice,
-                "USD",
-                "$",
-                raw = "$$totalCartItemsPrice"
-            )
+            Price(totalCartItemsPrice, totalCartItemsPrice, "USD", "$")
         )
 
         val totalShippingFees = 50.0
-        val shippingReceiptItem = ReceiptItem(
+        val totalShippingFeesItem = ReceiptItem(
             "Shipping fees",
-            Price(totalShippingFees, totalShippingFees, "USD", "$", raw = "$$totalShippingFees")
+            Price(totalShippingFees, totalShippingFees, "USD", "$")
         )
 
         val totalPrice = totalCartItemsPrice + totalShippingFees
         val totalPriceItem = ReceiptItem(
             "Total",
-            Price(totalPrice, totalPrice, "$", "$", raw = "$$totalPrice")
+            Price(totalPrice, totalPrice, "USD", "$")
         )
 
-        return listOf(totalCartPriceReceiptItem, shippingReceiptItem, totalPriceItem)
+        return listOf(totalCartPriceItem, totalShippingFeesItem, totalPriceItem)
     }
 }
