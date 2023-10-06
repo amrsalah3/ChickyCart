@@ -144,10 +144,14 @@ fun CartItem(
                         .padding(4.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Button(onClick = { onDecrementItem(cartItemState) }) {
+                    Button(
+                        shape = MaterialTheme.shapes.small,
+                        onClick = { onDecrementItem(cartItemState) },
+                    ) {
                         Text(
                             text = "-",
                             fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                     Text(
@@ -157,10 +161,14 @@ fun CartItem(
                             .padding(horizontal = 20.dp)
                             .align(Alignment.CenterVertically)
                     )
-                    Button(onClick = { onIncrementItem(cartItemState) }) {
+                    Button(
+                        shape = MaterialTheme.shapes.small,
+                        onClick = { onIncrementItem(cartItemState) }
+                    ) {
                         Text(
                             text = "+",
-                            fontSize = 20.sp
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }

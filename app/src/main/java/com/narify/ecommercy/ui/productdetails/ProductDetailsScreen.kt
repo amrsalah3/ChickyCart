@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -88,101 +90,108 @@ fun ProductDetailsScreen(
     onCartClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
+    Box(
         modifier
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(16.dp)
     ) {
-        /* Images slider */
-        val pageCount = product.images.size
-        val pagerState = rememberPagerState(initialPage = 0) { pageCount }
-        HorizontalPager(
-            state = pagerState,
-            pageSpacing = 16.dp,
-            modifier = Modifier
-                .height(300.dp)
-                .fillMaxWidth()
-        ) { pageIndex ->
-            Box {
-                AsyncImage(
-                    model = product.images[pageIndex],
-                    placeholder = painterResource(R.drawable.sample_product_item),
-                    contentDescription = stringResource(R.string.content_description_product_image),
-                    contentScale = ContentScale.Crop,
+        Column(Modifier.padding(16.dp)) {
+            /* Images slider */
+            val pageCount = product.images.size
+            val pagerState = rememberPagerState(initialPage = 0) { pageCount }
+            Surface(
+                shape = MaterialTheme.shapes.large,
+                shadowElevation = 8.dp,
+            ) {
+                HorizontalPager(
+                    state = pagerState,
+                    beyondBoundsPageCount = pageCount,
+                    pageSpacing = 2.dp,
+                    contentPadding = PaddingValues(0.dp),
                     modifier = Modifier
-                        .fillMaxSize()
-                        .clip(MaterialTheme.shapes.large)
-                )
-                DotIndicators(
-                    pageCount = pageCount,
-                    selectedPage = pagerState.currentPage,
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .align(Alignment.BottomCenter)
-                )
+                        .height(300.dp)
+                        .fillMaxWidth()
+                ) { pageIndex ->
+                    AsyncImage(
+                        model = product.images[pageIndex],
+                        placeholder = painterResource(R.drawable.sample_product_item),
+                        contentDescription = stringResource(R.string.content_description_product_image),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(MaterialTheme.shapes.large)
+                    )
+                }
             }
-        }
 
-        /* Product name */
-        Text(
-            text = product.name,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier
-                .padding(top = 16.dp, bottom = 8.dp)
-                .fillMaxWidth()
-        )
-
-        /* Product rating */
-        Row(Modifier.padding(vertical = 8.dp)) {
-            RatingBar(
-                value = product.rating.stars,
-                config = RatingBarConfig()
-                    .activeColor(MaterialTheme.colorScheme.primary)
-                    .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
-                    .size(20.dp),
-                onValueChange = {},
-                onRatingChanged = {},
-                modifier = modifier.align(Alignment.CenterVertically)
+            DotIndicators(
+                pageCount = pageCount,
+                selectedPage = pagerState.currentPage,
+                modifier = Modifier.padding(vertical = 8.dp)
             )
-            Text(
-                text = "(${product.rating.raters})",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.secondary,
-                modifier = modifier
-                    .padding(horizontal = 4.dp)
-                    .align(Alignment.CenterVertically)
-            )
-        }
 
-        /* Price text & Add to cart button */
-        Row(modifier.padding(vertical = 8.dp)) {
+            /* Product name */
             Text(
-                text = product.price.raw,
-                style = MaterialTheme.typography.headlineMedium,
+                text = product.name,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
+                    .padding(vertical = 8.dp)
+                    .fillMaxWidth()
             )
-            Button(onClick = { onAddToCartClicked(product) }) {
-                Text(stringResource(R.string.add_to_cart))
-            }
-        }
 
-        /* Product description */
-        Text(
-            text = product.description,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .fillMaxWidth()
-        )
+            /* Product rating */
+            Row(Modifier.padding(vertical = 8.dp)) {
+                RatingBar(
+                    value = product.rating.stars,
+                    config = RatingBarConfig()
+                        .activeColor(MaterialTheme.colorScheme.primary)
+                        .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
+                        .size(20.dp),
+                    onValueChange = {},
+                    onRatingChanged = {},
+                    modifier = modifier.align(Alignment.CenterVertically)
+                )
+                Text(
+                    text = "(${product.rating.raters})",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = modifier
+                        .padding(horizontal = 4.dp)
+                        .align(Alignment.CenterVertically)
+                )
+            }
+
+            /* Price text & Add to cart button */
+            Row(modifier.padding(vertical = 8.dp)) {
+                Text(
+                    text = product.price.raw,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                )
+                Button(onClick = { onAddToCartClicked(product) }) {
+                    Text(stringResource(R.string.add_to_cart))
+                }
+            }
+
+            /* Product description */
+            Text(
+                text = product.description,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier
+                    .padding(top = 16.dp, bottom = 32.dp)
+                    .fillMaxWidth()
+            )
+        }
 
         /* Proceed to cart button */
         Button(
             onClick = onCartClicked,
             modifier = Modifier
+                .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
+                .padding(horizontal = 8.dp, vertical = 8.dp)
         ) {
             Text(stringResource(R.string.proceed_to_cart))
         }
@@ -194,8 +203,8 @@ fun DotIndicators(
     pageCount: Int,
     selectedPage: Int,
     modifier: Modifier = Modifier,
-    selectedColor: Color = MaterialTheme.colorScheme.onSecondary,
-    unselectedColor: Color = MaterialTheme.colorScheme.secondary,
+    selectedColor: Color = Color.DarkGray,
+    unselectedColor: Color = Color.LightGray,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
