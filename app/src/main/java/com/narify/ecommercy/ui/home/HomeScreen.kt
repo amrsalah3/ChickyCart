@@ -375,7 +375,7 @@ fun ProductItem(
                         .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
                         .size(20.dp),
                     onValueChange = {},
-                    onRatingChanged = {},
+                    onRatingChanged = { onProductClicked(productState.id) },
                     modifier = Modifier.weight(0.5f)
                 )
                 Text(text = productState.priceText, modifier = Modifier.weight(0.5f))
