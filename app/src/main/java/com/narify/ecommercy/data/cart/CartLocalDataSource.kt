@@ -52,7 +52,7 @@ class CartLocalDataSource @Inject constructor(@ApplicationContext context: Conte
         saveCart(cart)
     }
 
-    suspend fun emptyCart() = dataStore.edit { pref -> pref.clear() }
+    suspend fun clearCart() = dataStore.edit { pref -> pref.clear() }
 
     private suspend fun saveCart(cart: Cart) {
         val serializedCart = gson.toJson(cart)

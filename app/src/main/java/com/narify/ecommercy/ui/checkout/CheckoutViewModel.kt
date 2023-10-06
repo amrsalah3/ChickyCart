@@ -161,6 +161,7 @@ class CheckoutViewModel @Inject constructor(
 
                 try {
                     checkoutRepository.placeOrder(order)
+                    cartRepository.clearCart()
                     _uiState.update {
                         it.copy(ordering = OrderingUiState.OrderPlaced)
                     }
@@ -169,7 +170,7 @@ class CheckoutViewModel @Inject constructor(
                         it.copy(ordering = OrderingUiState.OrderFailed(R.string.empty_string))
                     }
                 }
-                
+
             }
         }
     }

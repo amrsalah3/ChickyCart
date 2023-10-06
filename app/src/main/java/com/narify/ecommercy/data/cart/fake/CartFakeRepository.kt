@@ -31,4 +31,8 @@ class CartFakeRepository @Inject constructor(
     override suspend fun removeProductFromCart(productId: String) = withContext(dispatcher) {
         dataSource.decreaseItemCount(productId)
     }
+
+    override suspend fun clearCart() {
+        dataSource.clearCart()
+    }
 }

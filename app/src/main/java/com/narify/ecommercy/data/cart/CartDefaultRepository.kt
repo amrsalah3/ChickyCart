@@ -28,4 +28,8 @@ class CartDefaultRepository @Inject constructor(
     override suspend fun removeProductFromCart(productId: String) = withContext(dispatcher) {
         dataSource.removeItemFromCart(productId)
     }
+
+    override suspend fun clearCart() {
+        dataSource.clearCart()
+    }
 }

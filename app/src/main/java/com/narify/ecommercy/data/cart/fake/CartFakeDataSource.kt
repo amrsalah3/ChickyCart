@@ -28,6 +28,17 @@ class CartFakeDataSource @Inject constructor() {
         }
     }
 
+    fun getCartItemsStream(): Flow<List<CartItem>> = cartItems
+
+    suspend fun getCartItems(): List<CartItem> {
+        delay(1000)
+        val products = ProductFakeDataSource().getProducts()
+        val cart = Cart().apply {
+            products.forEach { addProduct(it) }
+        }
+        return cart.items
+    }
+
     suspend fun increaseItemCount(product: Product) {
         val cart = Cart(cartItems.value)
         cart.addProduct(product)
@@ -40,16 +51,9 @@ class CartFakeDataSource @Inject constructor() {
         cartItems.value = cart.items
     }
 
-    suspend fun getCartItems(): List<CartItem> {
-        delay(1000)
-        val products = ProductFakeDataSource().getProducts()
-        val cart = Cart().apply {
-            products.forEach { addProduct(it) }
-        }
-        return cart.items
+    suspend fun clearCart() {
+        cartItems.value = emptyList()
     }
-
-    fun getCartItemsStream(): Flow<List<CartItem>> = cartItems
 
     fun getPreviewCartItems(): List<CartItem> {
         val products = ProductFakeDataSource().getPreviewProducts()
