@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.narify.ecommercy.EcommercyDestinations.CART_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.CATEGORIES_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.HOME_ROUTE
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
 fun EcommercyNavGraph(
@@ -104,7 +104,7 @@ fun BottomBar(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EcommercyBottomBarPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         BottomBar(
             onHomeTabClicked = { },
             onCategoriesTabClicked = { },

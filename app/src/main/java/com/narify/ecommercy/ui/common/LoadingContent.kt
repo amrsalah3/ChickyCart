@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.common
 
-import android.content.res.Configuration
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,9 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 import com.razzaghi.compose_loading_dots.LoadingWavy
 import com.razzaghi.compose_loading_dots.core.rememberDotsLoadingController
 
@@ -32,11 +30,10 @@ fun LoadingContent(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun LoadingContentPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         LoadingContent()
     }
 }

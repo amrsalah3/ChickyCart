@@ -1,6 +1,6 @@
 package com.narify.ecommercy.ui.home
 
-import android.content.res.Configuration
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -53,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -62,7 +63,8 @@ import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.common.DevicePreviews
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 import com.narify.ecommercy.util.ProductsSortType
 import kotlinx.coroutines.launch
 
@@ -499,11 +501,12 @@ fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
-fun HomeScreenPreview() {
-    EcommercyTheme {
+fun HomeScreenPreview(
+    @PreviewParameter(CategoryFilterPreviewParameterProvider::class) filter: CategoryFilterState?
+) {
+    EcommercyThemePreview {
         ProductFakeDataSource().getPreviewProducts().let {
             val featuredProducts = it.toFeaturedProductsUiState()
             val allProducts = it.toProductsUiState()
@@ -511,64 +514,38 @@ fun HomeScreenPreview() {
                 featuredProducts = featuredProducts,
                 allProducts = allProducts,
                 searchUiState = SearchUiState(),
-                onSearchRequested = {},
-                onSortIconClicked = {},
-                onSortApplied = {},
+                onSearchRequested = { },
+                onSortIconClicked = { },
+                onSortApplied = { },
                 appliedSortType = ProductsSortType.NONE,
-                onProductClicked = {},
-                categoryFilter = null,
+                onProductClicked = { },
+                categoryFilter = filter,
                 bottomSheetState = rememberModalBottomSheetState(),
-                onDismissBottomSheet = {}
+                onDismissBottomSheet = { }
             )
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun HomeScreenWithCategoryFilteringPreview() {
-    EcommercyTheme {
-        ProductFakeDataSource().getPreviewProducts().let {
-            val featuredProducts = it.toFeaturedProductsUiState()
-            val allProducts = it.toProductsUiState()
-            HomeScreen(
-                featuredProducts = featuredProducts,
-                allProducts = allProducts,
-                searchUiState = SearchUiState(),
-                onSearchRequested = {},
-                onSortIconClicked = {},
-                onSortApplied = {},
-                appliedSortType = ProductsSortType.NONE,
-                onProductClicked = {},
-                categoryFilter = CategoryFilterState("Laptops", {}),
-                bottomSheetState = rememberModalBottomSheetState(),
-                onDismissBottomSheet = {}
-            )
-        }
-    }
-}
-
-@Preview(device = "id:pixel_2", showBackground = true)
+@Preview
 @Composable
 fun FeaturedProductItemPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         FeaturedProductItem(
             FeaturedProductItemUiState(
                 id = "p0",
                 imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
                 priceText = "100 EGP"
             ),
-            onProductClicked = {}
+            onProductClicked = { }
         )
     }
 }
 
-@Preview(device = "id:pixel_2", showBackground = true)
+@Preview
 @Composable
 fun ProductItemPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         ProductItem(
             productState = ProductItemUiState(
                 id = "p0",
@@ -577,24 +554,25 @@ fun ProductItemPreview() {
                 priceText = "500 EGP",
                 imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
             ),
-            onProductClicked = {}
+            onProductClicked = { }
         )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(device = "spec:width=1080px,height=1080px", showBackground = true)
+@Preview(device = "spec:width=1080px,height=1080px")
+@Preview(device = "spec:width=1080px,height=1080px", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SortOptionsBottomSheetPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         SortOptionsBottomSheet(
-            onSortApplied = {},
+            onSortApplied = { },
             sheetState = SheetState(
                 initialValue = SheetValue.Expanded,
                 skipPartiallyExpanded = true
             ),
             appliedSortType = ProductsSortType.NONE,
-            onDismiss = {}
+            onDismiss = { }
         )
     }
 }

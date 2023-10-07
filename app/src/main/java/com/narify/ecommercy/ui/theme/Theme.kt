@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -109,4 +110,27 @@ fun EcommercyTheme(
         typography = Typography,
         content = content
     )
+}
+
+/**
+ * A theming function that just contains an additional wrapping Surface composable to apply
+ * proper color theming for light-mode and dark-mode previews that needs a wrapping Surface.
+ * This is useful when previewing a composable or a screen that is wrapped
+ * in a Scaffold or a Surface indirectly that the composable is displayed in proper color theming
+ * in the actual working app, but not in the previews as they does not have a wrapping Surface.
+ * Note: If the composable to be previewed was not wrapped in a Surface or a Scaffold,
+ * the inverse behavior would occur, i.e., improper color theming for the actual working app,
+ * although the previews would show proper theming.
+ */
+@Composable
+fun EcommercyThemePreview(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    EcommercyTheme(darkTheme, dynamicColor) {
+        Surface {
+            content()
+        }
+    }
 }

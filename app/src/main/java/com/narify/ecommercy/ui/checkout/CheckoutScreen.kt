@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.checkout
 
-import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.SpringSpec
@@ -36,14 +35,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.R
 import com.narify.ecommercy.data.checkout.fake.ReceiptFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
+import com.narify.ecommercy.ui.common.DevicePreviews
 import com.narify.ecommercy.ui.common.LoadingContent
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
 fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
@@ -320,38 +320,41 @@ fun OrderResult(
     }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun CheckoutScreenPreview() {
-    CheckoutScreen(
-        shippingInputState = ShippingInputState(),
-        shippingErrorState = ShippingErrorState(),
-        shippingOnValueChange = { },
-        receiptItemsState = ReceiptFakeDataSource().getPreviewReceiptItems()
-            .toReceiptUiItemsState(),
-        onPlaceOrderClicked = { }
-    )
+    EcommercyThemePreview {
+        CheckoutScreen(
+            shippingInputState = ShippingInputState(),
+            shippingErrorState = ShippingErrorState(),
+            shippingOnValueChange = { },
+            receiptItemsState = ReceiptFakeDataSource().getPreviewReceiptItems()
+                .toReceiptUiItemsState(),
+            onPlaceOrderClicked = { }
+        )
+    }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun OrderResultSuccessPreview() {
-    OrderResult(
-        resultMsg = stringResource(R.string.order_result_success),
-        imageRes = R.drawable.ic_success,
-        imageTint = Color(0xFFA4FA3C)
-    )
+    EcommercyThemePreview {
+        OrderResult(
+            resultMsg = stringResource(R.string.order_result_success),
+            imageRes = R.drawable.ic_success,
+            imageTint = Color(0xFFA4FA3C)
+        )
+    }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun OrderResultFailPreview() {
-    OrderResult(
-        resultMsg = stringResource(R.string.order_result_error),
-        imageRes = R.drawable.ic_error,
-        imageTint = Color(0xFFFA0000)
-    )
+    EcommercyThemePreview {
+        OrderResult(
+            resultMsg = stringResource(R.string.order_result_error),
+            imageRes = R.drawable.ic_error,
+            imageTint = Color(0xFFFA0000)
+        )
+    }
 }

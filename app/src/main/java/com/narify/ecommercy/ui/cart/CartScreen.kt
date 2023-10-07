@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.cart
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,7 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,8 +36,9 @@ import com.narify.ecommercy.data.cart.fake.CartFakeDataSource
 import com.narify.ecommercy.model.CartItem
 import com.narify.ecommercy.model.totalPriceText
 import com.narify.ecommercy.ui.EmptyContent
+import com.narify.ecommercy.ui.common.DevicePreviews
 import com.narify.ecommercy.ui.common.LoadingContent
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
 fun CartRoute(
@@ -177,12 +176,11 @@ fun CartItem(
     }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun CartScreenPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         val cartItems = CartFakeDataSource().getPreviewCartItems().subList(0, 2)
-        CartScreen(cartItems, {}, {}, {})
+        CartScreen(cartItems, { }, { }, { })
     }
 }

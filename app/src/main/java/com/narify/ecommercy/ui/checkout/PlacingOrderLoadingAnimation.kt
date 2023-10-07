@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.checkout
 
-import android.content.res.Configuration
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -26,10 +25,10 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.narify.ecommercy.R
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.common.DevicePreviews
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 import kotlinx.coroutines.delay
 
 /**
@@ -109,11 +108,10 @@ fun PlacingOrderLoading(
 }
 
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun PlacingOrderLoadingPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         PlacingOrderLoading()
     }
 }

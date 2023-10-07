@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.productdetails
 
-import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +35,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -47,7 +45,8 @@ import com.narify.ecommercy.R
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.ui.EmptyContent
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.common.DevicePreviews
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
 fun ProductDetailsRoute(
@@ -223,12 +222,11 @@ fun DotIndicators(
     }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun ProductDetailsScreenPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         val product = ProductFakeDataSource().product1
-        ProductDetailsScreen(product, {}, {})
+        ProductDetailsScreen(product, { }, { })
     }
 }

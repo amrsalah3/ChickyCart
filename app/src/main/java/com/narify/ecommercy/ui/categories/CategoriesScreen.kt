@@ -1,6 +1,5 @@
 package com.narify.ecommercy.ui.categories
 
-import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,14 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.narify.ecommercy.data.categories.fake.CategoriesFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
+import com.narify.ecommercy.ui.common.DevicePreviews
 import com.narify.ecommercy.ui.common.LoadingContent
-import com.narify.ecommercy.ui.theme.EcommercyTheme
+import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
 fun CategoryRoute(
@@ -81,14 +80,13 @@ fun CategoryCard(
     }
 }
 
-@Preview(device = "id:pixel_2", showSystemUi = true)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@DevicePreviews
 @Composable
 fun CategoryScreenPreview() {
-    EcommercyTheme {
+    EcommercyThemePreview {
         CategoriesFakeDataSource().getPreviewCategories().let {
             val categories = it.toCategoriesUiState()
-            CategoryScreen(categories, {})
+            CategoryScreen(categories, { })
         }
     }
 }
