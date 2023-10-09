@@ -3,29 +3,29 @@ package com.narify.ecommercy.ui.home
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.narify.ecommercy.EcommercyDestintationsArgs.CATEGORY_NAME_ARG
-import com.narify.ecommercy.R
-import com.narify.ecommercy.data.Result
 import com.narify.ecommercy.data.products.ProductRepository
 import com.narify.ecommercy.model.Product
-import com.narify.ecommercy.ui.common.ErrorState
 import com.narify.ecommercy.util.ProductsSortType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val productRepository: ProductRepository,
@@ -33,100 +33,95 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val category: String? = savedStateHandle[CATEGORY_NAME_ARG]
+    private val _searchQuery: MutableStateFlow<String?> = MutableStateFlow(null)
     private val _categoryFilter: MutableStateFlow<String?> = MutableStateFlow(category)
     private val _sortState = MutableStateFlow(SortUiState())
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val _productsResult =
+    val pagingProductItems: StateFlow<PagingData<ProductItemUiState>> =
         combine(_categoryFilter, _sortState) { categoryFilter, sortState ->
             Pair(categoryFilter, sortState)
         }.flatMapLatest { (categoryFilter, sortState) ->
-            productRepository.getProductsStream(categoryFilter, sortState.sortType)
-                .map { products -> Result.Success(products) }
-                .catch<Result<List<Product>>> { emit(Result.Error(R.string.error_loading_products)) }
+            productRepository.getProductsStream(
+                category = categoryFilter,
+                sortType = sortState.sortType
+            ).map { pagingData -> pagingData.map { it.toProductUiState() } }
+                .cachedIn(viewModelScope)
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(5000),
-                    initialValue = Result.Loading
+                    initialValue = PagingData.empty(PagingLoadStates.Refresh)
                 )
-        }
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = PagingData.empty(PagingLoadStates.Refresh)
+        )
+
+    val pagingFeaturedProductItems: StateFlow<PagingData<FeaturedProductItemUiState>> =
+        productRepository.getProductsStream(featuredProductsOnly = true)
+            .map { pagingData -> pagingData.map { it.toFeaturedProductUiState() } }
+            .cachedIn(viewModelScope)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = PagingData.empty(PagingLoadStates.Refresh)
+            )
+
+    val pagingSearchedItems: StateFlow<PagingData<ProductItemUiState>> =
+        _searchQuery.flatMapLatest { query ->
+            // Immediately return empty data if query string is null or blank
+            if (query.isNullOrBlank()) {
+                return@flatMapLatest flowOf(PagingData.empty(PagingLoadStates.Idle))
+            }
+            // Apply search for the products
+            productRepository.getProductsStream(searchQuery = query)
+                .map { pagingData -> pagingData.map { it.toProductUiState() } }
+                .cachedIn(viewModelScope)
+                .stateIn(
+                    scope = viewModelScope,
+                    started = SharingStarted.WhileSubscribed(5000),
+                    initialValue = PagingData.empty(PagingLoadStates.Refresh)
+                )
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = PagingData.empty(PagingLoadStates.Refresh)
+        )
 
     val uiState: StateFlow<HomeUiState> =
-        combine(_categoryFilter, _sortState, _productsResult) { categoryFilter, sortState, result ->
+        combine(
+            _searchQuery,
+            _categoryFilter,
+            _sortState
+        ) { searchQuery, categoryFilter, sortState ->
             val categoryFilterState = categoryFilter?.let {
                 CategoryFilterState(
                     categoryName = it,
                     onFilterCleared = { clearCategoryFilter() }
                 )
             }
-
-            when (result) {
-                is Result.Loading -> {
-                    HomeUiState(isLoading = true)
-                }
-
-                is Result.Success -> {
-                    HomeUiState(
-                        featuredProductsItems = result.data.toFeaturedProductsUiState(),
-                        productItems = result.data.toProductsUiState(),
-                        categoryFilterState = categoryFilterState,
-                        sortUiState = sortState,
-                    )
-                }
-
-                is Result.Error -> {
-                    HomeUiState(
-                        errorState = ErrorState(true, result.messageResId),
-                        categoryFilterState = categoryFilterState,
-                        sortUiState = sortState
-                    )
-                }
-            }
+            HomeUiState(
+                searchQuery = searchQuery,
+                categoryFilterState = categoryFilterState,
+                sortUiState = sortState
+            )
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUiState(isLoading = true)
+            initialValue = HomeUiState()
         )
 
-    private val _searchState = MutableStateFlow(SearchUiState())
-    val searchState: StateFlow<SearchUiState> = _searchState.asStateFlow().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = SearchUiState()
-    )
+    fun setSearching(query: String) {
+        if (query.isBlank()) return
+        _searchQuery.update { query }
+    }
 
-    fun searchProducts(query: String) {
-        if (query.isEmpty()) return
-
-        viewModelScope.launch(Dispatchers.IO) {
-            _searchState.update { it.copy(isLoading = true, query = query) }
-            try {
-                val filteredProducts =
-                    productRepository.getProducts().filter { it.name.contains(query, true) }
-
-                _searchState.update {
-                    it.copy(
-                        isLoading = false,
-                        results = filteredProducts.toProductsUiState()
-                    )
-                }
-            } catch (e: Exception) {
-                _searchState.update {
-                    it.copy(
-                        isLoading = false,
-                        errorState = ErrorState(true, R.string.error_finding_product)
-                    )
-                }
-            }
-        }
+    fun setSorting(sortType: ProductsSortType) {
+        _sortState.update { SortUiState(sortType) }
     }
 
     fun clearCategoryFilter() {
         _categoryFilter.update { null }
-    }
-
-    fun setSorting(sortType: ProductsSortType) {
-        _sortState.update { it.copy(sortType = sortType) }
     }
 }
 
@@ -148,3 +143,16 @@ fun Product.toFeaturedProductUiState() = FeaturedProductItemUiState(
 fun List<Product>.toProductsUiState() = map(Product::toProductUiState)
 
 fun List<Product>.toFeaturedProductsUiState() = map(Product::toFeaturedProductUiState)
+
+private object PagingLoadStates {
+    val Refresh = LoadStates(
+        refresh = LoadState.Loading,
+        prepend = LoadState.NotLoading(false),
+        append = LoadState.NotLoading(false)
+    )
+    val Idle = LoadStates(
+        refresh = LoadState.NotLoading(false),
+        prepend = LoadState.NotLoading(false),
+        append = LoadState.NotLoading(false)
+    )
+}

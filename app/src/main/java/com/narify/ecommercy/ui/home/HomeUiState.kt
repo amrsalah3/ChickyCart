@@ -1,23 +1,11 @@
 package com.narify.ecommercy.ui.home
 
-import com.narify.ecommercy.ui.common.ErrorState
 import com.narify.ecommercy.util.ProductsSortType
 
 data class HomeUiState(
-    val isLoading: Boolean = false,
-    val featuredProductsItems: List<FeaturedProductItemUiState> = emptyList(),
-    val productItems: List<ProductItemUiState> = emptyList(),
+    val searchQuery: String? = null,
     val categoryFilterState: CategoryFilterState? = null,
-    val sortUiState: SortUiState = SortUiState(),
-    val errorState: ErrorState = ErrorState()
-)
-
-data class SearchUiState(
-    val isActive: Boolean = false,
-    val isLoading: Boolean = false,
-    val query: String = "",
-    val results: List<ProductItemUiState> = emptyList(),
-    val errorState: ErrorState = ErrorState()
+    val sortUiState: SortUiState = SortUiState()
 )
 
 data class FeaturedProductItemUiState(
@@ -34,7 +22,6 @@ data class ProductItemUiState(
 
 data class CategoryFilterState(val categoryName: String, val onFilterCleared: () -> Unit)
 
-data class SortUiState(val sortType: ProductsSortType = ProductsSortType.NONE)
-
-val SortUiState.isSortActive
-    get() = (sortType !== ProductsSortType.NONE)
+data class SortUiState(val sortType: ProductsSortType = ProductsSortType.NONE) {
+    val isSortActive = (sortType !== ProductsSortType.NONE)
+}

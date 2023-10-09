@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -57,6 +56,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
@@ -75,7 +77,9 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val searchState by viewModel.searchState.collectAsStateWithLifecycle()
+    val pagingProductItems = viewModel.pagingProductItems.collectAsLazyPagingItems()
+    val pagingFeaturedProductItems = viewModel.pagingFeaturedProductItems.collectAsLazyPagingItems()
+    val pagingSearchedItems = viewModel.pagingSearchedItems.collectAsLazyPagingItems()
 
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val coroutineScope = rememberCoroutineScope()
@@ -92,38 +96,50 @@ fun HomeRoute(
         }
     }
 
-    if (uiState.isLoading) LoadingProductsList()
-    else if (uiState.errorState.hasError) EmptyContent(uiState.errorState.errorMsgResId)
-    else HomeScreen(
-        featuredProducts = uiState.featuredProductsItems,
-        allProducts = uiState.productItems,
-        searchUiState = searchState,
-        bottomSheetState = bottomSheetState,
-        onSearchRequested = viewModel::searchProducts,
-        onSortIconClicked = { showBottomSheet() },
-        onSortApplied = { sortType ->
-            viewModel.setSorting(sortType)
-            collapseBottomSheet()
-        },
-        appliedSortType = uiState.sortUiState.sortType,
-        onDismissBottomSheet = { collapseBottomSheet() },
-        onProductClicked = onProductClicked,
-        categoryFilter = uiState.categoryFilterState,
-        sortIconBackgroundColor = if (uiState.sortUiState.isSortActive) {
-            MaterialTheme.colorScheme.primary
-        } else {
-            Color.Transparent
-        }
-    )
+    if (
+        pagingProductItems.loadState.refresh is LoadState.Loading ||
+        pagingFeaturedProductItems.loadState.refresh is LoadState.Loading
+    ) {
+        LoadingProductsList()
+    } else if (
+        pagingProductItems.loadState.refresh is LoadState.Error ||
+        pagingFeaturedProductItems.loadState.refresh is LoadState.Error
+    ) {
+        EmptyContent(R.string.error_loading_products)
+    } else {
+        HomeScreen(
+            featuredProducts = pagingFeaturedProductItems,
+            allProducts = pagingProductItems,
+            searchQuery = uiState.searchQuery,
+            bottomSheetState = bottomSheetState,
+            pagingSearchedItems = pagingSearchedItems,
+            onSearchRequested = viewModel::setSearching,
+            onSortIconClicked = { showBottomSheet() },
+            onSortApplied = { sortType ->
+                viewModel.setSorting(sortType)
+                collapseBottomSheet()
+            },
+            appliedSortType = uiState.sortUiState.sortType,
+            onDismissBottomSheet = { collapseBottomSheet() },
+            onProductClicked = onProductClicked,
+            categoryFilter = uiState.categoryFilterState,
+            sortIconBackgroundColor = if (uiState.sortUiState.isSortActive) {
+                MaterialTheme.colorScheme.primary
+            } else {
+                Color.Transparent
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    featuredProducts: List<FeaturedProductItemUiState>,
-    allProducts: List<ProductItemUiState>,
-    searchUiState: SearchUiState,
+    featuredProducts: LazyPagingItems<FeaturedProductItemUiState>,
+    allProducts: LazyPagingItems<ProductItemUiState>,
+    searchQuery: String?,
     bottomSheetState: SheetState,
+    pagingSearchedItems: LazyPagingItems<ProductItemUiState>,
     onSearchRequested: (String) -> Unit,
     onSortIconClicked: () -> Unit,
     onSortApplied: (ProductsSortType) -> Unit,
@@ -137,7 +153,8 @@ fun HomeScreen(
     Column(modifier = modifier.fillMaxSize()) {
         // Top search bar
         HomeSearchBar(
-            searchUiState = searchUiState,
+            submittedQuery = searchQuery,
+            searchedItems = pagingSearchedItems,
             onSearchRequested = onSearchRequested,
             onSortIconClicked = onSortIconClicked,
             sortIconBackgroundColor = sortIconBackgroundColor,
@@ -149,18 +166,18 @@ fun HomeScreen(
             contentPadding = PaddingValues(vertical = 8.dp),
         ) {
             // Featured products section
-            if (allProducts.isNotEmpty() && featuredProducts.isNotEmpty() && categoryFilter == null) {
+            if (allProducts.itemCount != 0 && featuredProducts.itemCount != 0 && categoryFilter == null) {
                 item {
                     SectionLabel(R.string.section_featured_products)
                     FeaturedProductsRow(
-                        products = featuredProducts,
+                        featuredProductItems = featuredProducts,
                         onProductClicked = onProductClicked
                     )
                 }
             }
 
             // All (or filtered) products section
-            if (allProducts.isNotEmpty()) {
+            if (allProducts.itemCount != 0) {
                 item {
                     Row(Modifier.fillMaxWidth()) {
                         if (categoryFilter == null) SectionLabel(R.string.section_all_products)
@@ -168,20 +185,32 @@ fun HomeScreen(
                     }
                 }
 
-                items(allProducts) { productItem ->
+                items(allProducts.itemCount) { index ->
                     Box(Modifier.padding(horizontal = 8.dp)) {
                         ProductItem(
-                            productState = productItem,
+                            productState = allProducts[index]!!,
                             onProductClicked = onProductClicked
                         )
                     }
+                }
+
+                when (allProducts.loadState.append) {
+                    is LoadState.Loading -> item {
+                        LoadingMoreProducts(Modifier.fillMaxWidth())
+                    }
+
+                    is LoadState.Error -> item {
+                        ErrorLoadingMoreProducts(Modifier.fillMaxWidth())
+                    }
+
+                    else -> {}
                 }
             }
 
         }
 
         // No products state
-        if (allProducts.isEmpty()) {
+        if (allProducts.itemCount == 0) {
             if (categoryFilter != null) CategoryFilterChip(categoryFilter)
             EmptyContent(R.string.empty_products)
         }
@@ -377,7 +406,7 @@ fun ProductItem(
                         .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
                         .size(20.dp),
                     onValueChange = {},
-                    onRatingChanged = { onProductClicked(productState.id) },
+                    onRatingChanged = { /*onProductClicked(productState.id)*/ },
                     modifier = Modifier.weight(0.5f)
                 )
                 Text(text = productState.priceText, modifier = Modifier.weight(0.5f))
@@ -388,16 +417,29 @@ fun ProductItem(
 
 @Composable
 fun FeaturedProductsRow(
-    products: List<FeaturedProductItemUiState>,
+    featuredProductItems: LazyPagingItems<FeaturedProductItemUiState>,
     onProductClicked: (String) -> Unit,
 ) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
         contentPadding = PaddingValues(horizontal = 8.dp),
         modifier = Modifier.padding(vertical = 8.dp)
     ) {
-        items(products) { productItem ->
-            FeaturedProductItem(productItem, onProductClicked)
+        items(featuredProductItems.itemCount) { index ->
+            FeaturedProductItem(featuredProductItems[index]!!, onProductClicked)
+        }
+
+        when (featuredProductItems.loadState.append) {
+            is LoadState.Loading -> item {
+                LoadingMoreProducts(Modifier.fillParentMaxHeight())
+            }
+
+            is LoadState.Error -> item {
+                ErrorLoadingMoreProducts()
+            }
+
+            else -> {}
         }
     }
 }
@@ -406,7 +448,8 @@ fun FeaturedProductsRow(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeSearchBar(
-    searchUiState: SearchUiState,
+    submittedQuery: String?,
+    searchedItems: LazyPagingItems<ProductItemUiState>,
     onSearchRequested: (String) -> Unit,
     onSortIconClicked: () -> Unit,
     onProductClicked: (String) -> Unit,
@@ -456,13 +499,13 @@ fun HomeSearchBar(
             .fillMaxWidth()
             .padding(8.dp)
     ) {
-        if (searchUiState.isLoading) LoadingProductsList()
-        else if (searchUiState.errorState.hasError) EmptyContent(searchUiState.errorState.errorMsgResId)
-        else if (searchUiState.query.isNotEmpty() && searchUiState.results.isEmpty()) {
+        if (searchedItems.loadState.refresh is LoadState.Loading) LoadingProductsList()
+        else if (searchedItems.loadState.refresh is LoadState.Error) EmptyContent(R.string.error_finding_product)
+        else if (!submittedQuery.isNullOrBlank() && searchedItems.itemCount == 0) {
             EmptyContent(R.string.empty_products)
         } else {
             SearchProductsContent(
-                products = searchUiState.results,
+                searchedItems = searchedItems,
                 onProductClicked = onProductClicked
             )
         }
@@ -471,7 +514,7 @@ fun HomeSearchBar(
 
 @Composable
 fun SearchProductsContent(
-    products: List<ProductItemUiState>,
+    searchedItems: LazyPagingItems<ProductItemUiState>,
     onProductClicked: (String) -> Unit,
     cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
@@ -479,12 +522,24 @@ fun SearchProductsContent(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(8.dp),
     ) {
-        items(products) { productItem ->
+        items(searchedItems.itemCount) { index ->
             ProductItem(
-                productState = productItem,
+                productState = searchedItems[index]!!,
                 onProductClicked = onProductClicked,
                 cardColor = cardColor
             )
+        }
+
+        when (searchedItems.loadState.append) {
+            is LoadState.Loading -> item {
+                LoadingMoreProducts(Modifier.fillMaxWidth())
+            }
+
+            is LoadState.Error -> item {
+                ErrorLoadingMoreProducts(Modifier.fillMaxWidth())
+            }
+
+            else -> {}
         }
     }
 }
@@ -507,23 +562,25 @@ fun HomeScreenPreview(
     @PreviewParameter(CategoryFilterPreviewParameterProvider::class) filter: CategoryFilterState?
 ) {
     EcommercyThemePreview {
-        ProductFakeDataSource().getPreviewProducts().let {
-            val featuredProducts = it.toFeaturedProductsUiState()
-            val allProducts = it.toProductsUiState()
-            HomeScreen(
-                featuredProducts = featuredProducts,
-                allProducts = allProducts,
-                searchUiState = SearchUiState(),
-                onSearchRequested = { },
-                onSortIconClicked = { },
-                onSortApplied = { },
-                appliedSortType = ProductsSortType.NONE,
-                onProductClicked = { },
-                categoryFilter = filter,
-                bottomSheetState = rememberModalBottomSheetState(),
-                onDismissBottomSheet = { }
-            )
-        }
+        val featuredProducts = ProductFakeDataSource().getPreviewPagingFeaturedProductItems()
+            .collectAsLazyPagingItems()
+        val allProducts =
+            ProductFakeDataSource().getPreviewPagingProductItems().collectAsLazyPagingItems()
+
+        HomeScreen(
+            featuredProducts = featuredProducts,
+            allProducts = allProducts,
+            searchQuery = null,
+            bottomSheetState = rememberModalBottomSheetState(),
+            pagingSearchedItems = allProducts,
+            onSearchRequested = { },
+            onSortIconClicked = { },
+            onSortApplied = { },
+            appliedSortType = ProductsSortType.NONE,
+            onProductClicked = { },
+            categoryFilter = filter,
+            onDismissBottomSheet = { }
+        )
     }
 }
 

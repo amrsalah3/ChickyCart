@@ -1,5 +1,6 @@
 package com.narify.ecommercy.data.products.fake
 
+import androidx.paging.PagingData
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.ALPHABETICAL
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.PRICE
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.RATING
@@ -7,8 +8,13 @@ import com.narify.ecommercy.model.Category
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.model.Rating
+import com.narify.ecommercy.ui.home.FeaturedProductItemUiState
+import com.narify.ecommercy.ui.home.ProductItemUiState
+import com.narify.ecommercy.ui.home.toFeaturedProductsUiState
+import com.narify.ecommercy.ui.home.toProductsUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,15 +37,22 @@ class ProductFakeDataSource @Inject constructor() {
     }
 
     fun getProductsStream(
+        searchQuery: String? = null,
         category: String? = null,
-        sortType: String? = null
-    ): Flow<List<Product>> = flow {
+        sortType: String? = null,
+        featuredProductsOnly: Boolean = false
+    ): Flow<PagingData<Product>> = flow {
         delay(2000)
         val products = listOf(product1, product2, product3, product4, product5, product6)
 
-        var filteredProducts = products
+        var searchResult = products
+        if (!searchQuery.isNullOrBlank()) {
+            searchResult = products.filter { it.name.contains(searchQuery, true) }
+        }
+
+        var filteredProducts = searchResult
         if (!category.isNullOrBlank()) {
-            filteredProducts = products.filter { it.category.name == category }
+            filteredProducts = searchResult.filter { it.category.name == category }
         }
 
         var sortedProducts = filteredProducts
@@ -52,7 +65,12 @@ class ProductFakeDataSource @Inject constructor() {
             }
         }
 
-        emit(sortedProducts)
+        var resultProducts = sortedProducts
+        if (featuredProductsOnly) {
+            resultProducts = sortedProducts.filter { it.price.discount?.active == true }
+        }
+
+        emit(PagingData.from(resultProducts))
     }
 
     fun getProductStream(productId: String): Flow<Product?> = flow {
@@ -63,6 +81,18 @@ class ProductFakeDataSource @Inject constructor() {
 
     fun getPreviewProducts(): List<Product> {
         return listOf(product1, product2, product3, product4, product5, product6)
+    }
+
+    fun getPreviewPagingProductItems(): Flow<PagingData<ProductItemUiState>> {
+        val products = listOf(product1, product2, product3, product4, product5, product6)
+            .toProductsUiState()
+        return MutableStateFlow(PagingData.from(products))
+    }
+
+    fun getPreviewPagingFeaturedProductItems(): Flow<PagingData<FeaturedProductItemUiState>> {
+        val products = listOf(product1, product2, product3, product4, product5, product6)
+            .toFeaturedProductsUiState()
+        return MutableStateFlow(PagingData.from(products))
     }
 
     val product1 = Product(

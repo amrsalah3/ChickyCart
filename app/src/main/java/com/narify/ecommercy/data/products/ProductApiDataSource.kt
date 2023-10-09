@@ -10,12 +10,17 @@ import javax.inject.Singleton
 @Singleton
 class ProductApiDataSource @Inject constructor(private val client: HttpClient) {
 
-    suspend fun getProducts(category: String? = null): ProductsApiResponse {
+    suspend fun getProducts(
+        start: Int = 0,
+        limit: Int = 5,
+        category: String? = null
+    ): ProductsApiResponse {
         val categoryPath = if (category != null) "/$CATEGORY_PATH_SEGMENT/$category" else ""
-        val limitsQuery = "$LIMIT_QUERY=100"
+        val skipQuery = "$SKIP_QUERY=${start}"
+        val limitQuery = "$LIMIT_QUERY=$limit"
 
         val response =
-            client.get<ProductsApiResponse>("$BASE_URL$categoryPath?$limitsQuery")
+            client.get<ProductsApiResponse>("$BASE_URL$categoryPath?$skipQuery&$limitQuery")
 
         return response
     }
@@ -28,6 +33,7 @@ class ProductApiDataSource @Inject constructor(private val client: HttpClient) {
     companion object {
         private const val BASE_URL = "https://dummyjson.com/products"
         private const val CATEGORY_PATH_SEGMENT = "category"
+        private const val SKIP_QUERY = "skip"
         private const val LIMIT_QUERY = "limit"
     }
 }

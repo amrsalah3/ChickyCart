@@ -14,14 +14,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
+import com.narify.ecommercy.R
 import com.narify.ecommercy.ui.common.DevicePreviews
 import com.narify.ecommercy.ui.theme.EcommercyThemePreview
+import com.razzaghi.compose_loading_dots.LoadingScaly
+import com.razzaghi.compose_loading_dots.core.rememberDotsLoadingController
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.defaultShimmerTheme
 import com.valentinilk.shimmer.rememberShimmer
@@ -98,10 +105,55 @@ fun LoadingProductsList(modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * Animation for loading more products in the list.
+ */
+@Composable
+fun LoadingMoreProducts(modifier: Modifier = Modifier) {
+    LoadingScaly(
+        controller = rememberDotsLoadingController(),
+        dotsCount = 3,
+        dotsColor = MaterialTheme.colorScheme.primary,
+        dotsSize = 10.dp,
+        duration = 300,
+        easing = LinearEasing,
+        modifier = modifier
+    )
+}
+
+/**
+ * Shows error which occurs when trying to load more products in the list.
+ */
+@Composable
+fun ErrorLoadingMoreProducts(modifier: Modifier = Modifier) {
+    Text(
+        text = stringResource(R.string.error_loading_products),
+        color = Color.Gray,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+    )
+}
+
 @DevicePreviews
 @Composable
 fun LoadingProductsListPreview() {
     EcommercyThemePreview {
         LoadingProductsList()
+    }
+}
+
+@Preview
+@Composable
+fun LoadingMoreProductsPreview() {
+    EcommercyThemePreview {
+        LoadingMoreProducts()
+    }
+}
+
+@Preview
+@Composable
+fun ErrorLoadingMoreProductsPreview() {
+    EcommercyThemePreview {
+        ErrorLoadingMoreProducts()
     }
 }

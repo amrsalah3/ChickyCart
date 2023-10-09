@@ -1,7 +1,6 @@
 package com.narify.ecommercy.model
 
 import com.narify.ecommercy.model.entities.ProductEntity
-import kotlin.random.Random
 
 data class Product(
     val id: String,
@@ -36,9 +35,6 @@ data class Discount(
 data class Rating(val stars: Float = 0.0F, val raters: Int = 0)
 
 fun ProductEntity.toProduct(): Product {
-    val currency = "USD"
-    val symbol = "$"
-    val raters = Random.nextInt(1, 10000)
     return Product(
         id = id.toString(),
         name = title,
@@ -52,7 +48,7 @@ fun ProductEntity.toProduct(): Product {
             symbol = symbol,
             discount = Discount(
                 percentage = discountPercentage.toInt(),
-                active = discountPercentage > 0
+                active = isDiscountActive
             )
         ),
         stock = stock,
