@@ -5,13 +5,17 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -53,12 +57,17 @@ fun LoadingProductsList(modifier: Modifier = Modifier) {
         )
     )
 
-    Column(modifier.shimmer(customShimmer)) {
-        repeat(10) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(350.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(8.dp),
+        userScrollEnabled = false,
+        modifier = modifier.shimmer(customShimmer)
+    ) {
+        items(20) {
             Surface(
                 shape = MaterialTheme.shapes.large,
-                shadowElevation = 6.dp,
-                modifier = Modifier.padding(8.dp)
+                shadowElevation = 6.dp
             ) {
                 Row(
                     Modifier

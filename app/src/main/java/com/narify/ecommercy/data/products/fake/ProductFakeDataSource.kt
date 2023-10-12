@@ -5,6 +5,7 @@ import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.AL
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.PRICE
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource.SortType.RATING
 import com.narify.ecommercy.model.Category
+import com.narify.ecommercy.model.Discount
 import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.model.Rating
@@ -80,18 +81,27 @@ class ProductFakeDataSource @Inject constructor() {
     }
 
     fun getPreviewProducts(): List<Product> {
-        return listOf(product1, product2, product3, product4, product5, product6)
+        return listOf(
+            product1, product2, product3, product4, product5, product6,
+            product1, product2, product3, product4, product5, product6
+        )
     }
 
     fun getPreviewPagingProductItems(): Flow<PagingData<ProductItemUiState>> {
-        val products = listOf(product1, product2, product3, product4, product5, product6)
-            .toProductsUiState()
+        val products = listOf(
+            product1, product2, product3, product4, product5, product6,
+            product1, product2, product3, product4, product5, product6
+        ).toProductsUiState()
+
         return MutableStateFlow(PagingData.from(products))
     }
 
     fun getPreviewPagingFeaturedProductItems(): Flow<PagingData<FeaturedProductItemUiState>> {
-        val products = listOf(product1, product2, product3, product4, product5, product6)
-            .toFeaturedProductsUiState()
+        val products = listOf(
+            product1, product2, product3, product4, product5, product6,
+            product1, product2, product3, product4, product5, product6
+        ).toFeaturedProductsUiState()
+
         return MutableStateFlow(PagingData.from(products))
     }
 
@@ -110,10 +120,11 @@ class ProductFakeDataSource @Inject constructor() {
         ),
         category = Category("C1", "Category 1"),
         price = Price(
-            value = 465.0,
+            value = 372.0,
             original = 465.0,
             currency = "EGP",
-            symbol = "£"
+            symbol = "£",
+            discount = Discount(percentage = 20, active = true)
         ),
         stock = 10,
         rating = Rating(stars = 4.5F, raters = 9502),
@@ -135,7 +146,8 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£"
+            symbol = "£",
+            discount = Discount(percentage = 10, active = false)
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),
@@ -153,7 +165,8 @@ class ProductFakeDataSource @Inject constructor() {
             value = 699.0,
             original = 699.0,
             currency = "EGP",
-            symbol = "£"
+            symbol = "£",
+            discount = Discount(percentage = 15, active = false)
         ),
         stock = 15,
         rating = Rating(stars = 3.5F, raters = 26),

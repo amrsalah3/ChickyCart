@@ -1,15 +1,16 @@
 package com.narify.ecommercy.ui.productdetails
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
@@ -32,13 +33,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
@@ -46,6 +47,8 @@ import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.model.Product
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.common.DevicePreviews
+import com.narify.ecommercy.ui.common.ProductAsyncImage
+import com.narify.ecommercy.ui.theme.DarkGreen
 import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
 @Composable
@@ -81,7 +84,6 @@ fun ProductDetailsRoute(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProductDetailsScreen(
     product: Product,
@@ -89,111 +91,82 @@ fun ProductDetailsScreen(
     onCartClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
-        Column(Modifier.padding(16.dp)) {
-            /* Images slider */
-            val pageCount = product.images.size
-            val pagerState = rememberPagerState(initialPage = 0) { pageCount }
-            Surface(
-                shape = MaterialTheme.shapes.large,
-                shadowElevation = 8.dp,
+    BoxWithConstraints(modifier.fillMaxSize()) {
+        if (maxWidth < 450.dp) {
+            Column(
+                Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp)
             ) {
-                HorizontalPager(
-                    state = pagerState,
-                    beyondBoundsPageCount = pageCount,
-                    pageSpacing = 2.dp,
-                    contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier
-                        .height(300.dp)
+                ImagesSection(
+                    images = product.images,
+                    pagerModifier = Modifier
                         .fillMaxWidth()
-                ) { pageIndex ->
-                    AsyncImage(
-                        model = product.images[pageIndex],
-                        placeholder = painterResource(R.drawable.sample_product_item),
-                        contentDescription = stringResource(R.string.content_description_product_image),
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(MaterialTheme.shapes.large)
-                    )
-                }
-            }
-
-            DotIndicators(
-                pageCount = pageCount,
-                selectedPage = pagerState.currentPage,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-
-            /* Product name */
-            Text(
-                text = product.name,
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .fillMaxWidth()
-            )
-
-            /* Product rating */
-            Row(Modifier.padding(vertical = 8.dp)) {
-                RatingBar(
-                    value = product.rating.stars,
-                    config = RatingBarConfig()
-                        .activeColor(MaterialTheme.colorScheme.primary)
-                        .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
-                        .size(20.dp),
-                    onValueChange = {},
-                    onRatingChanged = {},
-                    modifier = modifier.align(Alignment.CenterVertically)
+                        .aspectRatio(1F)
                 )
-                Text(
-                    text = "(${product.rating.raters})",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.secondary,
+                DetailsSection(
+                    product = product,
+                    onAddToCartClicked = onAddToCartClicked,
+                    onCartClicked = onCartClicked,
+                    modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                )
+            }
+        } else {
+            Row(Modifier.padding(16.dp)) {
+                ImagesSection(
+                    images = product.images,
+                    modifier = Modifier.fillMaxWidth(0.5F),
+                    pagerModifier = Modifier
+                        .fillMaxSize()
+                        .weight(1F)
+                )
+                DetailsSection(
+                    product = product,
+                    onAddToCartClicked = onAddToCartClicked,
+                    onCartClicked = onCartClicked,
                     modifier = modifier
-                        .padding(horizontal = 4.dp)
-                        .align(Alignment.CenterVertically)
+                        .verticalScroll(rememberScrollState())
+                        .padding(start = 16.dp)
                 )
             }
-
-            /* Price text & Add to cart button */
-            Row(modifier.padding(vertical = 8.dp)) {
-                Text(
-                    text = product.price.raw,
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                )
-                Button(onClick = { onAddToCartClicked(product) }) {
-                    Text(stringResource(R.string.add_to_cart))
-                }
-            }
-
-            /* Product description */
-            Text(
-                text = product.description,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier
-                    .padding(top = 16.dp, bottom = 32.dp)
-                    .fillMaxWidth()
-            )
         }
+    }
+}
 
-        /* Proceed to cart button */
-        Button(
-            onClick = onCartClicked,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+@Composable
+@OptIn(ExperimentalFoundationApi::class)
+fun ImagesSection(
+    images: List<String>,
+    modifier: Modifier = Modifier,
+    pagerModifier: Modifier = Modifier
+) {
+    val pageCount = images.size
+    val pagerState = rememberPagerState(initialPage = 0) { pageCount }
+
+    Column(modifier) {
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            shadowElevation = 8.dp,
+            modifier = pagerModifier
         ) {
-            Text(stringResource(R.string.proceed_to_cart))
+            HorizontalPager(
+                state = pagerState,
+                beyondBoundsPageCount = pageCount,
+                pageSpacing = 2.dp,
+            ) { pageIndex ->
+                ProductAsyncImage(
+                    imageUrl = images[pageIndex],
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(MaterialTheme.shapes.large)
+                )
+            }
         }
+        DotIndicators(
+            pageCount = pageCount,
+            selectedPage = pagerState.currentPage,
+            modifier = Modifier.padding(top = 8.dp)
+        )
     }
 }
 
@@ -214,7 +187,7 @@ fun DotIndicators(
             Box(
                 Modifier
                     .padding(horizontal = 8.dp, vertical = 4.dp)
-                    .size(20.dp)
+                    .size(10.dp)
                     .clip(CircleShape)
                     .background(color)
             )
@@ -222,6 +195,121 @@ fun DotIndicators(
     }
 }
 
+@Composable
+fun DetailsSection(
+    product: Product,
+    onAddToCartClicked: (Product) -> Unit,
+    onCartClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) = with(product) {
+    Column(modifier) {
+        val hasDiscount = price.discount.active
+        val stockResId: Int
+        val stockColor: Color
+        if (inStock) {
+            stockResId = R.string.product_in_stock
+            stockColor = DarkGreen
+        } else {
+            stockResId = R.string.product_out_stock
+            stockColor = Color.Red
+        }
+
+        // Product name
+        Text(
+            text = name,
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Product rating
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(vertical = 8.dp)
+        ) {
+            RatingBar(
+                value = rating.stars,
+                config = RatingBarConfig()
+                    .activeColor(MaterialTheme.colorScheme.primary)
+                    .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
+                    .size(20.dp),
+                onValueChange = {},
+                onRatingChanged = {}
+            )
+            Text(
+                text = "(${rating.raters})",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.secondary,
+                modifier = Modifier.padding(horizontal = 4.dp)
+            )
+        }
+
+        // Stock label
+        Text(text = stringResource(stockResId), color = stockColor)
+
+        // Price & discount text & Add to cart button
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // Price & discount texts
+            Column(
+                Modifier
+                    .padding(top = 8.dp)
+                    .weight(1f)
+            ) {
+                Text(text = price.raw, style = MaterialTheme.typography.headlineMedium)
+
+                if (hasDiscount) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = price.originalRaw,
+                            fontStyle = FontStyle.Italic,
+                            style = MaterialTheme.typography.headlineSmall.copy(textDecoration = TextDecoration.LineThrough),
+                            color = Color.Gray,
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
+                        Text(
+                            text = "-${price.discount.percentage}%",
+                            color = MaterialTheme.colorScheme.inverseOnSurface,
+                            modifier = Modifier
+                                .background(DarkGreen)
+                                .padding(4.dp)
+                        )
+                    }
+                }
+            }
+
+            // Add to cart button
+            Button(
+                enabled = inStock,
+                onClick = { onAddToCartClicked(product) }
+            ) {
+                Text(stringResource(R.string.add_to_cart))
+            }
+        }
+
+        // Product description
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier
+                .padding(top = 24.dp, bottom = 32.dp)
+                .fillMaxWidth()
+        )
+
+        // Proceed to cart button
+        Button(
+            onClick = onCartClicked,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.proceed_to_cart))
+        }
+
+    }
+}
+
+@Preview
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @DevicePreviews
 @Composable
 fun ProductDetailsScreenPreview() {

@@ -1,5 +1,6 @@
 package com.narify.ecommercy.ui.home
 
+import com.narify.ecommercy.model.Price
 import com.narify.ecommercy.util.ProductsSortType
 
 data class HomeUiState(
@@ -9,14 +10,16 @@ data class HomeUiState(
 )
 
 data class FeaturedProductItemUiState(
-    val id: String, val imageUrl: String, val priceText: String
+    val id: String,
+    val imageUrl: String,
+    val price: Price,
 )
 
 data class ProductItemUiState(
     val id: String,
     val name: String,
     val ratingStars: Float,
-    val priceText: String,
+    val price: Price,
     val imageUrl: String
 )
 

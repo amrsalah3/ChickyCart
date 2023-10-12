@@ -1,6 +1,7 @@
 package com.narify.ecommercy.model
 
 import com.narify.ecommercy.model.entities.ProductEntity
+import com.narify.ecommercy.util.roundUpToSinglePrecision
 
 data class Product(
     val id: String,
@@ -13,6 +14,7 @@ data class Product(
     val rating: Rating,
 ) {
     val thumbnail: String = images[0]
+    val inStock: Boolean = stock > 0
 }
 
 data class Price(
@@ -20,16 +22,17 @@ data class Price(
     val original: Double,
     val currency: String,
     val symbol: String,
-    val discount: Discount? = null
+    val discount: Discount = Discount(0, false)
 ) {
     val raw: String = "$symbol${value.toInt()}"
+    val originalRaw: String = "$symbol${original.toInt()}"
 }
 
 data class Discount(
     val percentage: Int,
     val active: Boolean
 ) {
-    val raw: String = percentage.toString()
+    val raw: String = "${percentage}% OFF"
 }
 
 data class Rating(val stars: Float = 0.0F, val raters: Int = 0)
@@ -43,7 +46,7 @@ fun ProductEntity.toProduct(): Product {
         category = Category(id = category, name = category),
         price = Price(
             value = price,
-            original = price,
+            original = priceBeforeDiscount,
             currency = currency,
             symbol = symbol,
             discount = Discount(
@@ -52,6 +55,6 @@ fun ProductEntity.toProduct(): Product {
             )
         ),
         stock = stock,
-        rating = Rating(stars = rating.toFloat(), raters = raters)
+        rating = Rating(stars = roundUpToSinglePrecision(rating), raters = raters)
     )
 }

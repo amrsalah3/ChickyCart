@@ -31,12 +31,17 @@ data class ProductEntity(
     val thumbnail: String,
     val images: List<String>
 ) {
-    val currency = "USD"
-    val symbol = "$"
-
     // Random boolean with a 20% chance of (true)
     val isDiscountActive = (Random.nextInt(5) == 0) && (discountPercentage > 0)
 
     // Random number of raters
     val raters = Random.nextInt(1, 10000)
+
+    val currency = "USD"
+    val symbol = "$"
+    val priceBeforeDiscount = if (isDiscountActive) {
+        price / (1.0 - discountPercentage / 100)
+    } else {
+        price
+    }
 }

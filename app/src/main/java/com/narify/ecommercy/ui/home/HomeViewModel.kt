@@ -130,14 +130,14 @@ fun Product.toProductUiState() = ProductItemUiState(
     id = id,
     name = name,
     ratingStars = rating.stars,
-    priceText = price.raw,
+    price = price,
     imageUrl = thumbnail
 )
 
 fun Product.toFeaturedProductUiState() = FeaturedProductItemUiState(
     id = id,
     imageUrl = thumbnail,
-    priceText = price.raw
+    price = price
 )
 
 fun List<Product>.toProductsUiState() = map(Product::toProductUiState)

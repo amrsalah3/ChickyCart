@@ -7,16 +7,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -27,6 +30,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
@@ -45,11 +49,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -59,13 +64,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.AsyncImage
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.ecommercy.R
 import com.narify.ecommercy.data.products.fake.ProductFakeDataSource
 import com.narify.ecommercy.ui.EmptyContent
 import com.narify.ecommercy.ui.common.DevicePreviews
+import com.narify.ecommercy.ui.common.ProductAsyncImage
+import com.narify.ecommercy.ui.common.itemWithMaxWidth
 import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 import com.narify.ecommercy.util.ProductsSortType
 import kotlinx.coroutines.launch
@@ -132,7 +138,7 @@ fun HomeRoute(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
     featuredProducts: LazyPagingItems<FeaturedProductItemUiState>,
@@ -152,7 +158,7 @@ fun HomeScreen(
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         // Top search bar
-        HomeSearchBar(
+        SearchBar(
             submittedQuery = searchQuery,
             searchedItems = pagingSearchedItems,
             onSearchRequested = onSearchRequested,
@@ -161,58 +167,36 @@ fun HomeScreen(
             onProductClicked = onProductClicked
         )
 
-        LazyColumn(
+        // No products state
+        if (allProducts.itemCount == 0) {
+            if (categoryFilter != null) CategoryFilterChip(categoryFilter)
+            EmptyContent(R.string.empty_products)
+        }
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(350.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(vertical = 8.dp),
         ) {
             // Featured products section
             if (allProducts.itemCount != 0 && featuredProducts.itemCount != 0 && categoryFilter == null) {
-                item {
+                itemWithMaxWidth {
                     SectionLabel(R.string.section_featured_products)
-                    FeaturedProductsRow(
-                        featuredProductItems = featuredProducts,
-                        onProductClicked = onProductClicked
-                    )
                 }
+                itemsOfFeaturedProducts(featuredProducts, onProductClicked)
             }
 
             // All (or filtered) products section
             if (allProducts.itemCount != 0) {
-                item {
-                    Row(Modifier.fillMaxWidth()) {
+                itemWithMaxWidth {
+                    FlowRow(Modifier.fillMaxWidth()) {
                         if (categoryFilter == null) SectionLabel(R.string.section_all_products)
                         else CategoryFilterChip(categoryFilter)
                     }
                 }
-
-                items(allProducts.itemCount) { index ->
-                    Box(Modifier.padding(horizontal = 8.dp)) {
-                        ProductItem(
-                            productState = allProducts[index]!!,
-                            onProductClicked = onProductClicked
-                        )
-                    }
-                }
-
-                when (allProducts.loadState.append) {
-                    is LoadState.Loading -> item {
-                        LoadingMoreProducts(Modifier.fillMaxWidth())
-                    }
-
-                    is LoadState.Error -> item {
-                        ErrorLoadingMoreProducts(Modifier.fillMaxWidth())
-                    }
-
-                    else -> {}
-                }
+                itemsOfProducts(allProducts, onProductClicked)
             }
 
-        }
-
-        // No products state
-        if (allProducts.itemCount == 0) {
-            if (categoryFilter != null) CategoryFilterChip(categoryFilter)
-            EmptyContent(R.string.empty_products)
         }
 
         // Bottom sheet for showing sort options
@@ -226,8 +210,19 @@ fun HomeScreen(
 }
 
 @Composable
+fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
+    Text(
+        text = stringResource(labelResId).uppercase(),
+        style = MaterialTheme.typography.titleMedium,
+        color = Color.Gray,
+        fontWeight = FontWeight.Bold,
+        modifier = modifier.padding(8.dp)
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
-private fun CategoryFilterChip(
+@Composable
+fun CategoryFilterChip(
     categoryFilter: CategoryFilterState,
     modifier: Modifier = Modifier
 ) {
@@ -250,6 +245,193 @@ private fun CategoryFilterChip(
         },
         modifier = modifier.padding(horizontal = 8.dp)
     )
+}
+
+@Composable
+fun FeaturedProductItem(
+    productState: FeaturedProductItemUiState,
+    onProductClicked: (String) -> Unit,
+    modifier: Modifier = Modifier
+) = with(productState) {
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        shadowElevation = 6.dp,
+        modifier = modifier.size(120.dp)
+    ) {
+        Box(Modifier.clickable(true) { onProductClicked(id) }) {
+            ProductAsyncImage(imageUrl, Modifier.fillMaxSize())
+            Text(
+                text = price.discount.raw,
+                maxLines = 1,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .background(Color.Red)
+                    .fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Composable
+fun ProductItem(
+    productState: ProductItemUiState,
+    onProductClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+) = with(productState) {
+    Surface(
+        shape = MaterialTheme.shapes.large,
+        color = cardColor,
+        shadowElevation = 6.dp,
+        modifier = modifier
+            .height(140.dp)
+            .fillMaxWidth()
+    ) {
+        Row {
+            ProductAsyncImage(imageUrl, Modifier.weight(1.2F))
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(2f)
+                    .fillMaxHeight()
+            ) {
+                val hasDiscount = price.discount.active
+                Text(
+                    text = name,
+                    maxLines = if (hasDiscount) 1 else 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1F, !hasDiscount)
+                )
+                if (hasDiscount) {
+                    Text(
+                        text = price.discount.raw,
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.inversePrimary)
+                            .padding(4.dp)
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("$ratingStars", Modifier.padding(end = 8.dp))
+                    RatingBar(
+                        value = ratingStars,
+                        config = RatingBarConfig()
+                            .activeColor(MaterialTheme.colorScheme.primary)
+                            .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
+                            .size(20.dp),
+                        onValueChange = { },
+                        onRatingChanged = { },
+                        modifier = Modifier.padding(vertical = if (hasDiscount) 0.dp else 6.dp)
+                    )
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = price.raw, fontWeight = FontWeight.Bold)
+                    if (hasDiscount) {
+                        Text(
+                            text = price.originalRaw,
+                            fontStyle = FontStyle.Italic,
+                            style = LocalTextStyle.current.copy(textDecoration = TextDecoration.LineThrough),
+                            color = Color.Gray,
+                            modifier = Modifier.padding(horizontal = 4.dp)
+                        )
+                    }
+                }
+
+            }
+        }
+        // Transparent Box just for handling click on the card
+        // Because RatingBar has an issue when clicking on it
+        Box(
+            Modifier
+                .fillMaxSize()
+                .clickable(true) { onProductClicked(id) }
+        )
+    }
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SearchBar(
+    submittedQuery: String?,
+    searchedItems: LazyPagingItems<ProductItemUiState>,
+    onSearchRequested: (String) -> Unit,
+    onSortIconClicked: () -> Unit,
+    onProductClicked: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    sortIconBackgroundColor: Color = Color.Transparent,
+) {
+    var query by rememberSaveable { mutableStateOf("") }
+    var active by rememberSaveable { mutableStateOf(false) }
+
+    SearchBar(
+        query = query,
+        onQueryChange = { query = it },
+        onSearch = { onSearchRequested(query) },
+        active = active,
+        onActiveChange = {
+            query = ""
+            active = it
+        },
+        leadingIcon = {
+            Icon(imageVector = Icons.Default.Search, contentDescription = null)
+        },
+        trailingIcon = {
+            if (active) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = stringResource(R.string.content_description_close_icon),
+                    modifier = Modifier.clickable(true) { query = "" }
+                )
+            } else {
+                IconButton(
+                    colors = IconButtonDefaults.filledIconButtonColors(
+                        containerColor = sortIconBackgroundColor
+                    ),
+                    onClick = onSortIconClicked
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_filter),
+                        contentDescription = stringResource(R.string.content_description_sort_icon)
+                    )
+                }
+            }
+        },
+        placeholder = {
+            Text(text = stringResource(R.string.searchbar_placeholder))
+        },
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        if (searchedItems.loadState.refresh is LoadState.Loading) LoadingProductsList()
+        else if (searchedItems.loadState.refresh is LoadState.Error) EmptyContent(R.string.error_finding_product)
+        else if (!submittedQuery.isNullOrBlank() && searchedItems.itemCount == 0) {
+            EmptyContent(R.string.empty_products)
+        } else {
+            SearchResultContent(
+                searchedItems = searchedItems,
+                onProductClicked = onProductClicked
+            )
+        }
+    }
+}
+
+@Composable
+fun SearchResultContent(
+    searchedItems: LazyPagingItems<ProductItemUiState>,
+    onProductClicked: (String) -> Unit
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(350.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(vertical = 8.dp),
+    ) {
+        itemsOfProducts(searchedItems, onProductClicked)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -330,231 +512,6 @@ fun SortOptionsRadioGroup(
     }
 }
 
-@Composable
-fun FeaturedProductItem(
-    productState: FeaturedProductItemUiState,
-    onProductClicked: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        shape = MaterialTheme.shapes.medium,
-        shadowElevation = 6.dp,
-        modifier = modifier.size(120.dp)
-    ) {
-        Box(Modifier.clickable(true) { onProductClicked(productState.id) }) {
-            AsyncImage(
-                model = productState.imageUrl,
-                placeholder = painterResource(R.drawable.sample_product_item),
-                contentDescription = stringResource(R.string.content_description_product_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
-            Text(
-                text = productState.priceText,
-                maxLines = 1,
-                textAlign = TextAlign.Center,
-                color = Color.White,
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .background(color = Color.Red)
-                    .fillMaxWidth()
-            )
-        }
-    }
-}
-
-@Composable
-fun ProductItem(
-    productState: ProductItemUiState,
-    onProductClicked: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer,
-) {
-    Surface(
-        shape = MaterialTheme.shapes.large,
-        color = cardColor,
-        shadowElevation = 6.dp
-    ) {
-        Row(
-            modifier
-                .height(140.dp)
-                .fillMaxWidth()
-                .clickable(true) { onProductClicked(productState.id) }
-        ) {
-            AsyncImage(
-                model = productState.imageUrl,
-                placeholder = painterResource(R.drawable.sample_product_item),
-                contentDescription = stringResource(R.string.content_description_product_image),
-                contentScale = ContentScale.Crop,
-                modifier = modifier.weight(1.2f)
-            )
-            Column(
-                Modifier
-                    .padding(16.dp)
-                    .weight(2f)
-            ) {
-                Text(
-                    text = productState.name,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
-                )
-                RatingBar(
-                    value = productState.ratingStars,
-                    config = RatingBarConfig()
-                        .activeColor(MaterialTheme.colorScheme.primary)
-                        .inactiveColor(MaterialTheme.colorScheme.inversePrimary)
-                        .size(20.dp),
-                    onValueChange = {},
-                    onRatingChanged = { /*onProductClicked(productState.id)*/ },
-                    modifier = Modifier.weight(0.5f)
-                )
-                Text(text = productState.priceText, modifier = Modifier.weight(0.5f))
-            }
-        }
-    }
-}
-
-@Composable
-fun FeaturedProductsRow(
-    featuredProductItems: LazyPagingItems<FeaturedProductItemUiState>,
-    onProductClicked: (String) -> Unit,
-) {
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        contentPadding = PaddingValues(horizontal = 8.dp),
-        modifier = Modifier.padding(vertical = 8.dp)
-    ) {
-        items(featuredProductItems.itemCount) { index ->
-            FeaturedProductItem(featuredProductItems[index]!!, onProductClicked)
-        }
-
-        when (featuredProductItems.loadState.append) {
-            is LoadState.Loading -> item {
-                LoadingMoreProducts(Modifier.fillParentMaxHeight())
-            }
-
-            is LoadState.Error -> item {
-                ErrorLoadingMoreProducts()
-            }
-
-            else -> {}
-        }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomeSearchBar(
-    submittedQuery: String?,
-    searchedItems: LazyPagingItems<ProductItemUiState>,
-    onSearchRequested: (String) -> Unit,
-    onSortIconClicked: () -> Unit,
-    onProductClicked: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    sortIconBackgroundColor: Color = Color.Transparent,
-) {
-    var query by rememberSaveable { mutableStateOf("") }
-    var active by rememberSaveable { mutableStateOf(false) }
-
-    SearchBar(
-        query = query,
-        onQueryChange = { query = it },
-        onSearch = { onSearchRequested(query) },
-        active = active,
-        onActiveChange = {
-            query = ""
-            active = it
-        },
-        leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = null)
-        },
-        trailingIcon = {
-            if (active) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(R.string.content_description_close_icon),
-                    modifier = Modifier.clickable(true) { query = "" }
-                )
-            } else {
-                IconButton(
-                    colors = IconButtonDefaults.filledIconButtonColors(
-                        containerColor = sortIconBackgroundColor
-                    ),
-                    onClick = onSortIconClicked
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_filter),
-                        contentDescription = stringResource(R.string.content_description_sort_icon)
-                    )
-                }
-            }
-        },
-        placeholder = {
-            Text(text = stringResource(R.string.searchbar_placeholder))
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        if (searchedItems.loadState.refresh is LoadState.Loading) LoadingProductsList()
-        else if (searchedItems.loadState.refresh is LoadState.Error) EmptyContent(R.string.error_finding_product)
-        else if (!submittedQuery.isNullOrBlank() && searchedItems.itemCount == 0) {
-            EmptyContent(R.string.empty_products)
-        } else {
-            SearchProductsContent(
-                searchedItems = searchedItems,
-                onProductClicked = onProductClicked
-            )
-        }
-    }
-}
-
-@Composable
-fun SearchProductsContent(
-    searchedItems: LazyPagingItems<ProductItemUiState>,
-    onProductClicked: (String) -> Unit,
-    cardColor: Color = MaterialTheme.colorScheme.secondaryContainer
-) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(8.dp),
-    ) {
-        items(searchedItems.itemCount) { index ->
-            ProductItem(
-                productState = searchedItems[index]!!,
-                onProductClicked = onProductClicked,
-                cardColor = cardColor
-            )
-        }
-
-        when (searchedItems.loadState.append) {
-            is LoadState.Loading -> item {
-                LoadingMoreProducts(Modifier.fillMaxWidth())
-            }
-
-            is LoadState.Error -> item {
-                ErrorLoadingMoreProducts(Modifier.fillMaxWidth())
-            }
-
-            else -> {}
-        }
-    }
-}
-
-@Composable
-fun SectionLabel(@StringRes labelResId: Int, modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(labelResId).uppercase(),
-        style = MaterialTheme.typography.titleMedium,
-        color = Color.Gray,
-        fontWeight = FontWeight.Bold,
-        modifier = modifier.padding(8.dp)
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @DevicePreviews
 @Composable
@@ -589,11 +546,7 @@ fun HomeScreenPreview(
 fun FeaturedProductItemPreview() {
     EcommercyThemePreview {
         FeaturedProductItem(
-            FeaturedProductItemUiState(
-                id = "p0",
-                imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
-                priceText = "100 EGP"
-            ),
+            ProductFakeDataSource().product1.toFeaturedProductUiState(),
             onProductClicked = { }
         )
     }
@@ -604,13 +557,7 @@ fun FeaturedProductItemPreview() {
 fun ProductItemPreview() {
     EcommercyThemePreview {
         ProductItem(
-            productState = ProductItemUiState(
-                id = "p0",
-                name = "Camera",
-                ratingStars = 4.5f,
-                priceText = "500 EGP",
-                imageUrl = "https://m.media-amazon.com/images/I/713xpOG8zZL._AC_SL1500_.jpg",
-            ),
+            productState = ProductFakeDataSource().product1.toProductUiState(),
             onProductClicked = { }
         )
     }

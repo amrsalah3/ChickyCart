@@ -34,6 +34,8 @@
 
     <!-- Product Details Screen -->
     <string name="error_loading_product_details">Error while loading the product</string>
+    <string name="product_in_stock">In Stock</string>
+    <string name="product_out_stock">Out of Stock</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_product_to_cart">Added</string>
     <string name="proceed_to_cart">PROCEED TO CART</string>

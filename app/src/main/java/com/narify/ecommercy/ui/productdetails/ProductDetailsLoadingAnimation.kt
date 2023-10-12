@@ -6,7 +6,12 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,7 +34,7 @@ import com.valentinilk.shimmer.shimmer
  * Shimmer animation for loading a product in product details screen.
  */
 @Composable
-fun LoadingProductDetails(modifier: Modifier = Modifier) {
+fun LoadingProductDetails() {
     val customShimmer = rememberShimmer(
         shimmerBounds = ShimmerBounds.View,
         theme = defaultShimmerTheme.copy(
@@ -44,22 +49,48 @@ fun LoadingProductDetails(modifier: Modifier = Modifier) {
         )
     )
 
-    Column(
-        modifier
+    BoxWithConstraints(
+        Modifier
             .padding(16.dp)
             .shimmer(customShimmer)
     ) {
-        Box(
-            Modifier
-                .height(300.dp)
-                .fillMaxWidth()
-                .clip(MaterialTheme.shapes.large)
-                .background(Color.Gray)
-        )
+        if (maxWidth < 450.dp) {
+            Column(Modifier.fillMaxSize()) {
+                ImagesSection(
+                    Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1F)
+                )
+                DetailsSection(Modifier.padding(vertical = 16.dp))
+            }
+        } else {
+            Row(Modifier.fillMaxSize()) {
+                ImagesSection(
+                    Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(0.5F)
+                )
+                DetailsSection(Modifier.padding(start = 16.dp))
+            }
+        }
+    }
+}
 
+@Composable
+private fun ImagesSection(modifier: Modifier = Modifier) {
+    Box(
+        modifier
+            .clip(MaterialTheme.shapes.large)
+            .background(Color.Gray)
+    )
+}
+
+@Composable
+private fun DetailsSection(modifier: Modifier = Modifier) {
+    Column(modifier) {
         Box(
             Modifier
-                .padding(top = 16.dp, bottom = 4.dp)
+                .padding(bottom = 4.dp)
                 .height(16.dp)
                 .fillMaxWidth()
                 .background(Color.Gray)
@@ -100,7 +131,6 @@ fun LoadingProductDetails(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .background(Color.Gray)
         )
-
     }
 }
 

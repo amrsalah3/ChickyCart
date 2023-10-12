@@ -17,7 +17,6 @@ import com.narify.ecommercy.EcommercyScreens.CATEGORIES_SCREEN
 import com.narify.ecommercy.EcommercyScreens.CHECKOUT_SCREEN
 import com.narify.ecommercy.EcommercyScreens.HOME_SCREEN
 import com.narify.ecommercy.EcommercyScreens.PRODUCT_DETAILS_SCREEN
-import com.narify.ecommercy.EcommercyScreens.SETTINGS_SCREEN
 import com.narify.ecommercy.ui.cart.CartRoute
 import com.narify.ecommercy.ui.categories.CategoryRoute
 import com.narify.ecommercy.ui.checkout.CheckoutRoute
@@ -28,7 +27,6 @@ private object EcommercyScreens {
     const val HOME_SCREEN = "home"
     const val CATEGORIES_SCREEN = "category"
     const val CART_SCREEN = "cart"
-    const val SETTINGS_SCREEN = "settings"
     const val PRODUCT_DETAILS_SCREEN = "productDetails"
     const val CHECKOUT_SCREEN = "checkout"
 }
@@ -42,7 +40,6 @@ object EcommercyDestinations {
     const val HOME_ROUTE = "$HOME_SCREEN?$CATEGORY_NAME_ARG={$CATEGORY_NAME_ARG}"
     const val CATEGORIES_ROUTE = CATEGORIES_SCREEN
     const val CART_ROUTE = CART_SCREEN
-    const val SETTINGS_ROUTE = SETTINGS_SCREEN
     const val PRODUCT_DETAILS_ROUTE = "$PRODUCT_DETAILS_SCREEN/{$PRODUCT_ID_ARG}"
     const val CHECKOUT_ROUTE = CHECKOUT_SCREEN
 }
@@ -115,9 +112,9 @@ fun NavGraphBuilder.categoriesRoute(onCategoryClicked: (String) -> Unit) {
     }
 }
 
-fun NavGraphBuilder.cartRoute(onCheckoutClicked: () -> Unit) {
+fun NavGraphBuilder.cartRoute(onCartItemClicked: (String) -> Unit, onCheckoutClicked: () -> Unit) {
     composable(CART_ROUTE) {
-        CartRoute(onCheckoutClicked)
+        CartRoute(onCartItemClicked, onCheckoutClicked)
     }
 }
 

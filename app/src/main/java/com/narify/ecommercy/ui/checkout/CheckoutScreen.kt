@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.SpringSpec
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -102,11 +104,10 @@ fun CheckoutScreen(
     shippingOnValueChange: (ShippingUiEvent) -> Unit,
     receiptItemsState: List<ReceiptUiItemState>,
     onPlaceOrderClicked: () -> Unit,
-    modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState()
 ) {
     Column(
-        modifier
+        Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
@@ -296,14 +297,18 @@ fun OrderResult(
     modifier: Modifier = Modifier,
     imageTint: Color = Color.Unspecified
 ) {
-    Column(modifier.fillMaxSize()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
         Icon(
             painter = painterResource(imageRes),
             contentDescription = resultMsg,
             tint = imageTint,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
+                .weight(1F)
         )
 
         Text(
@@ -312,9 +317,7 @@ fun OrderResult(
             fontWeight = FontWeight.Bold,
             color = imageTint,
             maxLines = 1,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 64.dp)
+            modifier = Modifier.weight(0.25F)
 
         )
     }
@@ -338,6 +341,18 @@ fun CheckoutScreenPreview() {
 @DevicePreviews
 @Composable
 fun OrderResultSuccessPreview() {
+    EcommercyThemePreview {
+        OrderResult(
+            resultMsg = stringResource(R.string.order_result_success),
+            imageRes = R.drawable.ic_success,
+            imageTint = Color(0xFFA4FA3C)
+        )
+    }
+}
+
+@Preview(device = "spec:parent=pixel_2,orientation=landscape")
+@Composable
+fun OrderResultSuccesssPreview() {
     EcommercyThemePreview {
         OrderResult(
             resultMsg = stringResource(R.string.order_result_success),

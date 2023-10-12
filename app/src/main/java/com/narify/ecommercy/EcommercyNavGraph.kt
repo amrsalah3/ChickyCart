@@ -1,5 +1,6 @@
 package com.narify.ecommercy
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import com.narify.ecommercy.EcommercyDestinations.CATEGORIES_ROUTE
 import com.narify.ecommercy.EcommercyDestinations.HOME_ROUTE
 import com.narify.ecommercy.ui.theme.EcommercyThemePreview
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun EcommercyNavGraph(
     modifier: Modifier = Modifier,
@@ -51,7 +53,10 @@ fun EcommercyNavGraph(
         ) {
             homeRoute(onProductClicked = navController::navigateToProductDetails)
             categoriesRoute(onCategoryClicked = { navController.navigateToHome(it, false) })
-            cartRoute(onCheckoutClicked = navController::navigateToCheckout)
+            cartRoute(
+                onCartItemClicked = navController::navigateToProductDetails,
+                onCheckoutClicked = navController::navigateToCheckout
+            )
             productDetailsRoute(onCartClicked = navController::navigateToCart)
             checkoutRoute()
         }
