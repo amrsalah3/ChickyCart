@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Ecommercy</string>
+    <string name="app_name">ChickyCart \nShopping</string>
 
     <!-- Common -->
     <string name="empty_string">""</string>
     <string name="empty_content">Empty content</string>
-    <string name="action_dismiss">Dismiss</string>
+    <string name="action_dismiss">Got it</string>
     <string name="content_description_product_image">Product image</string>
 
     <!-- Home Screen -->
