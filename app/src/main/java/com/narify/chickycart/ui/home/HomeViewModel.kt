@@ -8,7 +8,7 @@ import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.narify.chickycart.EcommercyDestintationsArgs.CATEGORY_NAME_ARG
+import com.narify.chickycart.ChickyCartDestintationsArgs.CATEGORY_NAME_ARG
 import com.narify.chickycart.data.products.ProductRepository
 import com.narify.chickycart.model.Product
 import com.narify.chickycart.util.ProductsSortType

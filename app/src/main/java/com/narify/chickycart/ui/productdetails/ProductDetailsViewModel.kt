@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.narify.chickycart.EcommercyDestintationsArgs.PRODUCT_ID_ARG
+import com.narify.chickycart.ChickyCartDestintationsArgs.PRODUCT_ID_ARG
 import com.narify.chickycart.R
 import com.narify.chickycart.data.Result
 import com.narify.chickycart.data.cart.CartRepository

@@ -5,25 +5,25 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.narify.chickycart.EcommercyDestinations.CART_ROUTE
-import com.narify.chickycart.EcommercyDestinations.CATEGORIES_ROUTE
-import com.narify.chickycart.EcommercyDestinations.CHECKOUT_ROUTE
-import com.narify.chickycart.EcommercyDestinations.HOME_ROUTE
-import com.narify.chickycart.EcommercyDestinations.PRODUCT_DETAILS_ROUTE
-import com.narify.chickycart.EcommercyDestintationsArgs.CATEGORY_NAME_ARG
-import com.narify.chickycart.EcommercyDestintationsArgs.PRODUCT_ID_ARG
-import com.narify.chickycart.EcommercyScreens.CART_SCREEN
-import com.narify.chickycart.EcommercyScreens.CATEGORIES_SCREEN
-import com.narify.chickycart.EcommercyScreens.CHECKOUT_SCREEN
-import com.narify.chickycart.EcommercyScreens.HOME_SCREEN
-import com.narify.chickycart.EcommercyScreens.PRODUCT_DETAILS_SCREEN
+import com.narify.chickycart.ChickyCartDestinations.CART_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.CATEGORIES_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.CHECKOUT_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.HOME_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.PRODUCT_DETAILS_ROUTE
+import com.narify.chickycart.ChickyCartDestintationsArgs.CATEGORY_NAME_ARG
+import com.narify.chickycart.ChickyCartDestintationsArgs.PRODUCT_ID_ARG
+import com.narify.chickycart.ChickyCartScreens.CART_SCREEN
+import com.narify.chickycart.ChickyCartScreens.CATEGORIES_SCREEN
+import com.narify.chickycart.ChickyCartScreens.CHECKOUT_SCREEN
+import com.narify.chickycart.ChickyCartScreens.HOME_SCREEN
+import com.narify.chickycart.ChickyCartScreens.PRODUCT_DETAILS_SCREEN
 import com.narify.chickycart.ui.cart.CartRoute
 import com.narify.chickycart.ui.categories.CategoryRoute
 import com.narify.chickycart.ui.checkout.CheckoutRoute
 import com.narify.chickycart.ui.home.HomeRoute
 import com.narify.chickycart.ui.productdetails.ProductDetailsRoute
 
-private object EcommercyScreens {
+private object ChickyCartScreens {
     const val HOME_SCREEN = "home"
     const val CATEGORIES_SCREEN = "category"
     const val CART_SCREEN = "cart"
@@ -31,12 +31,12 @@ private object EcommercyScreens {
     const val CHECKOUT_SCREEN = "checkout"
 }
 
-object EcommercyDestintationsArgs {
+object ChickyCartDestintationsArgs {
     const val PRODUCT_ID_ARG = "productId"
     const val CATEGORY_NAME_ARG = "categoryName"
 }
 
-object EcommercyDestinations {
+object ChickyCartDestinations {
     const val HOME_ROUTE = "$HOME_SCREEN?$CATEGORY_NAME_ARG={$CATEGORY_NAME_ARG}"
     const val CATEGORIES_ROUTE = CATEGORIES_SCREEN
     const val CART_ROUTE = CART_SCREEN

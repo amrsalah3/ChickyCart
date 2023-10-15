@@ -82,7 +82,7 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun EcommercyTheme(
+fun ChickyCartTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
@@ -123,12 +123,12 @@ fun EcommercyTheme(
  * although the previews would show proper theming.
  */
 @Composable
-fun EcommercyThemePreview(
+fun ChickyCartThemePreview(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    EcommercyTheme(darkTheme, dynamicColor) {
+    ChickyCartTheme(darkTheme, dynamicColor) {
         Surface {
             content()
         }

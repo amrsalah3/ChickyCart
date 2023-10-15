@@ -48,8 +48,8 @@ import com.narify.chickycart.model.Product
 import com.narify.chickycart.ui.EmptyContent
 import com.narify.chickycart.ui.common.DevicePreviews
 import com.narify.chickycart.ui.common.ProductAsyncImage
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import com.narify.chickycart.ui.theme.DarkGreen
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
 
 @Composable
 fun ProductDetailsRoute(
@@ -313,7 +313,7 @@ fun DetailsSection(
 @DevicePreviews
 @Composable
 fun ProductDetailsScreenPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         val product = ProductFakeDataSource().product1
         ProductDetailsScreen(product, { }, { })
     }

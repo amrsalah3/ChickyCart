@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import com.razzaghi.compose_loading_dots.LoadingWavy
 import com.razzaghi.compose_loading_dots.core.rememberDotsLoadingController
 
@@ -33,7 +33,7 @@ fun LoadingContent(modifier: Modifier = Modifier) {
 @DevicePreviews
 @Composable
 fun LoadingContentPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         LoadingContent()
     }
 }

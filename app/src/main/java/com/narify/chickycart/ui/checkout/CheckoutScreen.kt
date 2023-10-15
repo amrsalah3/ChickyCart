@@ -45,7 +45,7 @@ import com.narify.chickycart.data.checkout.fake.ReceiptFakeDataSource
 import com.narify.chickycart.ui.EmptyContent
 import com.narify.chickycart.ui.common.DevicePreviews
 import com.narify.chickycart.ui.common.LoadingContent
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 
 @Composable
 fun CheckoutRoute(viewModel: CheckoutViewModel = hiltViewModel()) {
@@ -326,7 +326,7 @@ fun OrderResult(
 @DevicePreviews
 @Composable
 fun CheckoutScreenPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         CheckoutScreen(
             shippingInputState = ShippingInputState(),
             shippingErrorState = ShippingErrorState(),
@@ -341,7 +341,7 @@ fun CheckoutScreenPreview() {
 @DevicePreviews
 @Composable
 fun OrderResultSuccessPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         OrderResult(
             resultMsg = stringResource(R.string.order_result_success),
             imageRes = R.drawable.ic_success,
@@ -353,7 +353,7 @@ fun OrderResultSuccessPreview() {
 @Preview(device = "spec:parent=pixel_2,orientation=landscape")
 @Composable
 fun OrderResultSuccesssPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         OrderResult(
             resultMsg = stringResource(R.string.order_result_success),
             imageRes = R.drawable.ic_success,
@@ -365,7 +365,7 @@ fun OrderResultSuccesssPreview() {
 @DevicePreviews
 @Composable
 fun OrderResultFailPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         OrderResult(
             resultMsg = stringResource(R.string.order_result_error),
             imageRes = R.drawable.ic_error,

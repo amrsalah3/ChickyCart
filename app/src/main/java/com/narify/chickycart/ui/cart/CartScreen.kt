@@ -39,7 +39,7 @@ import com.narify.chickycart.ui.common.DevicePreviews
 import com.narify.chickycart.ui.common.LoadingContent
 import com.narify.chickycart.ui.common.ProductAsyncImage
 import com.narify.chickycart.ui.common.itemWithMaxWidth
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 
 @Composable
 fun CartRoute(
@@ -205,7 +205,7 @@ fun CartItem(
 @DevicePreviews
 @Composable
 fun CartScreenPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         val cartItems = CartFakeDataSource().getPreviewCartItems().subList(0, 1)
         CartScreen(cartItems, { }, { }, { }, { })
     }

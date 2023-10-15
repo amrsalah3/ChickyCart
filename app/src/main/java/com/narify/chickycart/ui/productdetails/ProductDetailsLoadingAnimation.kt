@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.chickycart.ui.common.DevicePreviews
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.defaultShimmerTheme
 import com.valentinilk.shimmer.rememberShimmer
@@ -137,7 +137,7 @@ private fun DetailsSection(modifier: Modifier = Modifier) {
 @DevicePreviews
 @Composable
 fun LoadingProductDetailsPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         LoadingProductDetails()
     }
 }

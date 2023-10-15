@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.narify.chickycart.ui.theme.EcommercyTheme
+import com.narify.chickycart.ui.theme.ChickyCartTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -24,8 +24,8 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         setContent {
-            EcommercyTheme {
-                EcommercyNavGraph()
+            ChickyCartTheme {
+                ChickyCartNavGraph()
             }
         }
     }

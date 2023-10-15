@@ -72,7 +72,7 @@ import com.narify.chickycart.ui.EmptyContent
 import com.narify.chickycart.ui.common.DevicePreviews
 import com.narify.chickycart.ui.common.ProductAsyncImage
 import com.narify.chickycart.ui.common.itemWithMaxWidth
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import com.narify.chickycart.util.ProductsSortType
 import kotlinx.coroutines.launch
 
@@ -518,7 +518,7 @@ fun SortOptionsRadioGroup(
 fun HomeScreenPreview(
     @PreviewParameter(CategoryFilterPreviewParameterProvider::class) filter: CategoryFilterState?
 ) {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         val featuredProducts = ProductFakeDataSource().getPreviewPagingFeaturedProductItems()
             .collectAsLazyPagingItems()
         val allProducts =
@@ -544,7 +544,7 @@ fun HomeScreenPreview(
 @Preview
 @Composable
 fun FeaturedProductItemPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         FeaturedProductItem(
             ProductFakeDataSource().product1.toFeaturedProductUiState(),
             onProductClicked = { }
@@ -555,7 +555,7 @@ fun FeaturedProductItemPreview() {
 @Preview
 @Composable
 fun ProductItemPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         ProductItem(
             productState = ProductFakeDataSource().product1.toProductUiState(),
             onProductClicked = { }
@@ -568,7 +568,7 @@ fun ProductItemPreview() {
 @Preview(device = "spec:width=1080px,height=1080px", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun SortOptionsBottomSheetPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         SortOptionsBottomSheet(
             onSortApplied = { },
             sheetState = SheetState(

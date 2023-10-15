@@ -28,7 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.narify.chickycart.R
 import com.narify.chickycart.ui.common.DevicePreviews
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import kotlinx.coroutines.delay
 
 /**
@@ -111,7 +111,7 @@ fun PlacingOrderLoading(
 @DevicePreviews
 @Composable
 fun PlacingOrderLoadingPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         PlacingOrderLoading()
     }
 }

@@ -30,7 +30,7 @@ import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.narify.chickycart.R
 import com.narify.chickycart.ui.common.DevicePreviews
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 import com.razzaghi.compose_loading_dots.LoadingScaly
 import com.razzaghi.compose_loading_dots.core.rememberDotsLoadingController
 import com.valentinilk.shimmer.ShimmerBounds
@@ -146,7 +146,7 @@ fun ErrorLoadingMoreProducts(modifier: Modifier = Modifier) {
 @DevicePreviews
 @Composable
 fun LoadingProductsListPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         LoadingProductsList()
     }
 }
@@ -154,7 +154,7 @@ fun LoadingProductsListPreview() {
 @Preview
 @Composable
 fun LoadingMoreProductsPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         LoadingMoreProducts()
     }
 }
@@ -162,7 +162,7 @@ fun LoadingMoreProductsPreview() {
 @Preview
 @Composable
 fun ErrorLoadingMoreProductsPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         ErrorLoadingMoreProducts()
     }
 }

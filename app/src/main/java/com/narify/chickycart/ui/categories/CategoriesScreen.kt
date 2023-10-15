@@ -24,7 +24,7 @@ import com.narify.chickycart.data.categories.fake.CategoriesFakeDataSource
 import com.narify.chickycart.ui.EmptyContent
 import com.narify.chickycart.ui.common.DevicePreviews
 import com.narify.chickycart.ui.common.LoadingContent
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 
 @Composable
 fun CategoryRoute(
@@ -83,7 +83,7 @@ fun CategoryCard(
 @DevicePreviews
 @Composable
 fun CategoryScreenPreview() {
-    EcommercyThemePreview {
+    ChickyCartThemePreview {
         CategoriesFakeDataSource().getPreviewCategories().let {
             val categories = it.toCategoriesUiState()
             CategoryScreen(categories, { })

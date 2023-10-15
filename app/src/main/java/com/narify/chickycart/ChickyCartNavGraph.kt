@@ -21,14 +21,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.narify.chickycart.EcommercyDestinations.CART_ROUTE
-import com.narify.chickycart.EcommercyDestinations.CATEGORIES_ROUTE
-import com.narify.chickycart.EcommercyDestinations.HOME_ROUTE
-import com.narify.chickycart.ui.theme.EcommercyThemePreview
+import com.narify.chickycart.ChickyCartDestinations.CART_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.CATEGORIES_ROUTE
+import com.narify.chickycart.ChickyCartDestinations.HOME_ROUTE
+import com.narify.chickycart.ui.theme.ChickyCartThemePreview
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun EcommercyNavGraph(
+fun ChickyCartNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = HOME_ROUTE
@@ -108,8 +108,8 @@ fun BottomBar(
 @Preview
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun EcommercyBottomBarPreview() {
-    EcommercyThemePreview {
+fun BottomBarPreview() {
+    ChickyCartThemePreview {
         BottomBar(
             onHomeTabClicked = { },
             onCategoriesTabClicked = { },
