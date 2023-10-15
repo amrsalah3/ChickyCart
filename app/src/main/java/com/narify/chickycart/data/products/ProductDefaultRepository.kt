@@ -10,12 +10,10 @@ import com.narify.chickycart.model.toProduct
 import com.narify.chickycart.util.ProductsSortType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -51,7 +49,6 @@ class ProductDefaultRepository @Inject constructor(
                 )
             }
         ).flow
-            .onStart { delay(2000) }
             .map { pagingData -> pagingData.map { it.toProduct() } }
             .flowOn(dispatcher)
     }

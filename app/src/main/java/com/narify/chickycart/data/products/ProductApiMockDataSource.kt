@@ -18,7 +18,7 @@ class ProductApiMockDataSource @Inject constructor() {
         startAt: Int = 0,
         limit: Int = DEFAULT_LIMIT
     ): List<ProductEntity> {
-        delay(500)
+        delay(1000)
 
         var searchResult = productEntities
         if (!searchQuery.isNullOrBlank()) {
@@ -609,8 +609,8 @@ class ProductApiMockDataSource @Inject constructor() {
             id = 30,
             title = "Key Holder",
             description = "Attractive DesignMetallic materialFour key hooksReliable & DurablePremium Quality",
-            price = 30.0,
-            discountPercentage = 2.0,
+            price = 28.0,
+            discountPercentage = 7.0,
             rating = 4.92,
             stock = 54,
             brand = "Golden",
