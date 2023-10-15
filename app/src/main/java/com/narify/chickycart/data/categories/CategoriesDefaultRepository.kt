@@ -1,7 +1,6 @@
 package com.narify.chickycart.data.categories
 
 import com.narify.chickycart.model.Category
-import com.narify.chickycart.model.createCategory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -13,14 +12,12 @@ import javax.inject.Singleton
 
 @Singleton
 class CategoriesDefaultRepository @Inject constructor(
-    private val dataSource: CategoriesApiDataSource,
+    private val dataSource: CategoriesApiMockDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CategoriesRepository {
 
     override suspend fun getCategories(): List<Category> = withContext(dispatcher) {
-        val categoryNames = dataSource.getCategories()
-        val categories = categoryNames.map { createCategory(it) }
-        return@withContext categories
+        return@withContext dataSource.getCategories()
     }
 
     override fun getCategoriesStream(): Flow<List<Category>> = flow {
