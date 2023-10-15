@@ -1,5 +1,6 @@
 package com.narify.chickycart.data.products
 
+import com.narify.chickycart.BuildConfig
 import com.narify.chickycart.model.entities.ProductEntity
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -77,6 +78,7 @@ class ProductApiMockDataSource @Inject constructor() {
         const val NONE = ""
     }
 
+    private val baseUrl = BuildConfig.PRODUCT_IMAGES_BASE_URL
     private val productEntities: List<ProductEntity> = listOf(
         ProductEntity(
             id = 1,
@@ -88,13 +90,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 94,
             brand = "Apple",
             category = "Smartphones",
-            thumbnail = "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+            thumbnail = "$baseUrl/1/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/1/1.jpg",
-                "https://i.dummyjson.com/data/products/1/2.jpg",
-                "https://i.dummyjson.com/data/products/1/3.jpg",
-                "https://i.dummyjson.com/data/products/1/4.jpg",
-                "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+                "$baseUrl/1/1.jpg",
+                "$baseUrl/1/2.jpg",
+                "$baseUrl/1/3.jpg"
             )
         ),
         ProductEntity(
@@ -107,12 +107,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 34,
             brand = "Apple",
             category = "Smartphones",
-            thumbnail = "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+            thumbnail = "$baseUrl/2/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/2/1.jpg",
-                "https://i.dummyjson.com/data/products/2/2.jpg",
-                "https://i.dummyjson.com/data/products/2/3.jpg",
-                "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+                "$baseUrl/2/1.jpg",
+                "$baseUrl/2/2.jpg",
+                "$baseUrl/2/3.jpg",
+                "$baseUrl/2/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -125,8 +125,8 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 36,
             brand = "Samsung",
             category = "Smartphones",
-            thumbnail = "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-            images = listOf("https://i.dummyjson.com/data/products/3/1.jpg")
+            thumbnail = "$baseUrl/3/thumbnail.jpg",
+            images = listOf("$baseUrl/3/1.jpg")
         ),
         ProductEntity(
             id = 4,
@@ -138,13 +138,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 123,
             brand = "OPPO",
             category = "Smartphones",
-            thumbnail = "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+            thumbnail = "$baseUrl/4/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/4/1.jpg",
-                "https://i.dummyjson.com/data/products/4/2.jpg",
-                "https://i.dummyjson.com/data/products/4/3.jpg",
-                "https://i.dummyjson.com/data/products/4/4.jpg",
-                "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+                "$baseUrl/4/1.jpg",
+                "$baseUrl/4/2.jpg",
+                "$baseUrl/4/3.jpg",
+                "$baseUrl/4/4.jpg",
+                "$baseUrl/4/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -157,11 +157,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 32,
             brand = "Huawei",
             category = "Smartphones",
-            thumbnail = "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
+            thumbnail = "$baseUrl/5/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/5/1.jpg",
-                "https://i.dummyjson.com/data/products/5/2.jpg",
-                "https://i.dummyjson.com/data/products/5/3.jpg"
+                "$baseUrl/5/1.jpg",
+                "$baseUrl/5/2.jpg",
+                "$baseUrl/5/3.jpg"
             )
         ),
         ProductEntity(
@@ -174,12 +174,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 83,
             brand = "Apple",
             category = "Laptops",
-            thumbnail = "https://i.dummyjson.com/data/products/6/thumbnail.png",
+            thumbnail = "$baseUrl/6/thumbnail.png",
             images = listOf(
-                "https://i.dummyjson.com/data/products/6/1.png",
-                "https://i.dummyjson.com/data/products/6/2.jpg",
-                "https://i.dummyjson.com/data/products/6/3.png",
-                "https://i.dummyjson.com/data/products/6/4.jpg"
+                "$baseUrl/6/1.png",
+                "$baseUrl/6/2.jpg",
+                "$baseUrl/6/3.png",
+                "$baseUrl/6/4.jpg"
             )
         ),
         ProductEntity(
@@ -192,12 +192,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 50,
             brand = "Samsung",
             category = "Laptops",
-            thumbnail = "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+            thumbnail = "$baseUrl/7/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/7/1.jpg",
-                "https://i.dummyjson.com/data/products/7/2.jpg",
-                "https://i.dummyjson.com/data/products/7/3.jpg",
-                "https://i.dummyjson.com/data/products/7/thumbnail.jpg"
+                "$baseUrl/7/1.jpg",
+                "$baseUrl/7/2.jpg",
+                "$baseUrl/7/3.jpg",
+                "$baseUrl/7/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -210,13 +210,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 68,
             brand = "Microsoft Surface",
             category = "Laptops",
-            thumbnail = "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+            thumbnail = "$baseUrl/8/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/8/1.jpg",
-                "https://i.dummyjson.com/data/products/8/2.jpg",
-                "https://i.dummyjson.com/data/products/8/3.jpg",
-                "https://i.dummyjson.com/data/products/8/4.jpg",
-                "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
+                "$baseUrl/8/1.jpg",
+                "$baseUrl/8/2.jpg",
+                "$baseUrl/8/3.jpg",
+                "$baseUrl/8/4.jpg",
+                "$baseUrl/8/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -229,13 +229,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 96,
             brand = "Infinix",
             category = "Laptops",
-            thumbnail = "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+            thumbnail = "$baseUrl/9/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/9/1.jpg",
-                "https://i.dummyjson.com/data/products/9/2.png",
-                "https://i.dummyjson.com/data/products/9/3.png",
-                "https://i.dummyjson.com/data/products/9/4.jpg",
-                "https://i.dummyjson.com/data/products/9/thumbnail.jpg"
+                "$baseUrl/9/1.jpg",
+                "$baseUrl/9/2.png",
+                "$baseUrl/9/3.png",
+                "$baseUrl/9/4.jpg",
+                "$baseUrl/9/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -248,12 +248,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 89,
             brand = "HP Pavilion",
             category = "Laptops",
-            thumbnail = "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
+            thumbnail = "$baseUrl/10/thumbnail.jpeg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/10/1.jpg",
-                "https://i.dummyjson.com/data/products/10/2.jpg",
-                "https://i.dummyjson.com/data/products/10/3.jpg",
-                "https://i.dummyjson.com/data/products/10/thumbnail.jpeg"
+                "$baseUrl/10/1.jpg",
+                "$baseUrl/10/2.jpg",
+                "$baseUrl/10/3.jpg",
+                "$baseUrl/10/thumbnail.jpeg"
             )
         ),
         ProductEntity(
@@ -266,12 +266,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 65,
             brand = "Impression of Acqua Di Gio",
             category = "Fragrances",
-            thumbnail = "https://i.dummyjson.com/data/products/11/thumbnail.jpg",
+            thumbnail = "$baseUrl/11/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/11/1.jpg",
-                "https://i.dummyjson.com/data/products/11/2.jpg",
-                "https://i.dummyjson.com/data/products/11/3.jpg",
-                "https://i.dummyjson.com/data/products/11/thumbnail.jpg"
+                "$baseUrl/11/1.jpg",
+                "$baseUrl/11/2.jpg",
+                "$baseUrl/11/3.jpg",
+                "$baseUrl/11/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -284,13 +284,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 52,
             brand = "Royal_Mirage",
             category = "Fragrances",
-            thumbnail = "https://i.dummyjson.com/data/products/12/thumbnail.jpg",
+            thumbnail = "$baseUrl/12/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/12/1.jpg",
-                "https://i.dummyjson.com/data/products/12/2.jpg",
-                "https://i.dummyjson.com/data/products/12/3.png",
-                "https://i.dummyjson.com/data/products/12/4.jpg",
-                "https://i.dummyjson.com/data/products/12/thumbnail.jpg"
+                "$baseUrl/12/1.jpg",
+                "$baseUrl/12/2.jpg",
+                "$baseUrl/12/3.png",
+                "$baseUrl/12/4.jpg",
+                "$baseUrl/12/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -303,13 +303,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 61,
             brand = "Fog Scent Xpressio",
             category = "Fragrances",
-            thumbnail = "https://i.dummyjson.com/data/products/13/thumbnail.webp",
+            thumbnail = "$baseUrl/13/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/13/1.jpg",
-                "https://i.dummyjson.com/data/products/13/2.png",
-                "https://i.dummyjson.com/data/products/13/3.jpg",
-                "https://i.dummyjson.com/data/products/13/4.jpg",
-                "https://i.dummyjson.com/data/products/13/thumbnail.webp"
+                "$baseUrl/13/1.jpg",
+                "$baseUrl/13/2.png",
+                "$baseUrl/13/3.jpg",
+                "$baseUrl/13/4.jpg",
+                "$baseUrl/13/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -322,12 +322,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 114,
             brand = "Al Munakh",
             category = "Fragrances",
-            thumbnail = "https://i.dummyjson.com/data/products/14/thumbnail.jpg",
+            thumbnail = "$baseUrl/14/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/14/1.jpg",
-                "https://i.dummyjson.com/data/products/14/2.jpg",
-                "https://i.dummyjson.com/data/products/14/3.jpg",
-                "https://i.dummyjson.com/data/products/14/thumbnail.jpg"
+                "$baseUrl/14/1.jpg",
+                "$baseUrl/14/2.jpg",
+                "$baseUrl/14/3.jpg",
+                "$baseUrl/14/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -340,13 +340,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 105,
             brand = "Lord - Al-Rehab",
             category = "Fragrances",
-            thumbnail = "https://i.dummyjson.com/data/products/15/thumbnail.jpg",
+            thumbnail = "$baseUrl/15/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/15/1.jpg",
-                "https://i.dummyjson.com/data/products/15/2.jpg",
-                "https://i.dummyjson.com/data/products/15/3.jpg",
-                "https://i.dummyjson.com/data/products/15/4.jpg",
-                "https://i.dummyjson.com/data/products/15/thumbnail.jpg"
+                "$baseUrl/15/1.jpg",
+                "$baseUrl/15/2.jpg",
+                "$baseUrl/15/3.jpg",
+                "$baseUrl/15/4.jpg",
+                "$baseUrl/15/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -359,13 +359,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 110,
             brand = "L'Oreal Paris",
             category = "Skincare",
-            thumbnail = "https://i.dummyjson.com/data/products/16/thumbnail.jpg",
+            thumbnail = "$baseUrl/16/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/16/1.png",
-                "https://i.dummyjson.com/data/products/16/2.webp",
-                "https://i.dummyjson.com/data/products/16/3.jpg",
-                "https://i.dummyjson.com/data/products/16/4.jpg",
-                "https://i.dummyjson.com/data/products/16/thumbnail.jpg"
+                "$baseUrl/16/1.png",
+                "$baseUrl/16/2.webp",
+                "$baseUrl/16/3.jpg",
+                "$baseUrl/16/4.jpg",
+                "$baseUrl/16/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -378,12 +378,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 78,
             brand = "Hemani Tea",
             category = "Skincare",
-            thumbnail = "https://i.dummyjson.com/data/products/17/thumbnail.jpg",
+            thumbnail = "$baseUrl/17/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/17/1.jpg",
-                "https://i.dummyjson.com/data/products/17/2.jpg",
-                "https://i.dummyjson.com/data/products/17/3.jpg",
-                "https://i.dummyjson.com/data/products/17/thumbnail.jpg"
+                "$baseUrl/17/1.jpg",
+                "$baseUrl/17/2.jpg",
+                "$baseUrl/17/3.jpg",
+                "$baseUrl/17/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -396,13 +396,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 88,
             brand = "Dermive",
             category = "Skincare",
-            thumbnail = "https://i.dummyjson.com/data/products/18/thumbnail.jpg",
+            thumbnail = "$baseUrl/18/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/18/1.jpg",
-                "https://i.dummyjson.com/data/products/18/2.jpg",
-                "https://i.dummyjson.com/data/products/18/3.jpg",
-                "https://i.dummyjson.com/data/products/18/4.jpg",
-                "https://i.dummyjson.com/data/products/18/thumbnail.jpg"
+                "$baseUrl/18/1.jpg",
+                "$baseUrl/18/2.jpg",
+                "$baseUrl/18/3.jpg",
+                "$baseUrl/18/4.jpg",
+                "$baseUrl/18/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -415,12 +415,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 54,
             brand = "ROREC White Rice",
             category = "Skincare",
-            thumbnail = "https://i.dummyjson.com/data/products/19/thumbnail.jpg",
+            thumbnail = "$baseUrl/19/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/19/1.jpg",
-                "https://i.dummyjson.com/data/products/19/2.jpg",
-                "https://i.dummyjson.com/data/products/19/3.png",
-                "https://i.dummyjson.com/data/products/19/thumbnail.jpg"
+                "$baseUrl/19/1.jpg",
+                "$baseUrl/19/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -433,13 +431,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 140,
             brand = "Fair & Clear",
             category = "Skincare",
-            thumbnail = "https://i.dummyjson.com/data/products/20/thumbnail.jpg",
+            thumbnail = "$baseUrl/20/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/20/1.jpg",
-                "https://i.dummyjson.com/data/products/20/2.jpg",
-                "https://i.dummyjson.com/data/products/20/3.jpg",
-                "https://i.dummyjson.com/data/products/20/4.jpg",
-                "https://i.dummyjson.com/data/products/20/thumbnail.jpg"
+                "$baseUrl/20/1.jpg",
+                "$baseUrl/20/2.jpg"
             )
         ),
         ProductEntity(
@@ -452,11 +447,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 133,
             brand = "Saaf & Khaas",
             category = "Groceries",
-            thumbnail = "https://i.dummyjson.com/data/products/21/thumbnail.png",
+            thumbnail = "$baseUrl/21/thumbnail.png",
             images = listOf(
-                "https://i.dummyjson.com/data/products/21/1.png",
-                "https://i.dummyjson.com/data/products/21/2.jpg",
-                "https://i.dummyjson.com/data/products/21/3.jpg"
+                "$baseUrl/21/1.png",
+                "$baseUrl/21/2.jpg",
+                "$baseUrl/21/3.jpg"
             )
         ),
         ProductEntity(
@@ -469,11 +464,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 146,
             brand = "Bake Parlor Big",
             category = "Groceries",
-            thumbnail = "https://i.dummyjson.com/data/products/22/thumbnail.jpg",
+            thumbnail = "$baseUrl/22/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/22/1.jpg",
-                "https://i.dummyjson.com/data/products/22/2.jpg",
-                "https://i.dummyjson.com/data/products/22/3.jpg"
+                "$baseUrl/22/1.jpg",
+                "$baseUrl/22/2.jpg",
+                "$baseUrl/22/3.jpg"
             )
         ),
         ProductEntity(
@@ -486,13 +481,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 26,
             brand = "Baking Food Items",
             category = "Groceries",
-            thumbnail = "https://i.dummyjson.com/data/products/23/thumbnail.jpg",
+            thumbnail = "$baseUrl/23/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/23/1.jpg",
-                "https://i.dummyjson.com/data/products/23/2.jpg",
-                "https://i.dummyjson.com/data/products/23/3.jpg",
-                "https://i.dummyjson.com/data/products/23/4.jpg",
-                "https://i.dummyjson.com/data/products/23/thumbnail.jpg"
+                "$baseUrl/23/1.jpg",
+                "$baseUrl/23/2.jpg",
+                "$baseUrl/23/3.jpg",
+                "$baseUrl/23/4.jpg",
+                "$baseUrl/23/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -505,13 +500,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 113,
             brand = "fauji",
             category = "Groceries",
-            thumbnail = "https://i.dummyjson.com/data/products/24/thumbnail.jpg",
+            thumbnail = "$baseUrl/24/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/24/1.jpg",
-                "https://i.dummyjson.com/data/products/24/2.jpg",
-                "https://i.dummyjson.com/data/products/24/3.jpg",
-                "https://i.dummyjson.com/data/products/24/4.jpg",
-                "https://i.dummyjson.com/data/products/24/thumbnail.jpg"
+                "$baseUrl/24/1.jpg",
+                "$baseUrl/24/2.jpg",
+                "$baseUrl/24/3.jpg",
+                "$baseUrl/24/4.jpg",
+                "$baseUrl/24/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -524,13 +519,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 47,
             brand = "Dry Rose",
             category = "Groceries",
-            thumbnail = "https://i.dummyjson.com/data/products/25/thumbnail.jpg",
+            thumbnail = "$baseUrl/25/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/25/1.png",
-                "https://i.dummyjson.com/data/products/25/2.jpg",
-                "https://i.dummyjson.com/data/products/25/3.png",
-                "https://i.dummyjson.com/data/products/25/4.jpg",
-                "https://i.dummyjson.com/data/products/25/thumbnail.jpg"
+                "$baseUrl/25/1.png",
+                "$baseUrl/25/2.jpg",
+                "$baseUrl/25/3.png",
+                "$baseUrl/25/4.jpg",
+                "$baseUrl/25/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -543,14 +538,14 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 131,
             brand = "Boho Decor",
             category = "Home Decoration",
-            thumbnail = "https://i.dummyjson.com/data/products/26/thumbnail.jpg",
+            thumbnail = "$baseUrl/26/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/26/1.jpg",
-                "https://i.dummyjson.com/data/products/26/2.jpg",
-                "https://i.dummyjson.com/data/products/26/3.jpg",
-                "https://i.dummyjson.com/data/products/26/4.jpg",
-                "https://i.dummyjson.com/data/products/26/5.jpg",
-                "https://i.dummyjson.com/data/products/26/thumbnail.jpg"
+                "$baseUrl/26/1.jpg",
+                "$baseUrl/26/2.jpg",
+                "$baseUrl/26/3.jpg",
+                "$baseUrl/26/4.jpg",
+                "$baseUrl/26/5.jpg",
+                "$baseUrl/26/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -563,13 +558,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 17,
             brand = "Flying Wooden",
             category = "Home Decoration",
-            thumbnail = "https://i.dummyjson.com/data/products/27/thumbnail.webp",
+            thumbnail = "$baseUrl/27/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/27/1.jpg",
-                "https://i.dummyjson.com/data/products/27/2.jpg",
-                "https://i.dummyjson.com/data/products/27/3.jpg",
-                "https://i.dummyjson.com/data/products/27/4.jpg",
-                "https://i.dummyjson.com/data/products/27/thumbnail.webp"
+                "$baseUrl/27/1.jpg",
+                "$baseUrl/27/2.jpg",
+                "$baseUrl/27/3.jpg",
+                "$baseUrl/27/4.jpg",
+                "$baseUrl/27/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -582,13 +577,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 54,
             brand = "LED Lights",
             category = "Home Decoration",
-            thumbnail = "https://i.dummyjson.com/data/products/28/thumbnail.jpg",
+            thumbnail = "$baseUrl/28/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/28/1.jpg",
-                "https://i.dummyjson.com/data/products/28/2.jpg",
-                "https://i.dummyjson.com/data/products/28/3.png",
-                "https://i.dummyjson.com/data/products/28/4.jpg",
-                "https://i.dummyjson.com/data/products/28/thumbnail.jpg"
+                "$baseUrl/28/1.jpg",
+                "$baseUrl/28/2.jpg",
+                "$baseUrl/28/3.png",
+                "$baseUrl/28/4.jpg",
+                "$baseUrl/28/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -601,13 +596,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 7,
             brand = "luxury palace",
             category = "Home Decoration",
-            thumbnail = "https://i.dummyjson.com/data/products/29/thumbnail.webp",
+            thumbnail = "$baseUrl/29/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/29/1.jpg",
-                "https://i.dummyjson.com/data/products/29/2.jpg",
-                "https://i.dummyjson.com/data/products/29/3.webp",
-                "https://i.dummyjson.com/data/products/29/4.webp",
-                "https://i.dummyjson.com/data/products/29/thumbnail.webp"
+                "$baseUrl/29/1.jpg",
+                "$baseUrl/29/2.jpg",
+                "$baseUrl/29/3.webp",
+                "$baseUrl/29/4.webp",
+                "$baseUrl/29/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -620,12 +615,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 54,
             brand = "Golden",
             category = "Home Decoration",
-            thumbnail = "https://i.dummyjson.com/data/products/30/thumbnail.jpg",
+            thumbnail = "$baseUrl/30/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/30/1.jpg",
-                "https://i.dummyjson.com/data/products/30/2.jpg",
-                "https://i.dummyjson.com/data/products/30/3.jpg",
-                "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
+                "$baseUrl/30/1.jpg",
+                "$baseUrl/30/2.jpg",
+                "$baseUrl/30/3.jpg",
+                "$baseUrl/30/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -638,13 +633,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 140,
             brand = "Furniture Bed Set",
             category = "Furniture",
-            thumbnail = "https://i.dummyjson.com/data/products/31/thumbnail.jpg",
+            thumbnail = "$baseUrl/31/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/31/1.jpg",
-                "https://i.dummyjson.com/data/products/31/2.jpg",
-                "https://i.dummyjson.com/data/products/31/3.jpg",
-                "https://i.dummyjson.com/data/products/31/4.jpg",
-                "https://i.dummyjson.com/data/products/31/thumbnail.jpg"
+                "$baseUrl/31/1.jpg",
+                "$baseUrl/31/2.jpg",
+                "$baseUrl/31/3.jpg",
+                "$baseUrl/31/4.jpg",
+                "$baseUrl/31/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -657,12 +652,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 30,
             brand = "Ratttan Outdoor",
             category = "Furniture",
-            thumbnail = "https://i.dummyjson.com/data/products/32/thumbnail.jpg",
+            thumbnail = "$baseUrl/32/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/32/1.jpg",
-                "https://i.dummyjson.com/data/products/32/2.jpg",
-                "https://i.dummyjson.com/data/products/32/3.jpg",
-                "https://i.dummyjson.com/data/products/32/thumbnail.jpg"
+                "$baseUrl/32/1.jpg",
+                "$baseUrl/32/2.jpg",
+                "$baseUrl/32/3.jpg",
+                "$baseUrl/32/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -675,13 +670,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 106,
             brand = "Kitchen Shelf",
             category = "Furniture",
-            thumbnail = "https://i.dummyjson.com/data/products/33/thumbnail.jpg",
+            thumbnail = "$baseUrl/33/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/33/1.jpg",
-                "https://i.dummyjson.com/data/products/33/2.jpg",
-                "https://i.dummyjson.com/data/products/33/3.jpg",
-                "https://i.dummyjson.com/data/products/33/4.jpg",
-                "https://i.dummyjson.com/data/products/33/thumbnail.jpg"
+                "$baseUrl/33/1.jpg",
+                "$baseUrl/33/2.jpg",
+                "$baseUrl/33/3.jpg",
+                "$baseUrl/33/4.jpg",
+                "$baseUrl/33/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -694,13 +689,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 136,
             brand = "Multi Purpose",
             category = "Furniture",
-            thumbnail = "https://i.dummyjson.com/data/products/34/thumbnail.jpg",
+            thumbnail = "$baseUrl/34/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/34/1.jpg",
-                "https://i.dummyjson.com/data/products/34/2.jpg",
-                "https://i.dummyjson.com/data/products/34/3.jpg",
-                "https://i.dummyjson.com/data/products/34/4.jpg",
-                "https://i.dummyjson.com/data/products/34/thumbnail.jpg"
+                "$baseUrl/34/1.jpg",
+                "$baseUrl/34/2.jpg",
+                "$baseUrl/34/3.jpg",
+                "$baseUrl/34/4.jpg",
+                "$baseUrl/34/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -713,37 +708,35 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 68,
             brand = "AmnaMart",
             category = "Furniture",
-            thumbnail = "https://i.dummyjson.com/data/products/35/thumbnail.jpg",
+            thumbnail = "$baseUrl/35/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/35/1.jpg",
-                "https://i.dummyjson.com/data/products/35/2.jpg",
-                "https://i.dummyjson.com/data/products/35/3.jpg",
-                "https://i.dummyjson.com/data/products/35/4.jpg",
-                "https://i.dummyjson.com/data/products/35/thumbnail.jpg"
+                "$baseUrl/35/1.jpg",
+                "$baseUrl/35/2.jpg",
+                "$baseUrl/35/3.jpg",
+                "$baseUrl/35/4.jpg",
+                "$baseUrl/35/thumbnail.jpg"
             )
         ),
         ProductEntity(
             id = 36,
-            title = "Sleeve Shirt Womens",
-            description = "Cotton Solid Color Professional Wear Sleeve Shirt Womens Work Blouses Wholesale Clothing Casual Plain Custom Top OEM Customized",
+            title = "Sleeve Shirt Women",
+            description = "Cotton Solid Color Professional Wear Sleeve Shirt Women Work Blouses Wholesale Clothing Casual Plain Custom Top OEM Customized",
             price = 90.0,
             discountPercentage = 10.0,
             rating = 4.26,
             stock = 39,
             brand = "Professional Wear",
             category = "Tops",
-            thumbnail = "https://i.dummyjson.com/data/products/36/thumbnail.jpg",
+            thumbnail = "$baseUrl/36/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/36/1.jpg",
-                "https://i.dummyjson.com/data/products/36/2.webp",
-                "https://i.dummyjson.com/data/products/36/3.webp",
-                "https://i.dummyjson.com/data/products/36/4.jpg",
-                "https://i.dummyjson.com/data/products/36/thumbnail.jpg"
+                "$baseUrl/36/1.jpg",
+                "$baseUrl/36/2.webp",
+                "$baseUrl/36/thumbnail.jpg"
             )
         ),
         ProductEntity(
             id = 37,
-            title = "ank Tops for Womens/Girls",
+            title = "ank Tops for Women/Girls",
             description = "PACK OF 3 CAMISOLES ,VERY COMFORTABLE SOFT COTTON STUFF, COMFORTABLE IN ALL FOUR SEASONS",
             price = 50.0,
             discountPercentage = 12.0,
@@ -751,13 +744,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 107,
             brand = "Soft Cotton",
             category = "Tops",
-            thumbnail = "https://i.dummyjson.com/data/products/37/thumbnail.jpg",
+            thumbnail = "$baseUrl/37/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/37/1.jpg",
-                "https://i.dummyjson.com/data/products/37/2.jpg",
-                "https://i.dummyjson.com/data/products/37/3.jpg",
-                "https://i.dummyjson.com/data/products/37/4.jpg",
-                "https://i.dummyjson.com/data/products/37/thumbnail.jpg"
+                "$baseUrl/37/1.jpg",
+                "$baseUrl/37/2.jpg",
+                "$baseUrl/37/3.jpg",
+                "$baseUrl/37/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -770,31 +762,27 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 20,
             brand = "Soft Cotton",
             category = "Tops",
-            thumbnail = "https://i.dummyjson.com/data/products/38/thumbnail.jpg",
+            thumbnail = "$baseUrl/38/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/38/1.png",
-                "https://i.dummyjson.com/data/products/38/2.jpg",
-                "https://i.dummyjson.com/data/products/38/3.jpg",
-                "https://i.dummyjson.com/data/products/38/4.jpg"
+                "$baseUrl/38/1.png",
+                "$baseUrl/38/2.jpg",
+                "$baseUrl/38/3.jpg",
+                "$baseUrl/38/4.jpg"
             )
         ),
         ProductEntity(
             id = 39,
-            title = "Women Sweaters Wool",
-            description = "2021 Custom Winter Fall Zebra Knit Crop Top Women Sweaters Wool Mohair Cos Customize Crew Neck Women' S Crop Top Sweater",
+            title = "Women Sweater Wool",
+            description = "2021 Custom Winter Fall Zebra Knit Crop Top Women Sweater Wool Mohair Cos Customize Crew Neck Women' S Crop Top Sweater",
             price = 600.0,
             discountPercentage = 17.0,
             rating = 4.55,
             stock = 55,
             brand = "Top Sweater",
             category = "Tops",
-            thumbnail = "https://i.dummyjson.com/data/products/39/thumbnail.jpg",
+            thumbnail = "$baseUrl/39/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/39/1.jpg",
-                "https://i.dummyjson.com/data/products/39/2.jpg",
-                "https://i.dummyjson.com/data/products/39/3.jpg",
-                "https://i.dummyjson.com/data/products/39/4.jpg",
-                "https://i.dummyjson.com/data/products/39/thumbnail.jpg"
+                "$baseUrl/39/1.jpg"
             )
         ),
         ProductEntity(
@@ -807,10 +795,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 84,
             brand = "Top Sweater",
             category = "Tops",
-            thumbnail = "https://i.dummyjson.com/data/products/40/thumbnail.jpg",
+            thumbnail = "$baseUrl/40/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/40/1.jpg",
-                "https://i.dummyjson.com/data/products/40/2.jpg"
+                "$baseUrl/40/1.jpg",
+                "$baseUrl/40/2.jpg"
             )
         ),
         ProductEntity(
@@ -823,13 +811,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 21,
             brand = "RED MICKY MOUSE..",
             category = "Women Dresses",
-            thumbnail = "https://i.dummyjson.com/data/products/41/thumbnail.webp",
+            thumbnail = "$baseUrl/41/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/41/1.jpg",
-                "https://i.dummyjson.com/data/products/41/2.webp",
-                "https://i.dummyjson.com/data/products/41/3.jpg",
-                "https://i.dummyjson.com/data/products/41/4.jpg",
-                "https://i.dummyjson.com/data/products/41/thumbnail.webp"
+                "$baseUrl/41/1.webp",
+                "$baseUrl/41/2.jpg",
+                "$baseUrl/41/3.jpg"
             )
         ),
         ProductEntity(
@@ -842,13 +828,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 148,
             brand = "Digital Printed",
             category = "Women Dresses",
-            thumbnail = "https://i.dummyjson.com/data/products/42/thumbnail.jpg",
+            thumbnail = "$baseUrl/42/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/42/1.png",
-                "https://i.dummyjson.com/data/products/42/2.png",
-                "https://i.dummyjson.com/data/products/42/3.png",
-                "https://i.dummyjson.com/data/products/42/4.jpg",
-                "https://i.dummyjson.com/data/products/42/thumbnail.jpg"
+                "$baseUrl/42/1.png",
+                "$baseUrl/42/2.png",
+                "$baseUrl/42/3.png",
+                "$baseUrl/42/4.jpg",
+                "$baseUrl/42/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -861,13 +847,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 150,
             brand = "Ghazi Fabric",
             category = "Women Dresses",
-            thumbnail = "https://i.dummyjson.com/data/products/43/thumbnail.jpg",
+            thumbnail = "$baseUrl/43/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/43/1.jpg",
-                "https://i.dummyjson.com/data/products/43/2.jpg",
-                "https://i.dummyjson.com/data/products/43/3.jpg",
-                "https://i.dummyjson.com/data/products/43/4.jpg",
-                "https://i.dummyjson.com/data/products/43/thumbnail.jpg"
+                "$baseUrl/43/1.jpg",
+                "$baseUrl/43/2.jpg"
             )
         ),
         ProductEntity(
@@ -880,13 +863,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 2,
             brand = "Ghazi Fabric",
             category = "Women Dresses",
-            thumbnail = "https://i.dummyjson.com/data/products/44/thumbnail.jpg",
+            thumbnail = "$baseUrl/44/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/44/1.jpg",
-                "https://i.dummyjson.com/data/products/44/2.jpg",
-                "https://i.dummyjson.com/data/products/44/3.jpg",
-                "https://i.dummyjson.com/data/products/44/4.jpg",
-                "https://i.dummyjson.com/data/products/44/thumbnail.jpg"
+                "$baseUrl/44/1.jpg",
+                "$baseUrl/44/2.jpg",
+                "$baseUrl/44/3.jpg",
+                "$baseUrl/44/4.jpg",
+                "$baseUrl/44/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -899,13 +882,9 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 96,
             brand = "IELGY",
             category = "Women Dresses",
-            thumbnail = "https://i.dummyjson.com/data/products/45/thumbnail.jpg",
+            thumbnail = "$baseUrl/45/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/45/1.jpg",
-                "https://i.dummyjson.com/data/products/45/2.webp",
-                "https://i.dummyjson.com/data/products/45/3.jpg",
-                "https://i.dummyjson.com/data/products/45/4.jpg",
-                "https://i.dummyjson.com/data/products/45/thumbnail.jpg"
+                "$baseUrl/45/1.jpg"
             )
         ),
         ProductEntity(
@@ -918,13 +897,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 72,
             brand = "IELGY fashion",
             category = "Women Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/46/thumbnail.jpg",
+            thumbnail = "$baseUrl/46/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/46/1.webp",
-                "https://i.dummyjson.com/data/products/46/2.jpg",
-                "https://i.dummyjson.com/data/products/46/3.jpg",
-                "https://i.dummyjson.com/data/products/46/4.jpg",
-                "https://i.dummyjson.com/data/products/46/thumbnail.jpg"
+                "$baseUrl/46/1.webp",
+                "$baseUrl/46/2.jpg",
+                "$baseUrl/46/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -937,12 +914,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 50,
             brand = "Synthetic Leather",
             category = "Women Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/47/thumbnail.jpeg",
+            thumbnail = "$baseUrl/47/thumbnail.jpeg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/47/1.jpg",
-                "https://i.dummyjson.com/data/products/47/2.jpg",
-                "https://i.dummyjson.com/data/products/47/3.jpg",
-                "https://i.dummyjson.com/data/products/47/thumbnail.jpeg"
+                "$baseUrl/47/1.jpg",
+                "$baseUrl/47/thumbnail.jpeg"
             )
         ),
         ProductEntity(
@@ -955,31 +930,27 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 25,
             brand = "Sandals Flip Flops",
             category = "Women Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/48/thumbnail.jpg",
+            thumbnail = "$baseUrl/48/thumbnail.png",
             images = listOf(
-                "https://i.dummyjson.com/data/products/48/1.jpg",
-                "https://i.dummyjson.com/data/products/48/2.jpg",
-                "https://i.dummyjson.com/data/products/48/3.jpg",
-                "https://i.dummyjson.com/data/products/48/4.jpg",
-                "https://i.dummyjson.com/data/products/48/thumbnail.jpg"
+                "$baseUrl/48/1.png"
             )
         ),
         ProductEntity(
             id = 49,
             title = "Chappals & Shoe Ladies Metallic",
-            description = "Womens Chappals & Shoe Ladies Metallic Tong Thong Sandal Flat Summer 2020 Maasai Sandals",
+            description = "Women Chappals & Shoe Ladies Metallic Tong Thong Sandal Flat Summer 2020 Maasai Sandals",
             price = 23.0,
             discountPercentage = 2.0,
             rating = 4.72,
             stock = 107,
             brand = "Maasai Sandals",
             category = "Women Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/49/thumbnail.jpg",
+            thumbnail = "$baseUrl/49/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/49/1.jpg",
-                "https://i.dummyjson.com/data/products/49/2.jpg",
-                "https://i.dummyjson.com/data/products/49/3.webp",
-                "https://i.dummyjson.com/data/products/49/thumbnail.jpg"
+                "$baseUrl/49/1.jpg",
+                "$baseUrl/49/2.jpg",
+                "$baseUrl/49/3.webp",
+                "$baseUrl/49/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -992,11 +963,9 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 46,
             brand = "Arrivals Genuine",
             category = "Women Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/50/thumbnail.jpg",
+            thumbnail = "$baseUrl/50/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/50/1.jpeg",
-                "https://i.dummyjson.com/data/products/50/2.jpg",
-                "https://i.dummyjson.com/data/products/50/3.jpg"
+                "$baseUrl/50/1.jpg"
             )
         ),
         ProductEntity(
@@ -1009,12 +978,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 132,
             brand = "Vintage Apparel",
             category = "Men Shirts",
-            thumbnail = "https://i.dummyjson.com/data/products/51/thumbnail.jpg",
+            thumbnail = "$baseUrl/51/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/51/1.png",
-                "https://i.dummyjson.com/data/products/51/2.jpg",
-                "https://i.dummyjson.com/data/products/51/3.jpg",
-                "https://i.dummyjson.com/data/products/51/thumbnail.jpg"
+                "$baseUrl/51/1.png",
+                "$baseUrl/51/2.jpg",
+                "$baseUrl/51/3.jpg",
+                "$baseUrl/51/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1027,13 +996,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 128,
             brand = "FREE FIRE",
             category = "Men Shirts",
-            thumbnail = "https://i.dummyjson.com/data/products/52/thumbnail.jpg",
+            thumbnail = "$baseUrl/52/thumbnail.png",
             images = listOf(
-                "https://i.dummyjson.com/data/products/52/1.png",
-                "https://i.dummyjson.com/data/products/52/2.png",
-                "https://i.dummyjson.com/data/products/52/3.jpg",
-                "https://i.dummyjson.com/data/products/52/4.jpg",
-                "https://i.dummyjson.com/data/products/52/thumbnail.jpg"
+                "$baseUrl/52/1.png",
+                "$baseUrl/52/2.png",
+                "$baseUrl/52/3.jpg",
+                "$baseUrl/52/4.jpg"
             )
         ),
         ProductEntity(
@@ -1046,13 +1014,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 6,
             brand = "Vintage Apparel",
             category = "Men Shirts",
-            thumbnail = "https://i.dummyjson.com/data/products/53/thumbnail.jpg",
+            thumbnail = "$baseUrl/53/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/53/1.webp",
-                "https://i.dummyjson.com/data/products/53/2.jpg",
-                "https://i.dummyjson.com/data/products/53/3.jpg",
-                "https://i.dummyjson.com/data/products/53/4.jpg",
-                "https://i.dummyjson.com/data/products/53/thumbnail.jpg"
+                "$baseUrl/53/1.webp",
+                "$baseUrl/53/2.jpg",
+                "$baseUrl/53/3.jpg",
+                "$baseUrl/53/4.jpg",
+                "$baseUrl/53/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1065,13 +1033,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 136,
             brand = "The Warehouse",
             category = "Men Shirts",
-            thumbnail = "https://i.dummyjson.com/data/products/54/thumbnail.jpg",
+            thumbnail = "$baseUrl/54/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/54/1.jpg",
-                "https://i.dummyjson.com/data/products/54/2.jpg",
-                "https://i.dummyjson.com/data/products/54/3.jpg",
-                "https://i.dummyjson.com/data/products/54/4.jpg",
-                "https://i.dummyjson.com/data/products/54/thumbnail.jpg"
+                "$baseUrl/54/1.jpg",
+                "$baseUrl/54/2.jpg",
+                "$baseUrl/54/3.jpg",
+                "$baseUrl/54/4.jpg",
+                "$baseUrl/54/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1084,13 +1052,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 122,
             brand = "The Warehouse",
             category = "Men Shirts",
-            thumbnail = "https://i.dummyjson.com/data/products/55/thumbnail.jpg",
+            thumbnail = "$baseUrl/55/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/55/1.jpg",
-                "https://i.dummyjson.com/data/products/55/2.webp",
-                "https://i.dummyjson.com/data/products/55/3.jpg",
-                "https://i.dummyjson.com/data/products/55/4.jpg",
-                "https://i.dummyjson.com/data/products/55/thumbnail.jpg"
+                "$baseUrl/55/1.jpg",
+                "$baseUrl/55/2.webp",
+                "$baseUrl/55/3.jpg",
+                "$baseUrl/55/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1103,14 +1070,14 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 6,
             brand = "Sneakers",
             category = "Men Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/56/thumbnail.jpg",
+            thumbnail = "$baseUrl/56/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/56/1.jpg",
-                "https://i.dummyjson.com/data/products/56/2.jpg",
-                "https://i.dummyjson.com/data/products/56/3.jpg",
-                "https://i.dummyjson.com/data/products/56/4.jpg",
-                "https://i.dummyjson.com/data/products/56/5.jpg",
-                "https://i.dummyjson.com/data/products/56/thumbnail.jpg"
+                "$baseUrl/56/1.jpg",
+                "$baseUrl/56/2.jpg",
+                "$baseUrl/56/3.jpg",
+                "$baseUrl/56/4.jpg",
+                "$baseUrl/56/5.jpg",
+                "$baseUrl/56/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1123,13 +1090,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 20,
             brand = "Rubber",
             category = "Men Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/57/thumbnail.jpg",
+            thumbnail = "$baseUrl/57/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/57/1.jpg",
-                "https://i.dummyjson.com/data/products/57/2.jpg",
-                "https://i.dummyjson.com/data/products/57/3.jpg",
-                "https://i.dummyjson.com/data/products/57/4.jpg",
-                "https://i.dummyjson.com/data/products/57/thumbnail.jpg"
+                "$baseUrl/57/1.jpg",
+                "$baseUrl/57/2.jpg",
+                "$baseUrl/57/3.jpg",
+                "$baseUrl/57/4.jpg",
+                "$baseUrl/57/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1142,18 +1109,18 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 68,
             brand = "The Warehouse",
             category = "Men Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/58/thumbnail.jpg",
+            thumbnail = "$baseUrl/58/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/58/1.jpg",
-                "https://i.dummyjson.com/data/products/58/2.jpg",
-                "https://i.dummyjson.com/data/products/58/3.jpg",
-                "https://i.dummyjson.com/data/products/58/4.jpg",
-                "https://i.dummyjson.com/data/products/58/thumbnail.jpg"
+                "$baseUrl/58/1.jpg",
+                "$baseUrl/58/2.jpg",
+                "$baseUrl/58/3.jpg",
+                "$baseUrl/58/4.jpg",
+                "$baseUrl/58/thumbnail.jpg"
             )
         ),
         ProductEntity(
             id = 59,
-            title = "Spring and summershoes",
+            title = "Spring and summer shoes",
             description = "Comfortable stretch cloth, lightweight body; ,rubber sole, anti-skid wear;",
             price = 20.0,
             discountPercentage = 8.0,
@@ -1161,13 +1128,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 137,
             brand = "Sneakers",
             category = "Men Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/59/thumbnail.jpg",
+            thumbnail = "$baseUrl/59/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/59/1.jpg",
-                "https://i.dummyjson.com/data/products/59/2.jpg",
-                "https://i.dummyjson.com/data/products/59/3.jpg",
-                "https://i.dummyjson.com/data/products/59/4.jpg",
-                "https://i.dummyjson.com/data/products/59/thumbnail.jpg"
+                "$baseUrl/59/1.jpg",
+                "$baseUrl/59/2.jpg",
+                "$baseUrl/59/3.jpg",
+                "$baseUrl/59/4.jpg",
+                "$baseUrl/59/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1180,12 +1147,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 129,
             brand = "Sneakers",
             category = "Men Shoes",
-            thumbnail = "https://i.dummyjson.com/data/products/60/thumbnail.jpg",
+            thumbnail = "$baseUrl/60/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/60/1.jpg",
-                "https://i.dummyjson.com/data/products/60/2.jpg",
-                "https://i.dummyjson.com/data/products/60/3.jpg",
-                "https://i.dummyjson.com/data/products/60/thumbnail.jpg"
+                "$baseUrl/60/1.jpg",
+                "$baseUrl/60/2.jpg",
+                "$baseUrl/60/3.jpg",
+                "$baseUrl/60/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1198,11 +1165,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 91,
             brand = "Naviforce",
             category = "Men Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/61/thumbnail.jpg",
+            thumbnail = "$baseUrl/61/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/61/1.jpg",
-                "https://i.dummyjson.com/data/products/61/2.png",
-                "https://i.dummyjson.com/data/products/61/3.jpg"
+                "$baseUrl/61/1.jpg",
+                "$baseUrl/61/2.png",
+                "$baseUrl/61/3.jpg"
             )
         ),
         ProductEntity(
@@ -1215,10 +1182,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 95,
             brand = "SKMEI 9117",
             category = "Men Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/62/thumbnail.jpg",
+            thumbnail = "$baseUrl/62/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/62/1.jpg",
-                "https://i.dummyjson.com/data/products/62/2.jpg"
+                "$baseUrl/62/1.jpg",
+                "$baseUrl/62/2.jpg"
             )
         ),
         ProductEntity(
@@ -1231,12 +1198,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 142,
             brand = "SKMEI 9117",
             category = "Men Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/63/thumbnail.webp",
+            thumbnail = "$baseUrl/63/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/63/1.jpg",
-                "https://i.dummyjson.com/data/products/63/2.jpg",
-                "https://i.dummyjson.com/data/products/63/3.png",
-                "https://i.dummyjson.com/data/products/63/4.jpeg"
+                "$baseUrl/63/1.jpg",
+                "$baseUrl/63/2.jpg",
+                "$baseUrl/63/3.png",
+                "$baseUrl/63/4.jpeg"
             )
         ),
         ProductEntity(
@@ -1249,12 +1216,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 61,
             brand = "Strap Skeleton",
             category = "Men Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/64/thumbnail.jpg",
+            thumbnail = "$baseUrl/64/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/64/1.jpg",
-                "https://i.dummyjson.com/data/products/64/2.webp",
-                "https://i.dummyjson.com/data/products/64/3.jpg",
-                "https://i.dummyjson.com/data/products/64/thumbnail.jpg"
+                "$baseUrl/64/1.jpg",
+                "$baseUrl/64/2.webp",
+                "$baseUrl/64/3.jpg",
+                "$baseUrl/64/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1267,13 +1234,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 94,
             brand = "Stainless",
             category = "Men Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/65/thumbnail.webp",
+            thumbnail = "$baseUrl/65/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/65/1.jpg",
-                "https://i.dummyjson.com/data/products/65/2.webp",
-                "https://i.dummyjson.com/data/products/65/3.jpg",
-                "https://i.dummyjson.com/data/products/65/4.webp",
-                "https://i.dummyjson.com/data/products/65/thumbnail.webp"
+                "$baseUrl/65/1.jpg",
+                "$baseUrl/65/2.webp",
+                "$baseUrl/65/3.jpg",
+                "$baseUrl/65/4.webp",
+                "$baseUrl/65/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -1286,13 +1253,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 24,
             brand = "Eastern Watches",
             category = "Women Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/66/thumbnail.jpg",
+            thumbnail = "$baseUrl/66/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/66/1.jpg",
-                "https://i.dummyjson.com/data/products/66/2.jpg",
-                "https://i.dummyjson.com/data/products/66/3.jpg",
-                "https://i.dummyjson.com/data/products/66/4.jpg",
-                "https://i.dummyjson.com/data/products/66/thumbnail.jpg"
+                "$baseUrl/66/1.jpg",
+                "$baseUrl/66/2.jpg",
+                "$baseUrl/66/3.jpg",
+                "$baseUrl/66/4.JPG",
+                "$baseUrl/66/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1305,13 +1272,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 46,
             brand = "Eastern Watches",
             category = "Women Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/67/thumbnail.jpg",
+            thumbnail = "$baseUrl/67/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/67/1.jpg",
-                "https://i.dummyjson.com/data/products/67/2.jpg",
-                "https://i.dummyjson.com/data/products/67/3.jpg",
-                "https://i.dummyjson.com/data/products/67/4.jpg",
-                "https://i.dummyjson.com/data/products/67/thumbnail.jpg"
+                "$baseUrl/67/1.jpg",
+                "$baseUrl/67/2.jpg"
             )
         ),
         ProductEntity(
@@ -1324,10 +1288,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 77,
             brand = "Luxury Digital",
             category = "Women Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/68/thumbnail.webp",
+            thumbnail = "$baseUrl/68/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/68/1.jpg",
-                "https://i.dummyjson.com/data/products/68/2.jpg"
+                "$baseUrl/68/1.jpg",
+                "$baseUrl/68/2.jpg"
             )
         ),
         ProductEntity(
@@ -1340,13 +1304,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 89,
             brand = "Watch Pearls",
             category = "Women Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/69/thumbnail.jpg",
+            thumbnail = "$baseUrl/69/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/69/1.jpg",
-                "https://i.dummyjson.com/data/products/69/2.jpg",
-                "https://i.dummyjson.com/data/products/69/3.webp",
-                "https://i.dummyjson.com/data/products/69/4.jpg",
-                "https://i.dummyjson.com/data/products/69/thumbnail.jpg"
+                "$baseUrl/69/1.jpg",
+                "$baseUrl/69/2.jpg"
             )
         ),
         ProductEntity(
@@ -1359,11 +1320,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 111,
             brand = "Bracelet",
             category = "Women Watches",
-            thumbnail = "https://i.dummyjson.com/data/products/70/thumbnail.jpg",
+            thumbnail = "$baseUrl/70/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/70/1.jpg",
-                "https://i.dummyjson.com/data/products/70/2.jpg",
-                "https://i.dummyjson.com/data/products/70/thumbnail.jpg"
+                "$baseUrl/70/1.jpg",
+                "$baseUrl/70/2.jpg",
+                "$baseUrl/70/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1376,12 +1337,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 17,
             brand = "LouisWill",
             category = "Women Bags",
-            thumbnail = "https://i.dummyjson.com/data/products/71/thumbnail.jpg",
+            thumbnail = "$baseUrl/71/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/71/1.jpg",
-                "https://i.dummyjson.com/data/products/71/2.jpg",
-                "https://i.dummyjson.com/data/products/71/3.webp",
-                "https://i.dummyjson.com/data/products/71/thumbnail.jpg"
+                "$baseUrl/71/1.jpg",
+                "$baseUrl/71/2.jpg",
+                "$baseUrl/71/3.webp",
+                "$baseUrl/71/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1394,13 +1355,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 27,
             brand = "LouisWill",
             category = "Women Bags",
-            thumbnail = "https://i.dummyjson.com/data/products/72/thumbnail.webp",
+            thumbnail = "$baseUrl/72/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/72/1.jpg",
-                "https://i.dummyjson.com/data/products/72/2.png",
-                "https://i.dummyjson.com/data/products/72/3.webp",
-                "https://i.dummyjson.com/data/products/72/4.jpg",
-                "https://i.dummyjson.com/data/products/72/thumbnail.webp"
+                "$baseUrl/72/1.jpg",
+                "$baseUrl/72/2.png",
+                "$baseUrl/72/3.webp",
+                "$baseUrl/72/4.jpg",
+                "$baseUrl/72/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -1413,12 +1374,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 101,
             brand = "Bracelet",
             category = "Women Bags",
-            thumbnail = "https://i.dummyjson.com/data/products/73/thumbnail.jpg",
+            thumbnail = "$baseUrl/73/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/73/1.jpg",
-                "https://i.dummyjson.com/data/products/73/2.webp",
-                "https://i.dummyjson.com/data/products/73/3.jpg",
-                "https://i.dummyjson.com/data/products/73/thumbnail.jpg"
+                "$baseUrl/73/1.jpg",
+                "$baseUrl/73/2.webp",
+                "$baseUrl/73/3.jpg",
+                "$baseUrl/73/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1431,13 +1392,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 43,
             brand = "Copenhagen Luxe",
             category = "Women Bags",
-            thumbnail = "https://i.dummyjson.com/data/products/74/thumbnail.jpg",
+            thumbnail = "$baseUrl/74/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/74/1.jpg",
-                "https://i.dummyjson.com/data/products/74/2.jpg",
-                "https://i.dummyjson.com/data/products/74/3.jpg",
-                "https://i.dummyjson.com/data/products/74/4.jpg",
-                "https://i.dummyjson.com/data/products/74/thumbnail.jpg"
+                "$baseUrl/74/1.jpg",
+                "$baseUrl/74/2.jpg",
+                "$baseUrl/74/3.jpg",
+                "$baseUrl/74/4.jpg",
+                "$baseUrl/74/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1450,12 +1411,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 13,
             brand = "Steal Frame",
             category = "Women Bags",
-            thumbnail = "https://i.dummyjson.com/data/products/75/thumbnail.jpg",
+            thumbnail = "$baseUrl/75/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/75/1.jpg",
-                "https://i.dummyjson.com/data/products/75/2.jpg",
-                "https://i.dummyjson.com/data/products/75/3.jpg",
-                "https://i.dummyjson.com/data/products/75/thumbnail.jpg"
+                "$baseUrl/75/1.jpg",
+                "$baseUrl/75/2.jpg",
+                "$baseUrl/75/3.jpg",
+                "$baseUrl/75/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1468,11 +1429,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 51,
             brand = "Darojay",
             category = "Women Jewellery",
-            thumbnail = "https://i.dummyjson.com/data/products/76/thumbnail.jpg",
+            thumbnail = "$baseUrl/76/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/76/1.jpg",
-                "https://i.dummyjson.com/data/products/76/2.jpg",
-                "https://i.dummyjson.com/data/products/76/thumbnail.jpg"
+                "$baseUrl/76/1.jpg",
+                "$baseUrl/76/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1485,12 +1445,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 149,
             brand = "Copenhagen Luxe",
             category = "Women Jewellery",
-            thumbnail = "https://i.dummyjson.com/data/products/77/thumbnail.jpg",
+            thumbnail = "$baseUrl/77/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/77/1.jpg",
-                "https://i.dummyjson.com/data/products/77/2.jpg",
-                "https://i.dummyjson.com/data/products/77/3.jpg",
-                "https://i.dummyjson.com/data/products/77/thumbnail.jpg"
+                "$baseUrl/77/1.jpg",
+                "$baseUrl/77/2.jpg",
+                "$baseUrl/77/3.jpg",
+                "$baseUrl/77/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1503,8 +1463,8 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 9,
             brand = "Fashion Jewellery",
             category = "Women Jewellery",
-            thumbnail = "https://i.dummyjson.com/data/products/78/thumbnail.jpg",
-            images = listOf("https://i.dummyjson.com/data/products/78/thumbnail.jpg")
+            thumbnail = "$baseUrl/78/thumbnail.jpg",
+            images = listOf("$baseUrl/78/thumbnail.jpg")
         ),
         ProductEntity(
             id = 79,
@@ -1516,8 +1476,8 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 16,
             brand = "Fashion Jewellery",
             category = "Women Jewellery",
-            thumbnail = "https://i.dummyjson.com/data/products/79/thumbnail.jpg",
-            images = listOf("https://i.dummyjson.com/data/products/79/1.jpg")
+            thumbnail = "$baseUrl/79/thumbnail.jpg",
+            images = listOf("$baseUrl/79/1.jpg")
         ),
         ProductEntity(
             id = 80,
@@ -1529,13 +1489,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 9,
             brand = "Cuff Butterfly",
             category = "Women Jewellery",
-            thumbnail = "https://i.dummyjson.com/data/products/80/thumbnail.jpg",
+            thumbnail = "$baseUrl/80/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/80/1.jpg",
-                "https://i.dummyjson.com/data/products/80/2.jpg",
-                "https://i.dummyjson.com/data/products/80/3.png",
-                "https://i.dummyjson.com/data/products/80/4.jpg",
-                "https://i.dummyjson.com/data/products/80/thumbnail.jpg"
+                "$baseUrl/80/1.jpg",
+                "$baseUrl/80/2.jpg",
+                "$baseUrl/80/3.jpg",
+                "$baseUrl/80/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1548,13 +1507,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 78,
             brand = "Designer Sunglasses",
             category = "Sunglasses",
-            thumbnail = "https://i.dummyjson.com/data/products/81/thumbnail.jpg",
+            thumbnail = "$baseUrl/81/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/81/1.jpg",
-                "https://i.dummyjson.com/data/products/81/2.jpg",
-                "https://i.dummyjson.com/data/products/81/3.jpg",
-                "https://i.dummyjson.com/data/products/81/4.webp",
-                "https://i.dummyjson.com/data/products/81/thumbnail.jpg"
+                "$baseUrl/81/1.jpg",
+                "$baseUrl/81/2.jpg",
+                "$baseUrl/81/3.jpg",
+                "$baseUrl/81/4.webp",
+                "$baseUrl/81/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1567,13 +1526,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 78,
             brand = "Designer Sunglasses",
             category = "Sunglasses",
-            thumbnail = "https://i.dummyjson.com/data/products/82/thumbnail.jpg",
+            thumbnail = "$baseUrl/82/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/82/1.jpg",
-                "https://i.dummyjson.com/data/products/82/2.webp",
-                "https://i.dummyjson.com/data/products/82/3.jpg",
-                "https://i.dummyjson.com/data/products/82/4.jpg",
-                "https://i.dummyjson.com/data/products/82/thumbnail.jpg"
+                "$baseUrl/82/1.jpg",
+                "$baseUrl/82/2.webp",
+                "$baseUrl/82/3.jpg",
+                "$baseUrl/82/4.jpg",
+                "$baseUrl/82/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1586,13 +1545,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 115,
             brand = "mastar watch",
             category = "Sunglasses",
-            thumbnail = "https://i.dummyjson.com/data/products/83/thumbnail.jpg",
+            thumbnail = "$baseUrl/83/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/83/1.jpg",
-                "https://i.dummyjson.com/data/products/83/2.jpg",
-                "https://i.dummyjson.com/data/products/83/3.jpg",
-                "https://i.dummyjson.com/data/products/83/4.jpg",
-                "https://i.dummyjson.com/data/products/83/thumbnail.jpg"
+                "$baseUrl/83/1.jpg",
+                "$baseUrl/83/2.jpg",
+                "$baseUrl/83/3.jpg",
+                "$baseUrl/83/4.jpg",
+                "$baseUrl/83/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1605,11 +1564,10 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 64,
             brand = "mastar watch",
             category = "Sunglasses",
-            thumbnail = "https://i.dummyjson.com/data/products/84/thumbnail.jpg",
+            thumbnail = "$baseUrl/84/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/84/1.jpg",
-                "https://i.dummyjson.com/data/products/84/2.jpg",
-                "https://i.dummyjson.com/data/products/84/thumbnail.jpg"
+                "$baseUrl/84/1.jpg",
+                "$baseUrl/84/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1622,11 +1580,11 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 92,
             brand = "LouisWill",
             category = "Sunglasses",
-            thumbnail = "https://i.dummyjson.com/data/products/85/thumbnail.jpg",
+            thumbnail = "$baseUrl/85/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/85/1.jpg",
-                "https://i.dummyjson.com/data/products/85/2.jpg",
-                "https://i.dummyjson.com/data/products/85/thumbnail.jpg"
+                "$baseUrl/85/1.jpg",
+                "$baseUrl/85/2.jpg",
+                "$baseUrl/85/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1639,13 +1597,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 22,
             brand = "Car Aux",
             category = "Automotive",
-            thumbnail = "https://i.dummyjson.com/data/products/86/thumbnail.jpg",
+            thumbnail = "$baseUrl/86/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/86/1.jpg",
-                "https://i.dummyjson.com/data/products/86/2.webp",
-                "https://i.dummyjson.com/data/products/86/3.jpg",
-                "https://i.dummyjson.com/data/products/86/4.jpg",
-                "https://i.dummyjson.com/data/products/86/thumbnail.jpg"
+                "$baseUrl/86/1.jpg",
+                "$baseUrl/86/2.webp",
+                "$baseUrl/86/3.jpg",
+                "$baseUrl/86/4.jpg",
+                "$baseUrl/86/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1658,13 +1616,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 37,
             brand = "W1209 DC12V",
             category = "Automotive",
-            thumbnail = "https://i.dummyjson.com/data/products/87/thumbnail.jpg",
+            thumbnail = "$baseUrl/87/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/87/1.jpg",
-                "https://i.dummyjson.com/data/products/87/2.jpg",
-                "https://i.dummyjson.com/data/products/87/3.jpg",
-                "https://i.dummyjson.com/data/products/87/4.jpg",
-                "https://i.dummyjson.com/data/products/87/thumbnail.jpg"
+                "$baseUrl/87/1.jpg",
+                "$baseUrl/87/2.jpg",
+                "$baseUrl/87/3.jpg",
+                "$baseUrl/87/4.jpg",
+                "$baseUrl/87/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1677,13 +1635,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 42,
             brand = "TC Reusable",
             category = "Automotive",
-            thumbnail = "https://i.dummyjson.com/data/products/88/thumbnail.jpg",
+            thumbnail = "$baseUrl/88/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/88/1.jpg",
-                "https://i.dummyjson.com/data/products/88/2.jpg",
-                "https://i.dummyjson.com/data/products/88/3.jpg",
-                "https://i.dummyjson.com/data/products/88/4.webp",
-                "https://i.dummyjson.com/data/products/88/thumbnail.jpg"
+                "$baseUrl/88/1.jpg",
+                "$baseUrl/88/2.jpg",
+                "$baseUrl/88/3.jpg",
+                "$baseUrl/88/4.webp",
+                "$baseUrl/88/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1696,13 +1654,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 79,
             brand = "TC Reusable",
             category = "Automotive",
-            thumbnail = "https://i.dummyjson.com/data/products/89/thumbnail.jpg",
+            thumbnail = "$baseUrl/89/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/89/1.jpg",
-                "https://i.dummyjson.com/data/products/89/2.jpg",
-                "https://i.dummyjson.com/data/products/89/3.jpg",
-                "https://i.dummyjson.com/data/products/89/4.jpg",
-                "https://i.dummyjson.com/data/products/89/thumbnail.jpg"
+                "$baseUrl/89/1.jpg",
+                "$baseUrl/89/2.jpg",
+                "$baseUrl/89/3.jpg",
+                "$baseUrl/89/4.jpg",
+                "$baseUrl/89/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1715,13 +1673,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 63,
             brand = "Neon LED Light",
             category = "Automotive",
-            thumbnail = "https://i.dummyjson.com/data/products/90/thumbnail.jpg",
+            thumbnail = "$baseUrl/90/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/90/1.jpg",
-                "https://i.dummyjson.com/data/products/90/2.jpg",
-                "https://i.dummyjson.com/data/products/90/3.jpg",
-                "https://i.dummyjson.com/data/products/90/4.jpg",
-                "https://i.dummyjson.com/data/products/90/thumbnail.jpg"
+                "$baseUrl/90/1.jpg",
+                "$baseUrl/90/2.jpg",
+                "$baseUrl/90/3.jpg",
+                "$baseUrl/90/4.jpg",
+                "$baseUrl/90/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1734,13 +1692,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 115,
             brand = "METRO 70cc Motorcycle - MR70",
             category = "Motorcycle",
-            thumbnail = "https://i.dummyjson.com/data/products/91/thumbnail.jpg",
+            thumbnail = "$baseUrl/91/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/91/1.jpg",
-                "https://i.dummyjson.com/data/products/91/2.jpg",
-                "https://i.dummyjson.com/data/products/91/3.jpg",
-                "https://i.dummyjson.com/data/products/91/4.jpg",
-                "https://i.dummyjson.com/data/products/91/thumbnail.jpg"
+                "$baseUrl/91/1.jpg",
+                "$baseUrl/91/2.jpg",
+                "$baseUrl/91/3.jpg",
+                "$baseUrl/91/4.jpg",
+                "$baseUrl/91/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1753,12 +1711,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 22,
             brand = "BRAVE BULL",
             category = "Motorcycle",
-            thumbnail = "https://i.dummyjson.com/data/products/92/thumbnail.jpg",
+            thumbnail = "$baseUrl/92/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/92/1.jpg",
-                "https://i.dummyjson.com/data/products/92/2.jpg",
-                "https://i.dummyjson.com/data/products/92/3.jpg",
-                "https://i.dummyjson.com/data/products/92/4.jpg"
+                "$baseUrl/92/1.jpg",
+                "$baseUrl/92/2.jpg",
+                "$baseUrl/92/3.jpg",
+                "$baseUrl/92/4.jpg"
             )
         ),
         ProductEntity(
@@ -1771,13 +1729,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 127,
             brand = "shock absorber",
             category = "Motorcycle",
-            thumbnail = "https://i.dummyjson.com/data/products/93/thumbnail.jpg",
+            thumbnail = "$baseUrl/93/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/93/1.jpg",
-                "https://i.dummyjson.com/data/products/93/2.jpg",
-                "https://i.dummyjson.com/data/products/93/3.jpg",
-                "https://i.dummyjson.com/data/products/93/4.jpg",
-                "https://i.dummyjson.com/data/products/93/thumbnail.jpg"
+                "$baseUrl/93/1.jpg",
+                "$baseUrl/93/2.jpg",
+                "$baseUrl/93/3.jpg",
+                "$baseUrl/93/4.jpg",
+                "$baseUrl/93/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1790,12 +1748,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 109,
             brand = "JIEPOLLY",
             category = "Motorcycle",
-            thumbnail = "https://i.dummyjson.com/data/products/94/thumbnail.webp",
+            thumbnail = "$baseUrl/94/thumbnail.webp",
             images = listOf(
-                "https://i.dummyjson.com/data/products/94/1.webp",
-                "https://i.dummyjson.com/data/products/94/2.jpg",
-                "https://i.dummyjson.com/data/products/94/3.jpg",
-                "https://i.dummyjson.com/data/products/94/thumbnail.webp"
+                "$baseUrl/94/1.webp",
+                "$baseUrl/94/2.jpg",
+                "$baseUrl/94/3.jpg",
+                "$baseUrl/94/thumbnail.webp"
             )
         ),
         ProductEntity(
@@ -1808,13 +1766,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 144,
             brand = "Xiangle",
             category = "Motorcycle",
-            thumbnail = "https://i.dummyjson.com/data/products/95/thumbnail.jpg",
+            thumbnail = "$baseUrl/95/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/95/1.jpg",
-                "https://i.dummyjson.com/data/products/95/2.jpg",
-                "https://i.dummyjson.com/data/products/95/3.jpg",
-                "https://i.dummyjson.com/data/products/95/4.jpg",
-                "https://i.dummyjson.com/data/products/95/thumbnail.jpg"
+                "$baseUrl/95/1.jpg",
+                "$baseUrl/95/2.jpg",
+                "$baseUrl/95/3.jpg",
+                "$baseUrl/95/4.jpg",
+                "$baseUrl/95/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1827,13 +1785,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 96,
             brand = "lightingbrilliance",
             category = "Lighting",
-            thumbnail = "https://i.dummyjson.com/data/products/96/thumbnail.jpg",
+            thumbnail = "$baseUrl/96/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/96/1.jpg",
-                "https://i.dummyjson.com/data/products/96/2.jpg",
-                "https://i.dummyjson.com/data/products/96/3.jpg",
-                "https://i.dummyjson.com/data/products/96/4.jpg",
-                "https://i.dummyjson.com/data/products/96/thumbnail.jpg"
+                "$baseUrl/96/1.jpg",
+                "$baseUrl/96/2.jpg",
+                "$baseUrl/96/3.jpg",
+                "$baseUrl/96/4.jpg"
             )
         ),
         ProductEntity(
@@ -1846,13 +1803,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 146,
             brand = "Ifei Home",
             category = "Lighting",
-            thumbnail = "https://i.dummyjson.com/data/products/97/thumbnail.jpg",
+            thumbnail = "$baseUrl/97/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/97/1.jpg",
-                "https://i.dummyjson.com/data/products/97/2.jpg",
-                "https://i.dummyjson.com/data/products/97/3.jpg",
-                "https://i.dummyjson.com/data/products/97/4.webp",
-                "https://i.dummyjson.com/data/products/97/thumbnail.jpg"
+                "$baseUrl/97/1.jpg",
+                "$baseUrl/97/2.jpg",
+                "$baseUrl/97/3.jpg",
+                "$baseUrl/97/4.webp",
+                "$baseUrl/97/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1865,13 +1822,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 44,
             brand = "DADAWU",
             category = "Lighting",
-            thumbnail = "https://i.dummyjson.com/data/products/98/thumbnail.jpg",
+            thumbnail = "$baseUrl/98/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/98/1.jpg",
-                "https://i.dummyjson.com/data/products/98/2.jpg",
-                "https://i.dummyjson.com/data/products/98/3.jpg",
-                "https://i.dummyjson.com/data/products/98/4.jpg",
-                "https://i.dummyjson.com/data/products/98/thumbnail.jpg"
+                "$baseUrl/98/1.jpg",
+                "$baseUrl/98/2.jpg",
+                "$baseUrl/98/3.jpg",
+                "$baseUrl/98/4.jpg",
+                "$baseUrl/98/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1884,13 +1841,13 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 138,
             brand = "Ifei Home",
             category = "Lighting",
-            thumbnail = "https://i.dummyjson.com/data/products/99/thumbnail.jpg",
+            thumbnail = "$baseUrl/99/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/99/1.jpg",
-                "https://i.dummyjson.com/data/products/99/2.jpg",
-                "https://i.dummyjson.com/data/products/99/3.jpg",
-                "https://i.dummyjson.com/data/products/99/4.jpg",
-                "https://i.dummyjson.com/data/products/99/thumbnail.jpg"
+                "$baseUrl/99/1.jpg",
+                "$baseUrl/99/2.jpg",
+                "$baseUrl/99/3.jpg",
+                "$baseUrl/99/4.jpg",
+                "$baseUrl/99/thumbnail.jpg"
             )
         ),
         ProductEntity(
@@ -1903,12 +1860,12 @@ class ProductApiMockDataSource @Inject constructor() {
             stock = 133,
             brand = "YIOSI",
             category = "Lighting",
-            thumbnail = "https://i.dummyjson.com/data/products/100/thumbnail.jpg",
+            thumbnail = "$baseUrl/100/thumbnail.jpg",
             images = listOf(
-                "https://i.dummyjson.com/data/products/100/1.jpg",
-                "https://i.dummyjson.com/data/products/100/2.jpg",
-                "https://i.dummyjson.com/data/products/100/3.jpg",
-                "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
+                "$baseUrl/100/1.jpg",
+                "$baseUrl/100/2.jpg",
+                "$baseUrl/100/3.jpg",
+                "$baseUrl/100/thumbnail.jpg"
             )
         )
     )
