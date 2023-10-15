@@ -2,7 +2,7 @@
 <resources>
     <!-- Splash screen theme -->
     <style name="ChickyCartSplashTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#9ECAFF</item>
+        <item name="windowSplashScreenBackground">@color/launcher_icon_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
         <item name="postSplashScreenTheme">@style/ChickyCartAppTheme</item>
     </style>
