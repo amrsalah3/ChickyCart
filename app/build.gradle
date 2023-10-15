@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.narify.ecommercy'
+    namespace 'com.narify.chickycart'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.narify.ecommercy"
+        applicationId "com.narify.chickycart"
         minSdk 22
         targetSdk 33
         versionCode 1
