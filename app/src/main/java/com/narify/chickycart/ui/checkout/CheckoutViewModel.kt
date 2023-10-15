@@ -7,7 +7,6 @@ import com.narify.chickycart.data.cart.CartRepository
 import com.narify.chickycart.data.checkout.CheckoutRepository
 import com.narify.chickycart.model.Order
 import com.narify.chickycart.model.OrderItem
-import com.narify.chickycart.model.ReceiptItem
 import com.narify.chickycart.model.ShippingDetails
 import com.narify.chickycart.ui.common.ErrorState
 import com.narify.chickycart.util.ShippingFieldsValidator.isValidAddress
@@ -212,6 +211,3 @@ class CheckoutViewModel @Inject constructor(
         _uiState.update { it.copy(shouldScrollToShowError = false) }
     }
 }
-
-fun ReceiptItem.toReceiptUiItemState() = ReceiptUiItemState(name, price.raw)
-fun List<ReceiptItem>.toReceiptUiItemsState() = map(ReceiptItem::toReceiptUiItemState)

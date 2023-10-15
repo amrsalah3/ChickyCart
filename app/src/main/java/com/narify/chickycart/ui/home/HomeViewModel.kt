@@ -10,7 +10,6 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.narify.chickycart.ChickyCartDestintationsArgs.CATEGORY_NAME_ARG
 import com.narify.chickycart.data.products.ProductRepository
-import com.narify.chickycart.model.Product
 import com.narify.chickycart.util.ProductsSortType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -124,25 +123,6 @@ class HomeViewModel @Inject constructor(
         _categoryFilter.update { null }
     }
 }
-
-
-fun Product.toProductUiState() = ProductItemUiState(
-    id = id,
-    name = name,
-    ratingStars = rating.stars,
-    price = price,
-    imageUrl = thumbnail
-)
-
-fun Product.toFeaturedProductUiState() = FeaturedProductItemUiState(
-    id = id,
-    imageUrl = thumbnail,
-    price = price
-)
-
-fun List<Product>.toProductsUiState() = map(Product::toProductUiState)
-
-fun List<Product>.toFeaturedProductsUiState() = map(Product::toFeaturedProductUiState)
 
 private object PagingLoadStates {
     val Refresh = LoadStates(

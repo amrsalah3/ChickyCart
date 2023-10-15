@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.narify.chickycart.R
 import com.narify.chickycart.data.categories.CategoriesRepository
-import com.narify.chickycart.model.Category
 import com.narify.chickycart.ui.common.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -40,9 +39,3 @@ class CategoriesViewModel @Inject constructor(
             initialValue = CategoriesUiState(isLoading = true)
         )
 }
-
-fun Category.toCategoryUiState(): CategoryItemUiState {
-    return CategoryItemUiState(name)
-}
-
-fun List<Category>.toCategoriesUiState() = map(Category::toCategoryUiState)

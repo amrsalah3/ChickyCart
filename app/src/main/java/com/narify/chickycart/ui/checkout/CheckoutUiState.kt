@@ -1,6 +1,7 @@
 package com.narify.chickycart.ui.checkout
 
 import androidx.annotation.StringRes
+import com.narify.chickycart.model.ReceiptItem
 import com.narify.chickycart.ui.common.ErrorState
 
 data class CheckoutUiState(
@@ -41,3 +42,6 @@ sealed interface OrderingUiState {
     object OrderPlaced : OrderingUiState
     data class OrderFailed(@StringRes val messageResId: Int) : OrderingUiState
 }
+
+fun ReceiptItem.toReceiptUiItemState() = ReceiptUiItemState(name, price.raw)
+fun List<ReceiptItem>.toReceiptUiItemsState() = map(ReceiptItem::toReceiptUiItemState)
