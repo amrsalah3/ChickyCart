@@ -1,2 +1,2 @@
-# Ecommerce
+# ChickyCart Shopping
 ## This project is still in progress..
