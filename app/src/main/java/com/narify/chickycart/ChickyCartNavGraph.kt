@@ -52,7 +52,7 @@ fun ChickyCartNavGraph(
             modifier = modifier.padding(innerPadding)
         ) {
             homeRoute(onProductClicked = navController::navigateToProductDetails)
-            categoriesRoute(onCategoryClicked = { navController.navigateToHome(it, false) })
+            categoriesRoute(onCategoryClicked = navController::navigateToHome)
             cartRoute(
                 onCartItemClicked = navController::navigateToProductDetails,
                 onCheckoutClicked = navController::navigateToCheckout

@@ -45,51 +45,32 @@ object ChickyCartDestinations {
 }
 
 //  Type-safe navigation actions
-fun NavController.navigateToHome(categoryName: String? = null, restoreHome: Boolean = true) {
+fun NavController.navigateToHome(categoryName: String? = null) {
     navigate("$HOME_SCREEN?$CATEGORY_NAME_ARG=$categoryName") {
-        popUpTo(HOME_ROUTE) {
-            inclusive = !restoreHome
-            saveState = true
-        }
         launchSingleTop = true
-        restoreState = restoreHome
     }
 }
 
 fun NavController.navigateToCategories() {
     navigate(CATEGORIES_ROUTE) {
-        popUpTo(HOME_ROUTE) {
-            saveState = true
-        }
         launchSingleTop = true
-        restoreState = true
     }
 }
 
 fun NavController.navigateToCart() {
     navigate(CART_ROUTE) {
-        popUpTo(HOME_ROUTE) {
-            saveState = true
-        }
         launchSingleTop = true
-        restoreState = true
     }
 }
 
 fun NavController.navigateToProductDetails(productId: String) {
     navigate("$PRODUCT_DETAILS_SCREEN/$productId") {
-        popUpTo(HOME_ROUTE) {
-            saveState = true
-        }
         launchSingleTop = true
     }
 }
 
 fun NavController.navigateToCheckout() {
     navigate(CHECKOUT_ROUTE) {
-        popUpTo(CART_ROUTE) {
-            saveState = true
-        }
         launchSingleTop = true
         restoreState = true
     }
