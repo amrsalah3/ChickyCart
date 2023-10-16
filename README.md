@@ -4,12 +4,15 @@ An e-commerce shopping Android app built primarily with Jetpack Compose, Materia
 For Handsets:
 
 <img src="Screenshots/DeviceWrapped/phone_splash_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_splash_dark.png" width="217" height="470">
+
 <img src="Screenshots/DeviceWrapped/phone_home_nofilter_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_home_nofilter_dark.png" width="217" height="470">
 
 <img src="Screenshots/DeviceWrapped/phone_home_filtered_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_home_filtered_dark.png" width="217" height="470">
+
 <img src="Screenshots/DeviceWrapped/phone_product_details_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_product_details_dark.png" width="217" height="470">
 
 <img src="Screenshots/DeviceWrapped/phone_categories_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_categories_dark.png" width="217" height="470">
+
 <img src="Screenshots/DeviceWrapped/phone_checkout_light.png" width="217" height="470"> <img src="Screenshots/DeviceWrapped/phone_checkout_dark.png" width="217" height="470">
 
 For Tablets:
