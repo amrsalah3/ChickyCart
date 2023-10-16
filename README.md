@@ -1,5 +1,5 @@
 # ChickyCart Shopping
-An e-commerce shopping Android app built primarily with Jetpack Compose, Material 3, and Paging 3.
+An e-commerce shopping Android app built primarily with Jetpack Compose, Material 3, Paging 3, and built based on clean architecture guidelines.
 
 For Handsets:
 
