@@ -10,26 +10,22 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "phone",
     device = "id:pixel_2",
     showBackground = true,
-    showSystemUi = true
 )
 @Preview(
     name = "phone",
     device = "id:pixel_2",
     showBackground = true,
-    showSystemUi = true,
     uiMode = UI_MODE_NIGHT_YES
 )
 @Preview(
     name = "tablet",
     device = "id:Nexus 10",
     showBackground = true,
-    showSystemUi = true
 )
 @Preview(
     name = "tablet",
     device = "id:Nexus 10",
     showBackground = true,
-    showSystemUi = true,
     uiMode = UI_MODE_NIGHT_YES
 )
 annotation class DevicePreviews
