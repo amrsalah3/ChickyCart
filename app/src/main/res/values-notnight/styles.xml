@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Splash screen theme -->
     <style name="ChickyCartSplashTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/launcher_icon_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="android:windowSplashScreenBehavior" tools:targetApi="33">icon_preferred</item>
         <item name="postSplashScreenTheme">@style/ChickyCartAppTheme</item>
     </style>
 
