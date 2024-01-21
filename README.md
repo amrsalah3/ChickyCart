@@ -17,10 +17,10 @@ For Handsets:
 
 For Tablets:
 
-<img src="Screenshots/DeviceWrapped/tablet_home_light.png" width="720" height="450">
-<img src="Screenshots/DeviceWrapped/tablet_home_dark.png" width="720" height="450">
-<img src="Screenshots/DeviceWrapped/tablet_product_details_light.png" width="720" height="450">
-<img src="Screenshots/DeviceWrapped/tablet_product_details_dark.png" width="720" height="450">
+<img src="Screenshots/DeviceWrapped/tablet_home_light.png" width=70%>
+<img src="Screenshots/DeviceWrapped/tablet_home_dark.png" width=70%>
+<img src="Screenshots/DeviceWrapped/tablet_product_details_light.png" width=70%>
+<img src="Screenshots/DeviceWrapped/tablet_product_details_dark.png" width=70%>
 
 
 Notes:
